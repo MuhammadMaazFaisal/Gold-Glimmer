@@ -25,7 +25,7 @@
             </button>
         </div>
         <div class="d-flex">
-            <div class="dropdown d-inline-block d-lg-none ms-2">
+            <!-- <div class="dropdown d-inline-block d-lg-none ms-2">
                 <button type="button" class="btn header-item" id="page-header-search-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i data-feather="search" class="icon-lg"></i>
                 </button>
@@ -52,7 +52,7 @@
                 <button type="button" class="btn header-item right-bar-toggle me-2">
                     <i data-feather="settings" class="icon-lg"></i>
                 </button>
-            </div>
+            </div> -->
             <div class="dropdown d-inline-block">
                 <button type="button" class="btn header-item bg-soft-light border-start border-end" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img class="rounded-circle header-profile-user" src="assets/images/users/avatar-2.jpg" alt="Header Avatar">
@@ -105,8 +105,8 @@
                     </a>
 
                     <ul class="sub-menu" aria-expanded="false">
-                    <li><a href="semi_finish.php" data-key="t-register">Semi-Finished</a></li>
-                    <li><a href="add_product.php" data-key="t-register">Add Product</a></li>
+                    <li><a href="#" data-key="t-register">Semi-Finished</a></li>
+                    <!-- <li><a href="add_product.php" data-key="t-register">Add Product</a></li> -->
                         
                     </ul>
 
@@ -183,9 +183,9 @@
                         <i data-feather="settings"></i>
                         <span data-key="t-authentication">Settings</span>
                     </a>
-                    <ul class="sub-menu" aria-expanded="false">
+                    <!-- <ul class="sub-menu" aria-expanded="false">
                         <li><a href="#" data-key="t-register">System Settings</a></li>
-                    </ul>
+                    </ul> -->
                 </li>
             </ul>
         </div>

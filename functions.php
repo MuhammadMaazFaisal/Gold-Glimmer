@@ -150,16 +150,7 @@ if ($_POST['function'] == 'GetAllVendorData') {
     GetUniversalProduct();
 } elseif ($_POST['function'] == 'DeleteStock') {
     DeleteStock();
-} elseif($_POST['function'] == 'GetAllTypes'){
-    GetAllTypes();
-} elseif ($_POST['function'] == 'AddType'){
-    AddType();
 }
-elseif ($_POST['function'] == 'GetDetailType'){
-    GetDetailType();
-}
-
-
 function Logout()
 {
     // Initialize the session
@@ -547,72 +538,6 @@ function AddVendor()
     $getRecordStatement->bindParam(':date', $_POST['date'], PDO::PARAM_STR);
     if ($getRecordStatement->execute()) {
         array_push($array, 'success');
-        echo json_encode($array, true);
-        die;
-    }
-}
-
-function AddType()
-{
-    include 'layouts/session.php';
-    error_reporting(E_ALL);
-    ini_set('display_errors', 1);
-    require_once "layouts/config.php";
-    $array = array();
-
-    $checktype="SELECT * FROM `type` WHERE `id` = :id";
-    $checktypeStatement = $pdo->prepare($checktype);
-    $checktypeStatement->bindParam(':id', $_POST['id'], PDO::PARAM_STR);
-    $checktypeStatement->execute();
-    $row = $checktypeStatement->fetchAll(PDO::FETCH_ASSOC);
-
-    if (count($row) > 0) {
-        $getRecordQuery = "UPDATE `type` SET `name` = :name,`price_per`= :price_per, `rate` = :rate, `barcode` = :barcode WHERE `id` = :id";
-        $getRecordStatement = $pdo->prepare($getRecordQuery);
-        $getRecordStatement->bindParam(':id', $_POST['id'], PDO::PARAM_STR);
-    }else{
-        $getRecordQuery = "INSERT INTO `type`( `name`, `price_per`, `rate`, `barcode`) VALUES (:name, :price_per, :rate, :barcode)";
-        $getRecordStatement = $pdo->prepare($getRecordQuery);
-    }
-    $getRecordStatement->bindParam(':name', $_POST['type'], PDO::PARAM_STR);
-    $getRecordStatement->bindParam(':price_per', $_POST['price_per'], PDO::PARAM_STR);
-    $getRecordStatement->bindParam(':rate', $_POST['rate'], PDO::PARAM_STR);
-    $getRecordStatement->bindParam(':barcode', $_POST['barcode'], PDO::PARAM_STR);
-    if ($getRecordStatement->execute()) {
-        array_push($array, 'success');
-        echo json_encode($array, true);
-        die;
-    }
-}
-
-function GetDetailType(){
-    include 'layouts/session.php';
-    error_reporting(E_ALL);
-    ini_set('display_errors', 1);
-    require_once "layouts/config.php";
-
-    $array = array();
-    $getRecordQuery = "SELECT * FROM `type` WHERE `id` = :id";
-    $getRecordStatement = $pdo->prepare($getRecordQuery);
-    $getRecordStatement->bindParam(':id', $_POST['id'], PDO::PARAM_STR);
-    if ($getRecordStatement->execute()) {
-        $array = $getRecordStatement->fetch(PDO::FETCH_ASSOC);
-        echo json_encode($array, true);
-        die;
-    }
-}
-
-function GetAllTypes(){
-    include 'layouts/session.php';
-    error_reporting(E_ALL);
-    ini_set('display_errors', 1);
-    require_once "layouts/config.php";
-
-    $array = array();
-    $getRecordQuery = "SELECT * FROM `type`";
-    $getRecordStatement = $pdo->prepare($getRecordQuery);
-    if ($getRecordStatement->execute()) {
-        $array = $getRecordStatement->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($array, true);
         die;
     }

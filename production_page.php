@@ -436,7 +436,7 @@
 
  						<!--3-->
 
- 						<div class="col-xl-12">
+ 						<!-- <div class="col-xl-12">
 
 
  							<div class="row">
@@ -787,7 +787,7 @@
 
  								</div>
  							</div>
- 						</div>
+ 						</div> -->
  						<!-- end card -->
 
 
@@ -803,7 +803,7 @@
  				<div class="col-xl-12">
 
 
- 					<div class="row">
+ 					<!-- <div class="row">
  						<div class="col-lg-12">
  							<div class="card ">
  								<div class="card-header card border border-primary">
@@ -902,27 +902,10 @@
  									<div class="d-flex justify-content-end">
  										<button type='submit' class="btn btn-danger btn1 px-3" onclick="SemiFinish()">Lock</button>
  									</div>
-
-
-
-
-
-
-
  								</div>
  							</div>
  						</div>
- 						<!-- end card
-		
-							
-							</div> -->
-
-
- 						<!--4 end-->
-
-
- 						<!-- end col -->
- 					</div>
+ 					</div> -->
  					<!-- end row -->
  				</div>
  				<!-- container-fluid -->

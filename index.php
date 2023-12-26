@@ -20,8 +20,8 @@ if (isset($_SESSION['lang'])) {
 } else {
     $lang = "en";
 }
-require_once("./assets/lang/" . $lang . ".php");
-//require_once ("./../assets/lang/" . $lang . ".php");
+require_once("assets/lang/" . $lang . ".php");
+//require_once ("./assets/lang/" . $lang . ".php");
 
 define('root', $_SERVER['DOCUMENT_ROOT']);
 
@@ -41,37 +41,6 @@ define('root', $_SERVER['DOCUMENT_ROOT']);
     <link href="assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
 
     <?php include 'layouts/head-style.php'; ?>
-    <style>
-        /* CSS */
-        .card {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
-
-        .card-header {
-            font-size: 1.5em;
-            font-weight: 500;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            background-color: #adb5bd;
-            font-family: 'Roboto', sans-serif;
-            text-align: -webkit-center;
-        }
-
-        .card-body {
-            padding: 20px;
-            height: 400px;
-            /* Adjust the height value as needed */
-            overflow-y: auto;
-        }
-
-        .table {
-            width: 100% !important;
-        }
-
-        .margin{
-            margin: 0px 5px 0px 5px;
-        }
-    </style>
 </head>
 
 <body>
@@ -92,86 +61,269 @@ define('root', $_SERVER['DOCUMENT_ROOT']);
                     <!-- start page title -->
                     <div class="row">
                         <div class="col-12">
-                            <div class="page-title-box d-sm-flex align-items-center justify-content-between mb-2">
+                            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                                 <h4 class="mb-sm-0 font-size-18">DASHBOARD</h4>
+
+
+
                             </div>
                         </div>
                     </div>
-                    <div class="row mb-5">
-                        <div class="col-4 p-0">
-                            <div class="margin card">
-                                <div class="card-header">
-                                    Manufacturing Department
-                                </div>
-                                <div class="card-body">
-                                    <table id="manufacturer-table" class="table table-striped table-bordered">
-                                        <thead>
-                                        </thead>
-                                        <tbody id="tbody-manufacturer">
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-4 p-0">
-                            <div class="margin card">
-                                <div class="card-header">
-                                    Polishing Department
-                                </div>
-                                <div class="card-body">
-                                    <table id="polisher-table" class="table table-striped table-bordered">
-                                        <thead>
-                                        </thead>
-                                        <tbody id="tbody-polisher">
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-4 p-0">
-                            <div class="margin card">
-                                <div class="card-header">
-                                    Additional Vendors
-                                </div>
-                                <div class="card-body">
-                                    <table id="vendor-table" class="table table-striped table-bordered">
-                                        <thead>
-                                        </thead>
-                                        <tbody id="tbody-vendor">
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- end page title -->
+
                     <div class="row">
-                        <div class="m-0 p-0 col-12 card">
-                            <div class="card-header">
-                                Stone Setting Department
-                            </div>
-                            <div class="card-body">
-                                <table id="product-tabless" class="table table-striped table-bordered">
-                                    <thead>
-                                    </thead>
-                                    <tbody id="tbody-product">
-                                    </tbody>
-                                </table>
+                        <div class="col-xl-3 col-md-6">
+                            <!-- card -->
+                            <div class="card card-h-100">
+                                <!-- card body -->
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-6">
+                                            <span class="text-muted mb-3 lh-1 d-block text-truncate">Total Role</span>
+                                            <h4 class="mb-3">
+                                                <span class="counter-value">0</span>
+                                            </h4>
+                                        </div>
+
+                                        <div class="col-6">
+                                            <div id="mini-chart1" data-colors='["#5156be"]' class="apex-charts mb-2"></div>
+                                        </div>
+                                    </div>
+                                    <div class="text-nowrap">
+                                        <span class="badge bg-soft-success text-success">2</span>
+                                        <span class="ms-1 text-muted font-size-13">Since last week</span>
+                                    </div>
+                                </div><!-- end card body -->
+                            </div><!-- end card -->
+                        </div><!-- end col -->
+
+                        <div class="col-xl-3 col-md-6">
+                            <!-- card -->
+                            <div class="card card-h-100">
+                                <!-- card body -->
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-6">
+                                            <span class="text-muted mb-3 lh-1 d-block text-truncate">Total Users</span>
+                                            <h4 class="mb-3">
+                                                <span class="counter-value">">0</span>
+                                            </h4>
+                                        </div>
+                                        <div class="col-6">
+                                            <div id="mini-chart2" data-colors='["#5156be"]' class="apex-charts mb-2"></div>
+                                        </div>
+                                    </div>
+                                    <div class="text-nowrap">
+                                        <span class="badge bg-soft-danger text-danger">1</span>
+                                        <span class="ms-1 text-muted font-size-13">Since last week</span>
+                                    </div>
+                                </div><!-- end card body -->
+                            </div><!-- end card -->
+                        </div><!-- end col-->
+
+                        <div class="col-xl-3 col-md-6">
+                            <!-- card -->
+                            <div class="card card-h-100">
+                                <!-- card body -->
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-6">
+                                            <span class="text-muted mb-3 lh-1 d-block text-truncate">Unactive Users</span>
+                                            <h4 class="mb-3">
+                                                <span class="counter-value">0</span>
+                                            </h4>
+                                        </div>
+                                        <div class="col-6">
+                                            <div id="mini-chart2" data-colors='["#5156be"]' class="apex-charts mb-2"></div>
+                                        </div>
+                                    </div>
+                                    <div class="text-nowrap">
+                                        <span class="badge bg-soft-danger text-danger">1</span>
+                                        <span class="ms-1 text-muted font-size-13">Since last week</span>
+                                    </div>
+                                </div><!-- end card body -->
+                            </div><!-- end card -->
+                        </div><!-- end col-->
+
+                        <div class="col-xl-3 col-md-6">
+                            <!-- card -->
+                            <div class="card card-h-100">
+                                <!-- card body -->
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-6">
+                                            <span class="text-muted mb-3 lh-1 d-block text-truncate">System Activities</span>
+                                            <h4 class="mb-3">
+                                                <span class="counter-value">0</span>
+                                            </h4>
+                                        </div>
+                                        <div class="col-6">
+                                            <div id="mini-chart2" data-colors='["#5156be"]' class="apex-charts mb-2"></div>
+                                        </div>
+                                    </div>
+                                    <div class="text-nowrap">
+                                        <span class="badge bg-soft-danger text-danger">1</span>
+                                        <span class="ms-1 text-muted font-size-13">Since last week</span>
+                                    </div>
+                                </div><!-- end card body -->
+                            </div><!-- end card -->
+                        </div><!-- end col-->
+
+
+
+                        <div class="col-xl-3 col-md-6">
+                            <!-- card -->
+                            <div class="card card-h-100">
+                                <!-- card body -->
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-6">
+                                            <span class="text-muted mb-3 lh-1 d-block text-truncate">Total Manufacturing </span>
+                                            <h4 class="mb-3">
+                                                <span class="counter-value">0</span>
+                                            </h4>
+                                        </div>
+                                        <div class="col-6">
+                                            <div id="mini-chart3" data-colors='["#5156be"]' class="apex-charts mb-2"></div>
+                                        </div>
+                                    </div>
+                                    <div class="text-nowrap">
+                                        <span class="badge bg-soft-success text-success">+ 6</span>
+                                        <span class="ms-1 text-muted font-size-13">Since last week</span>
+                                    </div>
+                                </div><!-- end card body -->
+                            </div><!-- end card -->
+                        </div><!-- end col -->
+
+                        <div class="col-xl-3 col-md-6">
+                            <!-- card -->
+                            <div class="card card-h-100">
+                                <!-- card body -->
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-6">
+                                            <span class="text-muted mb-3 lh-1 d-block text-truncate">Total Polisher</span>
+                                            <h4 class="mb-3">
+                                                <span class="counter-value">0</span>
+                                            </h4>
+                                        </div>
+                                        <div class="col-6">
+                                            <div id="mini-chart4" data-colors='["#5156be"]' class="apex-charts mb-2"></div>
+                                        </div>
+                                    </div>
+                                    <div class="text-nowrap">
+                                        <span class="badge bg-soft-success text-success">+2.95%</span>
+                                        <span class="ms-1 text-muted font-size-13">Since last week</span>
+                                    </div>
+                                </div><!-- end card body -->
+                            </div><!-- end card -->
+                        </div><!-- end col -->
+                        <div class="col-xl-3 col-md-6">
+                            <!-- card -->
+                            <div class="card card-h-100">
+                                <!-- card body -->
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-10">
+                                            <span class="text-muted mb-3 lh-1 d-block text-truncate">Total Stone Setter
+
+                                            </span>
+                                            <h4 class="mb-3">
+                                                <span class="counter-value">0</span>
+                                            </h4>
+                                        </div>
+
+                                    </div>
+                                    <div class="text-nowrap">
+                                        <span class="badge bg-soft-success text-success">+2.95%</span>
+                                        <span class="ms-1 text-muted font-size-13">Since last week</span>
+                                    </div>
+                                </div><!-- end card body -->
+                            </div><!-- end card -->
+                        </div><!-- end col -->
+                        <div class="col-xl-3 col-md-6">
+                            <!-- card -->
+                            <div class="card card-h-100">
+                                <!-- card body -->
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-6">
+                                            <span class="text-muted mb-3 lh-1 d-block text-truncate">Total Additional Vendors
+
+                                            </span>
+                                            <h4 class="mb-3">
+                                                <span class="counter-value">0</span>
+                                            </h4>
+                                        </div>
+                                        <div class="col-6">
+                                            <div id="mini-chart4" data-colors='["#5156be"]' class="apex-charts mb-2"></div>
+                                        </div>
+                                    </div>
+                                    <div class="text-nowrap">
+                                        <span class="badge bg-soft-success text-success">+2.95%</span>
+                                        <span class="ms-1 text-muted font-size-13">Since last week</span>
+                                    </div>
+                                </div><!-- end card body -->
+                            </div><!-- end card -->
+                        </div><!-- end col -->
+
+                    </div><!-- end row-->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                <h4 class="mb-sm-0 font-size-18">STOCK PANEL</h4>
+
+
+
                             </div>
                         </div>
                     </div>
-                </div><!-- end row-->
 
 
+                    <div class="row">
+
+
+
+                        <div class="col-lg-4">
+                            <div class="card bg-dark border-dark text-light">
+                                <div class="card-body">
+                                    <h3 class="mb-4 text-light">Vendors</h3>
+                                    <h3 class="mb-4 text-light">0</h3>
+                                </div>
+                            </div>
+                        </div><!-- end col -->
+
+                        <div class="col-lg-4">
+                            <div class="card bg-success border-success text-white-50">
+                                <div class="card-body">
+                                    <h3 class="mb-3 text-white">Finished Products</h3>
+                                    <h3 class="mb-4 text-light">0</h3>
+                                </div>
+                            </div>
+                        </div><!-- end col -->
+
+                        <div class="col-lg-4">
+                            <div class="card bg-info border-info text-white-50">
+                                <div class="card-body">
+                                    <h3 class="mb-3 text-white">Unfinished Products</h3>
+                                    <h3 class="mb-4 text-light">0</h3>
+                                </div>
+                            </div>
+                        </div><!-- end col -->
+
+                    </div><!-- end row-->
+
+                    <!-- end row -->
+                </div>
+                <!-- container-fluid -->
             </div>
-            <!-- container-fluid -->
+            <!-- End Page-content -->
+
+            <?php include 'layouts/footer.php'; ?>
         </div>
-        <!-- End Page-content -->
+        <!-- end main content-->
 
-        <?php include 'layouts/footer.php'; ?>
     </div>
-    <!-- end main content-->
-
-
     <!-- END layout-wrapper -->
 
     <!-- Right Sidebar -->
@@ -305,381 +457,6 @@ define('root', $_SERVER['DOCUMENT_ROOT']);
 
     <!-- App js -->
     <script src="assets/js/app.js"></script>
-    <script>
-        function GetData(vendor_id) {
-            if ($.fn.DataTable.isDataTable('#manufacturer-table')) {
-                $('#manufacturer-table').DataTable().destroy();
-            }
-            $.ajax({
-                url: "functions.php",
-                type: "POST",
-                data: {
-                    function: "GetManufacturerReportData",
-                    id: vendor_id
-                },
-                success: function(data) {
-                    data = JSON.parse(data);
-                    var table = $('#manufacturer-table').DataTable({
-                        "lengthChange": false,
-                        data: data,
-                        columns: [{
-                                data: 'date',
-                                title: 'Date'
-                            },
-                            {
-                                data: 'vendor_id',
-                                title: 'ID'
-                            },
-                            {
-                                data: 'name',
-                                title: 'Vendor Name'
-                            },
-                            {
-                                data: 'tValues',
-                                title: '24k',
-                                className: 'metal',
-                            },
-                            {
-                                data: 'metal_pure_weight',
-                                title: '24K',
-                                className: 'jewellery column-border',
-                                render: function(data, type, row, meta) {
-                                    if (row.metal_type === 'issued') {
-                                        return (data);
-                                    } else {
-                                        return (-data);
-                                    }
-                                }
-                            }
-                        ]
-                    });
-
-                }
-            });
-        }
-
-        function GetDataAll() {
-            if ($.fn.DataTable.isDataTable('#manufacturer-table')) {
-                $('#manufacturer-table').DataTable().destroy();
-            }
-            $.ajax({
-                url: "functions.php",
-                type: "POST",
-                data: {
-                    function: "GetManufacturerReportDataAll",
-                },
-                success: function(data) {
-
-                    data = JSON.parse(data);
-                    var table = $('#manufacturer-table').DataTable({
-                        "lengthChange": false,
-                        data: data,
-                        columns: [{
-                                data: 'date',
-                                title: 'Date'
-                            },
-                            {
-                                data: 'vendor_id',
-                                title: 'ID'
-                            },
-                            {
-                                data: 'name',
-                                title: 'Vendor Name'
-                            },
-                            {
-                                data: 'tValues',
-                                title: '24k',
-                                className: 'metal',
-                            },
-                            {
-                                data: 'metal_pure_weight',
-                                title: '24K',
-                                className: 'jewellery column-border',
-                                render: function(data, type, row, meta) {
-                                    if (row.metal_type === 'issued') {
-                                        return (data);
-                                    } else {
-                                        return (-data);
-                                    }
-                                }
-                            }
-                        ]
-                    });
-                    // CalculateTotal();
-                }
-            });
-        }
-
-        $(document).ready(function() {
-            GetDataAll();
-            GetDataAllP();
-            GetDataIssued();
-            GetVendorData();
-
-        });
-
-        $(document).ready(function() {
-            $('select').selectize({
-                sortField: 'text'
-            })
-
-            $.ajax({
-                url: "functions.php",
-                method: "POST",
-                data: {
-                    function: "GetAllVendorData",
-                    type: "manufacturer"
-                },
-                success: function(response) {
-                    var data = JSON.parse(response);
-                    var select = $('#select-vendor')[0].selectize;
-                    for (var i = 0; i < data.length; i++) {
-                        var newOption = {
-                            value: data[i].id,
-                            text: data[i].id + " | " + data[i].name
-                        };
-                        select.addOption(newOption);
-                    }
-
-                }
-            });
-        });
-
-
-
-        $(document).on('change', '#select-vendor', function(e) {
-            e.preventDefault();
-            var select1 = $(this).val();
-            GetData(select1);
-        });
-
-        function GetData(vendor_id) {
-            if ($.fn.DataTable.isDataTable('#polisher-table')) {
-                $('#polisher-table').DataTable().destroy();
-            }
-            $.ajax({
-                url: "functions.php",
-                type: "POST",
-                data: {
-                    function: "GetPolisherReportData",
-                    id: vendor_id
-                },
-                success: function(data) {
-                    data = JSON.parse(data);
-                    console.log(data);
-                    var table = $('#polisher-table').DataTable({
-                        "lengthChange": false,
-                        data: data,
-                        columns: [{
-                                data: 'date',
-                                title: 'Date'
-                            },
-                            {
-                                data: 'ID',
-                                title: 'id'
-                            },
-                            {
-                                data: 'name',
-                                title: 'Vendor Name'
-                            },
-                            {
-                                data: 'm_details',
-                                title: 'Detail'
-                            },
-                            {
-                                data: 'Payable',
-                                title: '24k',
-                                className: 'metal',
-                            },
-                            {
-                                data: 'metal_pure_weight',
-                                title: '24K',
-                                className: 'jewellery column-border',
-                                render: function(data, type, row, meta) {
-                                    if (row.metal_type === 'issued') {
-                                        return (data);
-                                    } else {
-                                        return (-data);
-                                    }
-                                }
-                            }
-                        ]
-                    });
-                    // CalculateTotal();
-                }
-            });
-        }
-
-        function GetDataAllP() {
-            if ($.fn.DataTable.isDataTable('#polisher-table')) {
-                $('#polisher-table').DataTable().destroy();
-            }
-            $.ajax({
-                url: "functions.php",
-                type: "POST",
-                data: {
-                    function: "GetPolisherReportDataAll",
-                },
-                success: function(data) {
-                    data = JSON.parse(data);
-                    console.log(data);
-                    var table = $('#polisher-table').DataTable({
-                        "lengthChange": false,
-                        data: data,
-                        columns: [{
-                                data: 'date',
-                                title: 'Date'
-                            },
-                            {
-                                data: 'vendor_id',
-                                title: 'Id'
-                            },
-                            {
-                                data: 'name',
-                                title: 'Vendor Name'
-                            },
-                            {
-                                data: 'Payable',
-                                title: '24k',
-                                className: 'metal',
-                            },
-                            {
-                                data: 'metal_pure_weight',
-                                title: '24K',
-                                className: 'jewellery column-border',
-                                render: function(data, type, row, meta) {
-                                    if (row.metal_type === 'issued') {
-                                        return (data);
-                                    } else {
-                                        return (-data);
-                                    }
-                                }
-                            }
-                        ]
-                    });
-                    // CalculateTotal();
-                }
-            });
-        }
-
-        $(document).ready(function() {
-            $('select').selectize({
-                sortField: 'text'
-            })
-
-            $.ajax({
-                url: "functions.php",
-                method: "POST",
-                data: {
-                    function: "GetAllVendorData",
-                    type: "polisher"
-                },
-                success: function(response) {
-                    var data = JSON.parse(response);
-                    var select = $('#select-vendor')[0].selectize;
-                    for (var i = 0; i < data.length; i++) {
-                        var newOption = {
-                            value: data[i].id,
-                            text: data[i].id + " | " + data[i].name
-                        };
-                        select.addOption(newOption);
-                    }
-
-                }
-            });
-        });
-
-        $(document).on('change', '#select-vendor', function(e) {
-            e.preventDefault();
-            var select1 = $(this).val();
-            GetData(select1);
-        });
-
-        function GetDataIssued() {
-            $.ajax({
-                url: "functions.php",
-                type: "POST",
-                data: {
-                    function: "GetStoneSetterIssued"
-                },
-                success: function(data) {
-                    console.log(data);
-                    data = JSON.parse(data);
-                    console.log("stone",data);
-                    var table = $('#product-tabless').DataTable({
-                        "lengthChange": false,
-                        data: data,
-                        columns: [{
-                                data: 'date',
-                                title: 'Date'
-                            },
-                            {
-                                data: 'product_id',
-                                title: 'Product ID'
-                            },
-                            {
-                                data: 'name',
-                                title: 'Name'
-                            },
-                            {
-                                data: 'Issued_weight',
-                                title: 'Issued Weight'
-                            },
-                            {
-                                data: 'received_weight',
-                                title: 'Received Weight'
-                            },
-                            {
-                                data: 'payable',
-                                title: 'Payable'
-                            },
-
-                        ],
-                        responsive: true
-                    });
-
-
-                }
-            });
-        }
-
-        function GetVendorData(vendor_id) {
-            if ($.fn.DataTable.isDataTable('#vendor-table')) {
-                $('#vendor-table').DataTable().destroy();
-            }
-            $.ajax({
-                url: "functions.php",
-                type: "POST",
-                data: {
-                    function: "GetVendorData",
-                    id: vendor_id
-                },
-                success: function(data) {
-                    console.log(data);
-                    data = JSON.parse(data);
-                    var table = $('#vendor-table').DataTable({
-                        "lengthChange": false,
-                        data: data,
-                        columns: [{
-                                data: 'date',
-                                title: 'Date'
-                            },
-                            {
-                                data: 'id',
-                                title: 'ID'
-                            },
-                            {
-                                data: 'name',
-                                title: 'Vendor Name'
-                            },
-
-                        ]
-                    });
-                    // CalculateTotal();
-                }
-            });
-        }
-    </script>
 
 </body>
 
