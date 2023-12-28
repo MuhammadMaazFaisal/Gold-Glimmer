@@ -467,6 +467,11 @@ define('root', $_SERVER['DOCUMENT_ROOT']);
             success: function(data) {
                 console.log('data', data);
                 data = JSON.parse(data);
+                // Swal.fire({
+                //     icon: 'success',
+                //     title: 'Success',
+                //     text: 'Stock deleted successfully!',
+                // })
                 if (data == 'success') {
                     Swal.fire({
                         icon: 'success',

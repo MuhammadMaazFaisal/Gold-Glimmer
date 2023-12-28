@@ -163,10 +163,10 @@
  																	</div>
  																</div>
  																<div class="row mb-4">
- 																	<label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Details:</label>
+ 																	<label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Note:</label>
  																	<div class="col-sm-11">
 
- 																		<textarea type="text" id="details" name="details" value="" class="form-control" style="height: 107px;" placeholder="Details"></textarea>
+ 																		<textarea type="text" id="details" name="details" value="" class="form-control" style="height: 107px;" placeholder="Note"></textarea>
  																	</div>
  																</div>
  																<div class="row mb-4">
@@ -303,7 +303,7 @@
  						<!-- end col -->
 
  						<!--2 -->
- 						<div class="col-xl-12">
+ 						<!-- <div class="col-xl-12">
 
 
 
@@ -368,10 +368,10 @@
  																</div>
  															</div>
  															<div class="row mb-4">
- 																<label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Details:</label>
+ 																<label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Note:</label>
  																<div class="col-sm-11">
 
- 																	<textarea type="text" name="detail" id="p_details" class="form-control" style="height: 107px;" placeholder="Details"></textarea>
+ 																	<textarea type="text" name="detail" id="p_details" class="form-control" style="height: 107px;" placeholder="Note"></textarea>
  																</div>
  															</div>
 
@@ -425,10 +425,9 @@
  									</div>
  								</div>
  							</div>
- 							<!-- End Form Layout -->
 
 
- 						</div>
+ 						</div> -->
 
 
  						<!--2 end-->
@@ -506,10 +505,10 @@
  															</div>
  														</div>
  														<div class="row mb-4">
- 															<label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Details:</label>
+ 															<label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Note:</label>
  															<div class="col-sm-11">
 
- 																<textarea type="text" name="detail[]" id="s_details[]" class="form-control" style="height: 107px;" placeholder="Details"></textarea>
+ 																<textarea type="text" name="detail[]" id="s_details[]" class="form-control" style="height: 107px;" placeholder="Note"></textarea>
  															</div>
  														</div>
  														<div class="row mb-4">
@@ -1449,10 +1448,10 @@
 											</div>
 										</div>
 										<div class="row mb-4">
-											<label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Details:</label>
+											<label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Note:</label>
 											<div class="col-sm-11">
 
-												<textarea type="text" name="detail[]" id="s_details[]" class="form-control" style="height: 107px;" placeholder="Details"></textarea>
+												<textarea type="text" name="detail[]" id="s_details[]" class="form-control" style="height: 107px;" placeholder="Note"></textarea>
 											</div>
 										</div>
 										<div class="row mb-4">
@@ -2527,10 +2526,10 @@
 										</div>
 									</div>
 									<div class="row mb-4">
-										<label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Details:</label>
+										<label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Note:</label>
 										<div class="col-sm-11">
 
-											<textarea type="text" name="detail[]" id="s_details[]" value="${data[i].detail}" class="form-control" style="height: 107px;" placeholder="Details"></textarea>
+											<textarea type="text" name="detail[]" id="s_details[]" value="${data[i].detail}" class="form-control" style="height: 107px;" placeholder="Note"></textarea>
 										</div>
 									</div>
 									<div class="row mb-4">

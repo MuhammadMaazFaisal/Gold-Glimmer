@@ -159,7 +159,6 @@
 
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="add_type.php" data-key="t-register">Add Type</a></li>
                         <li><a href="stock.php" data-key="t-register">Stock</a></li>
                         <li><a href="purchasing.php" data-key="t-register">Purchasing</a></li>
                         <li><a href="add_stock.php" data-key="t-register">Add Stock</a></li>
@@ -173,9 +172,9 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="manufacturing_report.php" data-key="t-register">Manufecturing Report</a></li>
-                        <li><a href="polishing_report.php" data-key="t-register">Polishing Report</a></li>
+                        <!-- <li><a href="polishing_report.php" data-key="t-register">Polishing Report</a></li>
                         <li><a href="stone_setter_report.php" data-key="t-register">Stone Setting Report</a></li>
-                        <li><a href="additional_report.php" data-key="t-register">Additional Accounts Report</a></li>
+                        <li><a href="additional_report.php" data-key="t-register">Additional Accounts Report</a></li> -->
                     </ul>
                 </li>
                 <li>

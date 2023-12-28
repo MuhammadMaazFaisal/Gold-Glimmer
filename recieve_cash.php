@@ -125,9 +125,9 @@ define('root', $_SERVER['DOCUMENT_ROOT']);
                                                             </div>
                                                         </div>
                                                         <div class="row mb-4">
-                                                            <label for="detail" class="col-sm-1 col-form-label">Details:</label>
+                                                            <label for="detail" class="col-sm-1 col-form-label">Note:</label>
                                                             <div class="col-sm-11">
-                                                                <textarea type="text" name="detail" id="detail" class="form-control" style="height: 107px;" placeholder="Details"></textarea>
+                                                                <textarea type="text" name="detail" id="detail" class="form-control" style="height: 107px;" placeholder="Note"></textarea>
                                                             </div>
                                                         </div>
                                                         <div class="row mb-5">
