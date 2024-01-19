@@ -303,7 +303,7 @@
  						<!-- end col -->
 
  						<!--2 -->
- 						<!-- <div class="col-xl-12">
+ 						<div class="col-xl-12">
 
 
 
@@ -427,7 +427,7 @@
  							</div>
 
 
- 						</div> -->
+ 						</div>
 
 
  						<!--2 end-->
@@ -435,7 +435,7 @@
 
  						<!--3-->
 
- 						<!-- <div class="col-xl-12">
+ 						<div class="col-xl-12">
 
 
  							<div class="row">
@@ -786,7 +786,7 @@
 
  								</div>
  							</div>
- 						</div> -->
+ 						</div>
  						<!-- end card -->
 
 
@@ -802,7 +802,7 @@
  				<div class="col-xl-12">
 
 
- 					<!-- <div class="row">
+ 					<div class="row">
  						<div class="col-lg-12">
  							<div class="card ">
  								<div class="card-header card border border-primary">
@@ -898,13 +898,13 @@
  											</div>
  										</div>
  									</div>
- 									<div class="d-flex justify-content-end">
+ 									<!-- <div class="d-flex justify-content-end">
  										<button type='submit' class="btn btn-danger btn1 px-3" onclick="SemiFinish()">Lock</button>
- 									</div>
+ 									</div> -->
  								</div>
  							</div>
  						</div>
- 					</div> -->
+ 					</div>
  					<!-- end row -->
  				</div>
  				<!-- container-fluid -->
@@ -1937,8 +1937,8 @@
                 <html>
                 <head>
                 <style>
-@mediaprint {
-@page{
+						@mediaprint {
+						@page{
                             size: 80mm 200mm;
                             margin: 0;
 							margin-top:-20px;
@@ -2000,9 +2000,9 @@
 
             // Start rendering barcode
             renderBarcode();
-        <\/script>
-    </body>
-    </html>
+				<\/script>
+			</body>
+			</html>
             `;
 
  					// Write slip content to the new tab
@@ -2042,8 +2042,8 @@
                 <html>
                 <head>
                 <style>
-@mediaprint {
-@page{
+						@mediaprint {
+						@page{
                             size: 80mm 200mm;
                             margin: 0;
                         }
@@ -2104,9 +2104,9 @@
 
             // Start rendering barcode
             renderBarcode();
-        <\/script>
-    </body>
-    </html>
+					<\/script>
+				</body>
+				</html>
             `;
 
  					// Write slip content to the new tab
@@ -2144,8 +2144,8 @@
                 <html>
                 <head>
                 <style>
-@mediaprint {
-@page{
+						@mediaprint {
+						@page{
                             size: 80mm 200mm;
                             margin: 0;
                         }
@@ -2202,9 +2202,9 @@
 
             // Start rendering barcode
             renderBarcode();
-        <\/script>
-    </body>
-    </html>
+				<\/script>
+			</body>
+			</html>
             `;
 
  					// Write slip content to the new tab
@@ -2240,8 +2240,8 @@
                 <html>
                 <head>
                 <style>
-@mediaprint {
-@page{
+				@mediaprint {
+				@page{
                             size: 80mm 200mm;
                             margin: 0;
                         }
@@ -2299,9 +2299,9 @@
 
             // Start rendering barcode
             renderBarcode();
-        <\/script>
-    </body>
-    </html>
+				<\/script>
+			</body>
+			</html>
             `;
  					let printWindow = window.open("", "_blank");
 
@@ -2614,7 +2614,7 @@
 
 										</div>
 										<div class="col-sm-2 p-0">
-											<i class="fa fa-barcode fa-3x" onclick="BarCode(this)"></i>
+										<input type="text" name="stone_detail[]" id="stone_detail[]" value="" class="form-control" placeholder="Stone Detail">
 										</div>
 										<label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Weight:</label>
 										<div class="col-sm-2">

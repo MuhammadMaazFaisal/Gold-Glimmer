@@ -100,6 +100,19 @@
                 <li>
                     <a href="javascript: void(0);" class=" ">
                         <i data-feather="file-text"></i>
+                        <span data-key="t-authentication">Orders</span>
+
+                    </a>
+
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="create_order.php" data-key="t-register">Create Order</a></li>
+                        
+                    </ul>
+
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class=" ">
+                        <i data-feather="file-text"></i>
                         <span data-key="t-authentication">Products</span>
 
                     </a>

@@ -2743,3 +2743,25 @@ function SelectCash()
         echo json_encode($getRecordStatement->errorInfo(), true);
     }
 }
+
+// function CreateOrder(){
+//     include 'layouts/session.php';
+//     error_reporting(E_ALL);
+//     ini_set('display_errors', 1);
+//     require_once "layouts/config.php";
+
+//     // SELECT `id`, `date`, `gold_vendor`, `weight` FROM `orders` WHERE 1
+
+//     // SELECT `id`, `o_id`, `p_id`, `status` FROM `order_details` WHERE 1
+
+//     // SELECT `id`, `status`, `date_created` FROM `product` WHERE 1
+
+//     $array = array();
+//     $getRecordQuery = "INSERT INTO `orders`(`date`, `gold_vendor`, `weight`) VALUES (:date, :gold_vendor, :weight)";
+//     $getRecordStatement = $pdo->prepare($getRecordQuery);
+//     $getRecordStatement->bindParam(':date', $_POST['date']);
+//     $getRecordStatement->bindParam(':gold_vendor', $_POST['participent']);
+//     $getRecordStatement->bindParam(':weight', $_POST['weight']);
+//     if ($getRecordStatement->execute()) {
+//         for 
+// }
