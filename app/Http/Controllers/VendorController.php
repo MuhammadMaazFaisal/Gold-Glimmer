@@ -10,7 +10,17 @@ class VendorController extends Controller
 
     public function create()
     {
-        return view('admin.vendor.create');
+        $currentRoute = request()->route()->getName();
+        if ($currentRoute == 'manufacturer') {
+            $type = 'Manufacturing';
+        } elseif ($currentRoute == 'polisher') {
+            $type = 'Polishing';
+        } elseif ($currentRoute == 'stone-setter') {
+            $type = 'Stone Setting';
+        } else {
+            $type = 'Additional Vendors';
+        }
+        return view('admin.vendor.create', compact('type'));
     }
 
     public function store(Request $request)

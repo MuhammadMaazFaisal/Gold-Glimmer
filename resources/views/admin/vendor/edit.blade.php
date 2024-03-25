@@ -1,3 +1,5 @@
+@extends('admin.layouts.app')
+@section('content')
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-12">
@@ -12,7 +14,7 @@
             <div class="card ">
                 <div class="card-header card border border-danger">
                     <h4 class="card-title">
-                        MANUFACTURING DEPARTMENT
+                        {{$type}} DEPARTMENT
                     </h4>
                 </div>
                 <div class="card-body p-4 ">
@@ -83,3 +85,4 @@
         </div>
     </div>
 </div>
+@endsection

@@ -60,10 +60,10 @@
                     </a>
 
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="manufacturer.php" data-key="t-register">Manufacturer</a></li>
-                        <li><a href="polisher.php" data-key="t-register">Polisher</a></li>
-                        <li><a href="stone-setter.php" data-key="t-register">Stone Setter</a></li>
-                        <li><a href="vendor.php" data-key="t-register">Vendor</a></li>
+                        <li><a href="{{ route('manufacturer') }}" data-key="t-register">Manufacturer</a></li>
+                        <li><a href="{{ route('polisher') }}" data-key="t-register">Polisher</a></li>
+                        <li><a href="{{ route('stone-setter') }}" data-key="t-register">Stone Setter</a></li>
+                        <li><a href="{{ route('vendor') }}" data-key="t-register">Vendor</a></li>
                     </ul>
 
                 </li>
