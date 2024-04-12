@@ -9,9 +9,9 @@ use Illuminate\Http\Request;
 class VendorController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $vendors = Vendor::all();
+        $vendors = Vendor::where('type', VendorType::where('name', $request->type)->first()->id)->get();
         return $vendors;
     }
 
@@ -39,10 +39,14 @@ class VendorController extends Controller
         ]);
 
         $vendor = new Vendor();
+        $vendor->id = $request->id;
         $vendor->name = $request->name;
         $vendor->phone = $request->phone;
         $vendor->address = $request->address;
         $vendor->type = VendorType::where('name', $request->type)->first()->id;
+        $vendor['18k'] = $request['18k'];
+        $vendor['21k'] = $request['21k'];
+        $vendor['22k'] = $request['22k'];
         $vendor->status = 1;
         $vendor->save();
 
@@ -51,13 +55,39 @@ class VendorController extends Controller
             'alert-type' => 'success'
         );
 
-        return response()->json(['notification' => $notification]);
+        return response()->json(['data' => $notification]);
     }
 
     public function edit($id)
     {
         $vendor = Vendor::find($id);
-        return view('admin.vendor.edit', compact('vendor'));
+        return response()->json(['vendor' => $vendor]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required',
+            'phone' => 'required',
+            'address' => 'required',
+        ]);
+
+        $vendor = Vendor::find($id);
+        $vendor->name = $request->name;
+        $vendor->phone = $request->phone;
+        $vendor->address = $request->address;
+        $vendor['18k'] = $request['18k'];
+        $vendor['21k'] = $request['21k'];
+        $vendor['22k'] = $request['22k'];
+        $vendor->status = 1;
+        $vendor->save();
+
+        $notification = array(
+            'message' => 'Vendor updated successfully!',
+            'alert-type' => 'success'
+        );
+
+        return response()->json(['data' => $notification]);
     }
 
     public function getNextVendorNumber()
@@ -70,5 +100,18 @@ class VendorController extends Controller
             $vendorNumber = '0001';
         }
         return response()->json(['vendorNumber' => $vendorNumber]);
+    }
+
+    public function destroy($id)
+    {
+        $vendor = Vendor::find($id);
+        $vendor->delete();
+
+        $notification = array(
+            'message' => 'Vendor deleted successfully!',
+            'alert-type' => 'success'
+        );
+
+        return response()->json(['data' => $notification]);
     }
 }

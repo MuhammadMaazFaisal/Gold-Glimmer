@@ -74,7 +74,7 @@
                                             <div class="col-sm-9 d-flex justify-content-end me-4">
                                                 <button type="button" id="delete"
                                                     class="btn btn-danger px-3 me-3 disabled"
-                                                    onclick="Delete()">Delete</button>
+                                                    onclick="DeleteVendor()">Delete</button>
                                                 <button type="submit" class="btn btn-success px-4">Save</button>
                                             </div>
                                         </div>
@@ -91,7 +91,7 @@
 
 @section('scripts')
     <script>
-        function GetValue(id) {
+        function GetVendorData(id) {
             var delete1 = document.getElementById("delete");
             let url = `{{ route('vendor.edit', ['id' => ':id']) }}`;
             url = url.replace(':id', id);
@@ -99,30 +99,31 @@
                 url: url,
                 method: "GET",
                 success: function(response) {
-                    console.log(response);
-                    var data = JSON.parse(response);
                     delete1.classList.remove("disabled");
-                    document.getElementById("id").value = data[0].id;
-                    document.getElementById("name").value = data[0].name;
-                    document.getElementById("18k").value = data[0]['18k'];
-                    document.getElementById("21k").value = data[0]['21k'];
-                    document.getElementById("22k").value = data[0]['22k'];
+                    document.getElementById("id").value = response.vendor.id;
+                    document.getElementById("name").value = response.vendor.name;
+                    document.getElementById("phone").value = response.vendor.phone;
+                    document.getElementById("address").value = response.vendor.address;
+                    document.getElementById("18k").value = response.vendor['18k'];
+                    document.getElementById("21k").value = response.vendor['21k'];
+                    document.getElementById("22k").value = response.vendor['22k'];
                     document.getElementById("name").readOnly = true;
                 }
             });
         }
 
-        function Delete() {
+        function DeleteVendor() {
             var id = document.getElementById("id").value;
             let url = `{{ route('vendor.destroy', ['id' => ':id']) }}`;
             url = url.replace(':id', id);
             $.ajax({
                 url: url,
                 method: "DELETE",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
                 success: function(response) {
-                    console.log(response);
-                    var data = JSON.parse(response);
-                    if (data[0] == "success") {
+                    if (response.data['alert-type'] == "success") {
                         Swal.fire({
                             title: 'Deleted!',
                             text: 'Vendor Deleted Successfully',
@@ -145,7 +146,7 @@
             });
         }
 
-        function getInitials() {
+        function getVendorInitials() {
             var fullName = document.getElementById("name").value;
             const words = fullName.trim().split(" ");
 
@@ -195,6 +196,7 @@
                     type: type
                 },
                 success: function(data) {
+                    console.log(data);
                     var select = $('#select-vendor')[0].selectize;
                     for (var i = 0; i < data.length; i++) {
                         var newOption = {
@@ -216,12 +218,12 @@
 
         $(document).on('blur', '#name', function(e) {
             e.preventDefault();
-            getInitials();
+            getVendorInitials();
         });
 
         $(document).on('change', '#select-vendor', function(e) {
             e.preventDefault();
-            GetValue($(this).val());
+            GetVendorData($(this).val());
         });
 
         var form = document.getElementById("form");
@@ -247,13 +249,11 @@
                 data: data,
                 processData: false,
                 contentType: false,
-                success: function(response) {
-                    console.log(response);
-                    var data = JSON.parse(response);
-                    if (data[0] == "success") {
+                success: function(data) {
+                    if (data.data['alert-type'] == "success") {
                         Swal.fire({
                             title: 'Success!',
-                            text: 'Manufacturer Added Successfully',
+                            text: data.data.message,
                             icon: 'success',
                             confirmButtonText: 'Ok'
                         }).then((result) => {
@@ -269,6 +269,20 @@
                             confirmButtonText: 'Ok'
                         })
                     }
+                },
+                error: function(data) {
+                    console.log(data);
+                    var errors = data.responseJSON.errors;
+                    var message = "";
+                    for (var key in errors) {
+                        message += errors[key] + "\n";
+                    }
+                    Swal.fire({
+                        title: 'Error!',
+                        text: message,
+                        icon: 'error',
+                        confirmButtonText: 'Ok'
+                    })
                 }
             })
         });
