@@ -26,6 +26,8 @@ return new class extends Migration
             $table->float('unpolished_weight');
             $table->float('rate');
             $table->string('status');
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 

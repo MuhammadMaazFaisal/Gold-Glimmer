@@ -20,6 +20,8 @@ return new class extends Migration
             $table->integer('21k')->nullable();
             $table->integer('22k')->nullable();
             $table->integer('24k')->nullable();
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 

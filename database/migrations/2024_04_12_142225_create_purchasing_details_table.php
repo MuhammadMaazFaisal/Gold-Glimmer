@@ -27,6 +27,8 @@ return new class extends Migration
             $table->float('total_amount');
             $table->float('remaining_total_amount');
             $table->string('barcode');
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 

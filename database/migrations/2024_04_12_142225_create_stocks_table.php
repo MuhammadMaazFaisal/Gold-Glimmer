@@ -19,6 +19,8 @@ return new class extends Migration
             $table->float('total');
             $table->timestamp('date')->useCurrentOnUpdate()->useCurrent();
             $table->string('status');
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 

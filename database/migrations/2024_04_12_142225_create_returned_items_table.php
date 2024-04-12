@@ -21,6 +21,8 @@ return new class extends Migration
             $table->float('price');
             $table->float('weight');
             $table->integer('quantity');
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 

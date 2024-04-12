@@ -17,10 +17,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/polisher', [VendorController::class, 'create'])->name('polisher');
     Route::get('/stone-setter', [VendorController::class, 'create'])->name('stone-setter');
     Route::get('/vendor', [VendorController::class, 'create'])->name('vendor');
+    Route::post('/vendor', [VendorController::class, 'store'])->name('vendor.store');
+    Route::patch('/vendor/{id}', [VendorController::class, 'update'])->name('vendor.update');
+    Route::delete('/vendor/{id}', [VendorController::class, 'destroy'])->name('vendor.destroy');
+
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy'); 
 });
 
 

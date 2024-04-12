@@ -24,6 +24,8 @@ return new class extends Migration
             $table->float('rate');
             $table->float('total_amount');
             $table->bigInteger('barcode');
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 

@@ -23,6 +23,8 @@ return new class extends Migration
             $table->float('purity');
             $table->float('pure_weight');
             $table->string('status');
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 

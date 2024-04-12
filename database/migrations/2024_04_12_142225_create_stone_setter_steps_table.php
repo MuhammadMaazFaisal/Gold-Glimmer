@@ -29,6 +29,8 @@ return new class extends Migration
             $table->integer('s_total_quantity')->nullable();
             $table->float('grand_weight');
             $table->string('status', 191)->default('Active');
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 

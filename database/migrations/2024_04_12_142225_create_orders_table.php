@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('vendor_id')->index('vendor_id');
             $table->integer('customer_id')->index('customer_id');
             $table->string('weight');
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 

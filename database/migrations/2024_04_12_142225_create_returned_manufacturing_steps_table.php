@@ -23,6 +23,8 @@ return new class extends Migration
             $table->float('tValues');
             $table->integer('place_id')->index('place_id');
             $table->string('barcode');
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 

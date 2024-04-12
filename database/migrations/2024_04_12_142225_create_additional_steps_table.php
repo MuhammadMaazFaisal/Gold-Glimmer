@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('amount', 191)->nullable();
             $table->string('date');
             $table->string('status', 191)->default('Active');
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 

@@ -27,6 +27,8 @@ return new class extends Migration
             $table->float('Payable')->nullable();
             $table->string('status', 191)->default('Active');
             $table->string('polisherbarcode');
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 
