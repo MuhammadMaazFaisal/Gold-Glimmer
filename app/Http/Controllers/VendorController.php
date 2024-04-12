@@ -27,7 +27,7 @@ class VendorController extends Controller
         } else {
             $type = 'Additional Vendors';
         }
-        return view('admin.vendor.create', compact('type'));
+        return view('admin.vendor.index', compact('type'));
     }
 
     public function store(Request $request)
@@ -92,10 +92,9 @@ class VendorController extends Controller
 
     public function getNextVendorNumber()
     {
-        $vendor = Vendor::orderBy('id', 'desc')->first();
+        $vendor = Vendor::all()->count();
         if ($vendor) {
-            // number format should be 0001
-            $vendorNumber = str_pad($vendor->id + 1, 4, '0', STR_PAD_LEFT);
+            $vendorNumber = str_pad($vendor + 1, 4, '0', STR_PAD_LEFT);
         } else {
             $vendorNumber = '0001';
         }

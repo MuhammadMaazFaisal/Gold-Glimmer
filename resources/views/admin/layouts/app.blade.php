@@ -28,55 +28,42 @@
 </head>
 
 <body>
-
     <!-- Begin page -->
     <div id="layout-wrapper">
-
         @include('admin.layouts.header')
         @include('admin.layouts.sidebar')
-
         <!-- ============================================================== -->
         <!-- Start right Content here -->
         <!-- ============================================================== -->
         <div class="main-content">
-
             <div class="page-content">
                 @yield('content')
                 <!-- container-fluid -->
             </div>
             <!-- End Page-content -->
-
             @include('admin.layouts.footer')
         </div>
         <!-- end main content-->
-
     </div>
     <!-- END layout-wrapper -->
-
     <!-- Right Sidebar -->
     <div class="right-bar">
         <div data-simplebar class="h-100">
             <div class="rightbar-title d-flex align-items-center bg-dark p-3">
-
                 <h5 class="m-0 me-2 text-white">Theme Customizer</h5>
-
                 <a href="javascript:void(0);" class="right-bar-toggle ms-auto">
                     <i class="mdi mdi-close noti-icon"></i>
                 </a>
             </div>
-
             <!-- Settings -->
             <hr class="m-0" />
-
             <div class="p-4">
                 <h6 class="mb-3">Layout</h6>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="layout" id="layout-vertical" value="vertical">
                     <label class="form-check-label" for="layout-vertical">Vertical</label>
                 </div>
-
                 <h6 class="mt-4 mb-3 pt-2">Layout Mode</h6>
-
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="layout-mode" id="layout-mode-light"
                         value="light">
@@ -87,9 +74,7 @@
                         value="dark">
                     <label class="form-check-label" for="layout-mode-dark">Dark</label>
                 </div>
-
                 <h6 class="mt-4 mb-3 pt-2">Layout Width</h6>
-
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="layout-width" id="layout-width-fuild"
                         value="fuild" onchange="document.body.setAttribute('data-layout-size', 'fluid')">
@@ -100,9 +85,7 @@
                         value="boxed" onchange="document.body.setAttribute('data-layout-size', 'boxed')">
                     <label class="form-check-label" for="layout-width-boxed">Boxed</label>
                 </div>
-
                 <h6 class="mt-4 mb-3 pt-2">Layout Position</h6>
-
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="layout-position" id="layout-position-fixed"
                         value="fixed" onchange="document.body.setAttribute('data-layout-scrollable', 'false')">
@@ -114,9 +97,7 @@
                         onchange="document.body.setAttribute('data-layout-scrollable', 'true')">
                     <label class="form-check-label" for="layout-position-scrollable">Scrollable</label>
                 </div>
-
                 <h6 class="mt-4 mb-3 pt-2">Topbar Color</h6>
-
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="topbar-color" id="topbar-color-light"
                         value="light" onchange="document.body.setAttribute('data-topbar', 'light')">
@@ -127,9 +108,7 @@
                         value="dark" onchange="document.body.setAttribute('data-topbar', 'dark')">
                     <label class="form-check-label" for="topbar-color-dark">Dark</label>
                 </div>
-
                 <h6 class="mt-4 mb-3 pt-2 sidebar-setting">Sidebar Size</h6>
-
                 <div class="form-check sidebar-setting">
                     <input class="form-check-input" type="radio" name="sidebar-size" id="sidebar-size-default"
                         value="default" onchange="document.body.setAttribute('data-sidebar-size', 'lg')">
@@ -145,9 +124,7 @@
                         value="small" onchange="document.body.setAttribute('data-sidebar-size', 'sm')">
                     <label class="form-check-label" for="sidebar-size-small">Small (Icon View)</label>
                 </div>
-
                 <h6 class="mt-4 mb-3 pt-2 sidebar-setting">Sidebar Color</h6>
-
                 <div class="form-check sidebar-setting">
                     <input class="form-check-input" type="radio" name="sidebar-color" id="sidebar-color-light"
                         value="light" onchange="document.body.setAttribute('data-sidebar', 'light')">
@@ -163,9 +140,7 @@
                         value="brand" onchange="document.body.setAttribute('data-sidebar', 'brand')">
                     <label class="form-check-label" for="sidebar-color-brand">Brand</label>
                 </div>
-
                 <h6 class="mt-4 mb-3 pt-2">Direction</h6>
-
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="layout-direction" id="layout-direction-ltr"
                         value="ltr">
@@ -176,16 +151,12 @@
                         value="rtl">
                     <label class="form-check-label" for="layout-direction-rtl">RTL</label>
                 </div>
-
             </div>
-
         </div> <!-- end slimscroll-menu-->
     </div>
-
     <!-- Right bar overlay-->
     <div class="rightbar-overlay"></div>
     <!-- /Right-bar -->
-
     <!-- JAVASCRIPT -->
     <script src="{{ asset('assets/libs/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
@@ -212,23 +183,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.5/JsBarcode.all.js"
         integrity="sha512-wkHtSbhQMx77jh9oKL0AlLBd15fOMoJUowEpAzmSG5q5Pg9oF+XoMLCitFmi7AOhIVhR6T6BsaHJr6ChuXaM/Q=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
     <!-- apexcharts -->
     <script src="{{ asset('assets/libs/apexcharts/apexcharts.min.js') }}"></script>
-
     <!-- Plugins js-->
     <script src="{{ asset('assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js') }}"></script>
-    <script src="{{ asset('assets/libs/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js') }}"></script>
-
+    <script src="{{ asset('assets/libs/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js') }}">
+    </script>
     <!-- dashboard init -->
     <script src="{{ asset('assets/js/pages/dashboard.init.js') }}"></script>
-
     <!-- App js -->
     <script src="{{ asset('assets/js/app.js') }}"></script>
-
     <!-- Custom js -->
     <script src="{{ asset('assets/js/custom.js') }}"></script>
-
 </body>
 
 </html>

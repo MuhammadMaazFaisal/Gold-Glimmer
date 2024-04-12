@@ -88,7 +88,6 @@
         </div>
     </div>
 @endsection
-
 @section('scripts')
     <script>
         function GetVendorData(id) {
@@ -142,6 +141,18 @@
                             confirmButtonText: 'Ok'
                         })
                     }
+                },error: function(response) {
+                    let errors = response.responseJSON.errors;
+                    let message = "";
+                    for (let key in errors) {
+                        message += errors[key] + "\n";
+                    }
+                    Swal.fire({
+                        title: 'Error!',
+                        text: message,
+                        icon: 'error',
+                        confirmButtonText: 'Ok'
+                    })
                 }
             });
         }
@@ -149,15 +160,12 @@
         function getVendorInitials() {
             var fullName = document.getElementById("name").value;
             const words = fullName.trim().split(" ");
-
             for (let i = 0; i < words.length; i++) {
                 words[i] = words[i][0].toUpperCase() + words[i].slice(1);
             }
-
             // join the capitalized words back into a single string
             const capitalizedFullName = words.join(" ");
             document.getElementById("name").value = capitalizedFullName;
-
             var nameParts = fullName.split(" ");
             var initials = "";
             for (var i = 0; i < nameParts.length; i++) {
@@ -170,14 +178,12 @@
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                method: "POST",
+                method: "GET",
                 success: function(data) {
                     console.log(data);
                     document.getElementById("id").value = initials.toUpperCase() + data.vendorNumber;
-
                 }
             })
-
         }
         $(document).ready(function() {
             $('select').selectize({
@@ -207,25 +213,20 @@
                     }
                 }
             })
-
-
             var date = new Date().toISOString().slice(0, 10);
             var dataInputs = document.querySelectorAll('input[type="date"]');
             for (let i = 0; i < dataInputs.length; i++) {
                 dataInputs[i].value = date;
             }
         });
-
         $(document).on('blur', '#name', function(e) {
             e.preventDefault();
             getVendorInitials();
         });
-
         $(document).on('change', '#select-vendor', function(e) {
             e.preventDefault();
             GetVendorData($(this).val());
         });
-
         var form = document.getElementById("form");
         form.addEventListener("submit", function(event) {
             event.preventDefault();

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\MetalType;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -33,6 +34,17 @@ class DatabaseSeeder extends Seeder
         foreach ($vendorTypes as $vendorType) {
             VendorType::create([
                 'name' => $vendorType,
+            ]);
+        }
+
+        $metalTypes= [
+            'issue',
+            'receive',
+        ];
+
+        foreach ($metalTypes as $metalType) {
+            MetalType::create([
+                'name' => $metalType,
             ]);
         }
     }

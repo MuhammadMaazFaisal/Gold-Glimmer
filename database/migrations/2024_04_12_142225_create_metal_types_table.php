@@ -15,8 +15,7 @@ return new class extends Migration
     {
         Schema::create('metal_types', function (Blueprint $table) {
             $table->id();
-            $table->integer('name');
-            $table->integer('status');
+            $table->string('name');
             $table->softDeletes();
             $table->timestamps();
         });

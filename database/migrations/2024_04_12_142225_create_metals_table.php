@@ -18,11 +18,10 @@ return new class extends Migration
             $table->string('date');
             $table->string('vendor_id')->index('vendor_id');
             $table->unsignedBigInteger('type')->index('type');
-            $table->string('details');
+            $table->string('details')->nullable();
             $table->float('issued_weight');
             $table->float('purity');
             $table->float('pure_weight');
-            $table->string('status');
             $table->softDeletes();
             $table->timestamps();
         });
