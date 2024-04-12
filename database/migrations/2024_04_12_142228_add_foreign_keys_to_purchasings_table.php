@@ -13,10 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('cache', function (Blueprint $table) {
-            $table->string('key')->primary();
-            $table->mediumText('value');
-            $table->integer('expiration');
+        Schema::table('purchasings', function (Blueprint $table) {
+            $table->foreign(['vendor_id'], 'purchasings_ibfk_1')->references(['id'])->on('vendors')->onUpdate('no action')->onDelete('no action');
         });
     }
 
@@ -27,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cache');
+        Schema::table('purchasings', function (Blueprint $table) {
+            $table->dropForeign('purchasings_ibfk_1');
+        });
     }
 };

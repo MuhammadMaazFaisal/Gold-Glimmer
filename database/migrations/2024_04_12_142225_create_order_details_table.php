@@ -13,10 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('cache_locks', function (Blueprint $table) {
-            $table->string('key')->primary();
-            $table->string('owner');
-            $table->integer('expiration');
+        Schema::create('order_details', function (Blueprint $table) {
+            $table->integer('id', true);
+            $table->integer('o_id')->index('o_id');
+            $table->string('p_id')->index('p_id');
+            $table->integer('status');
         });
     }
 
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cache_locks');
+        Schema::dropIfExists('order_details');
     }
 };

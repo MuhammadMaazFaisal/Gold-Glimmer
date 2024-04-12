@@ -13,14 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
-            $table->timestamps();
+        Schema::table('vendors', function (Blueprint $table) {
+            $table->foreign(['type'], 'vendors_ibfk_1')->references(['id'])->on('vendor_types')->onUpdate('restrict')->onDelete('restrict');
         });
     }
 
@@ -31,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::table('vendors', function (Blueprint $table) {
+            $table->dropForeign('vendors_ibfk_1');
+        });
     }
 };
