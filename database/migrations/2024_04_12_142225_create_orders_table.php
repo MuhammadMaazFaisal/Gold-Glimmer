@@ -14,10 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->integer('id', true);
+            $table->id();
             $table->string('date');
             $table->string('vendor_id')->index('vendor_id');
-            $table->integer('customer_id')->index('customer_id');
+            $table->unsignedBigInteger('customer_id')->index('customer_id');
             $table->string('weight');
             $table->softDeletes();
             $table->timestamps();

@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('returned_stone_steps', function (Blueprint $table) {
-            $table->integer('id', true);
+            $table->id();
             $table->string('product_id')->index('product_id');
             $table->string('vendor_id')->index('vendor_id');
             $table->float('received_weight');

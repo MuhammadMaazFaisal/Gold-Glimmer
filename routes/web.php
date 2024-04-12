@@ -17,9 +17,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/polisher', [VendorController::class, 'create'])->name('polisher');
     Route::get('/stone-setter', [VendorController::class, 'create'])->name('stone-setter');
     Route::get('/vendor', [VendorController::class, 'create'])->name('vendor');
+
+    Route::post('/vendor-list', [VendorController::class, 'index'])->name('vendor.index');
+    Route::get('/vendor/{id}', [VendorController::class, 'edit'])->name('vendor.edit');
     Route::post('/vendor', [VendorController::class, 'store'])->name('vendor.store');
-    Route::patch('/vendor/{id}', [VendorController::class, 'update'])->name('vendor.update');
+    Route::post('/vendor/{id}', [VendorController::class, 'update'])->name('vendor.update');
     Route::delete('/vendor/{id}', [VendorController::class, 'destroy'])->name('vendor.destroy');
+    Route::post('/next-vendor-number', [VendorController::class, 'getNextVendorNumber'])->name('next-vendor-number');
 
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

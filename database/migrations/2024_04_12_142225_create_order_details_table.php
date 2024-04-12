@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('order_details', function (Blueprint $table) {
-            $table->integer('id', true);
-            $table->integer('o_id')->index('o_id');
+            $table->id();
+            $table->unsignedBigInteger('o_id')->index('o_id');
             $table->string('p_id')->index('p_id');
             $table->integer('status');
             $table->softDeletes();

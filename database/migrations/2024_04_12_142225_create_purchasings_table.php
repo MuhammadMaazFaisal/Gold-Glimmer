@@ -14,10 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('purchasings', function (Blueprint $table) {
-            $table->string('id')->primary();
+            $table->id();
             $table->string('vendor_id')->index('vendor_id');
             $table->integer('total');
-            $table->timestamp('date')->useCurrentOnUpdate()->nullable()->useCurrent();
             $table->string('status');
             $table->softDeletes();
             $table->timestamps();

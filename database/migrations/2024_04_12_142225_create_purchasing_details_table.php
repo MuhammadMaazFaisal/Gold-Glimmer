@@ -14,9 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('purchasing_details', function (Blueprint $table) {
-            $table->integer('id', true);
-            $table->string('p_id')->index('p_id');
-            $table->integer('item_id')->index('item_id');
+            $table->id();
+            $table->unsignedBigInteger('p_id')->index('p_id');
+            $table->unsignedBigInteger('item_id')->index('item_id');
             $table->string('detail');
             $table->string('price_per');
             $table->integer('quantity')->nullable();

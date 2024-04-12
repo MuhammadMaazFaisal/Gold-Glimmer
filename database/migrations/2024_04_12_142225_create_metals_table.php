@@ -14,10 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('metals', function (Blueprint $table) {
-            $table->integer('id', true);
+            $table->id();
             $table->string('date');
             $table->string('vendor_id')->index('vendor_id');
-            $table->integer('type')->index('type');
+            $table->unsignedBigInteger('type')->index('type');
             $table->string('details');
             $table->float('issued_weight');
             $table->float('purity');

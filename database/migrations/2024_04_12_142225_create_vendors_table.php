@@ -15,14 +15,14 @@ return new class extends Migration
     {
         Schema::create('vendors', function (Blueprint $table) {
             $table->string('id')->primary();
-            $table->integer('type')->index('type');
+            $table->string('name');
+            $table->unsignedBigInteger('type')->index('type');
             $table->string('phone')->nullable();
             $table->text('address')->nullable();
             $table->float('18k');
             $table->float('21k');
             $table->float('22k');
-            $table->string('status');
-            $table->string('date');
+            $table->string('status')->comment('0: Inactive, 1: Active');
             $table->softDeletes();
             $table->timestamps();
         });

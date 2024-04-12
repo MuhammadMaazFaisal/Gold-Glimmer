@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('stones', function (Blueprint $table) {
-            $table->integer('id', true);
-            $table->integer('item_id')->index('item_id');
+            $table->id();
+            $table->unsignedBigInteger('item_id')->index('item_id');
             $table->string('vendor_id')->index('vendor_id');
             $table->string('product_id')->index('product_id');
             $table->float('price');

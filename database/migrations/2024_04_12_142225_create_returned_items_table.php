@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('returned_items', function (Blueprint $table) {
-            $table->integer('id', true);
+            $table->id();
             $table->string('code');
             $table->string('vendor_id')->index('vendor_id');
             $table->string('product_id')->index('product_id');

@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('vendor_types', function (Blueprint $table) {
-            $table->integer('id', true);
+            $table->id();
             $table->string('name');
             $table->integer('18k')->nullable();
             $table->integer('21k')->nullable();

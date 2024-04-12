@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('billings', function (Blueprint $table) {
-            $table->integer('id', true);
+            $table->id();
             $table->integer('p_id');
             $table->string('vendor_id');
             $table->integer('total');

@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('stone_setter_steps', function (Blueprint $table) {
-            $table->integer('Ssid', true);
+            $table->id();
             $table->string('product_id')->index('product_id');
             $table->timestamp('date')->nullable();
             $table->string('vendor_id')->nullable()->index('vendor_id');

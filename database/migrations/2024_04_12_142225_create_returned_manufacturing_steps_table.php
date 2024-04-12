@@ -14,14 +14,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('returned_manufacturing_steps', function (Blueprint $table) {
-            $table->integer('id', true);
+            $table->id();
             $table->float('polish_weight')->nullable();
             $table->float('wastage')->nullable();
             $table->float('unpure_weight')->nullable();
             $table->float('pure_weight')->nullable();
             $table->string('status', 191)->default('Active');
             $table->float('tValues');
-            $table->integer('place_id')->index('place_id');
+            $table->unsignedBigInteger('place_id')->index('place_id');
             $table->string('barcode');
             $table->softDeletes();
             $table->timestamps();

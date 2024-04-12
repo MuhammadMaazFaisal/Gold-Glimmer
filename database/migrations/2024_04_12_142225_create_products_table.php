@@ -19,7 +19,7 @@ return new class extends Migration
             $table->date('date');
             $table->string('image');
             $table->text('note');
-            $table->integer('product_type')->index('product_type');
+            $table->unsignedBigInteger('product_type')->index('product_type');
             $table->integer('quantity');
             $table->float('purity');
             $table->string('purity_text');
