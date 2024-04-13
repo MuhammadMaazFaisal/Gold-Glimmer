@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('o_id')->index('o_id');
             $table->string('p_id')->index('p_id');
-            $table->integer('status');
             $table->softDeletes();
             $table->timestamps();
         });

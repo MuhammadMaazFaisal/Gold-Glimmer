@@ -19,8 +19,7 @@ return new class extends Migration
             $table->string('vendor_id')->index('vendor_id');
             $table->string('type');
             $table->float('amount');
-            $table->text('details');
-            $table->string('status');
+            $table->text('details')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

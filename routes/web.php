@@ -38,8 +38,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('metal/{id}', [MetalController::class, 'destroy'])->name('metal.destroy');
 
     // Cash Management
+    Route::get('cash-list', [CashController::class, 'index'])->name('cash.index');
     Route::get('issue-cash', [CashController::class, 'create'])->name('issue.cash');
     Route::get('receive-cash', [CashController::class, 'create'])->name('receive.cash');
+    Route::post('get-cash-vendors', [CashController::class, 'getcashVendors'])->name('cash.vendors');
+    Route::get('cash/{id}', [CashController::class, 'edit'])->name('cash.edit');
+    Route::post('cash', [CashController::class, 'store'])->name('cash.store');
+    Route::post('cash/{id}', [CashController::class, 'update'])->name('cash.update');
+    Route::delete('cash/{id}', [CashController::class, 'destroy'])->name('cash.destroy');
 
     Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('profile', [ProfileController::class, 'update'])->name('profile.update');

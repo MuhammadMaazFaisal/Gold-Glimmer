@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->string('vendor_id')->index('vendor_id');
             $table->integer('total');
-            $table->string('status');
             $table->softDeletes();
             $table->timestamps();
         });

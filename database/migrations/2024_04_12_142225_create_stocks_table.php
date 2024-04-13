@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('p_id')->index('p_id');
             $table->float('total');
-            $table->string('status');
             $table->softDeletes();
             $table->timestamps();
         });

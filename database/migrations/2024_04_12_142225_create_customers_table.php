@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('email');
             $table->text('address');
             $table->date('date_of_birth');
-            $table->string('status');
             $table->softDeletes();
             $table->timestamps();
         });
