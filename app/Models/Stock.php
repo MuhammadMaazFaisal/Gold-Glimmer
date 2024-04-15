@@ -11,4 +11,9 @@ class Stock extends Model
 
     protected $primaryKey = 'id';
     public $incrementing = false; 
+
+    public function stockDetails()
+    {
+        return $this->hasMany(StockDetail::class, 's_id', 'id');
+    } 
 }

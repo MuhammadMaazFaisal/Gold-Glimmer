@@ -1,146 +1,100 @@
 @extends('admin.layouts.app')
 @section('content')
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card ">
-                <div class="card-header card border border-danger">
-                    <h4 class="card-title">
-                        Stock
-                    </h4>
-                </div>
-                <div class="card-body px-4 ">
-                    <div class="row">
-                        <div class="col-lg-12 ms-lg-auto ">
-                            <div class="mt-4 mt-lg-0 table-responsive">
-                                <table id="stock-table" class="table table-hover">
-                                    <thead class="table-dark">
-                                    </thead>
-                                    <tbody id="tbody">
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="row my-4 justify-content-end">
-                                <div class="col-sm-2">
-                                    <input type="number" step="any" name="quantity" value="" id="quantity" class="form-control form-control card" placeholder="Total Metal">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card ">
+                    <div class="card-header card border border-danger">
+                        <h4 class="card-title">
+                            Stock
+                        </h4>
+                    </div>
+                    <div class="card-body px-4 ">
+                        <div class="row">
+                            <div class="col-lg-12 ms-lg-auto ">
+                                <div class="mt-4 mt-lg-0 table-responsive">
+                                    <table id="stock-table" class="table table-hover">
+                                        <thead class="table-dark">
+                                            <tr>
+                                                <th>Date</th>
+                                                <th>Barcode</th>
+                                                <th>Item</th>
+                                                <th>Price Per</th>
+                                                <th>Quantity</th>
+                                                <th>Weight</th>
+                                                <th>Rate</th>
+                                                <th>Total</th>
+                                                <th>Delete</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbody">
+                                            @php
+                                                $totalQuantity = 0;
+                                                $totalWeight = 0;
+                                                $payable = 0;
+                                            @endphp
+                                            @foreach ($stocks as $stock)
+                                                @foreach ($stock->stockDetails as $stockDetails)
+                                                    <tr>
+                                                        <td>{{ $stockDetails->created_at }}</td>
+                                                        <td>{{ $stockDetails->barcode }}</td>
+                                                        <td>{{ $stockDetails->detail }}</td>
+                                                        <td>{{ $stockDetails->price_per }}</td>
+                                                        <td>{{ $stockDetails->quantity }}</td>
+                                                        <td>{{ $stockDetails->weight }}</td>
+                                                        <td>{{ $stockDetails->rate }}</td>
+                                                        <td>{{ $stockDetails->total_amount }}</td>
+                                                        <td>
+                                                            <button class="delete-button"
+                                                                onclick="Delete({{ $stockDetails->id }})">Delete</button>
+                                                        </td>
+                                                    </tr>
+                                                    @php
+                                                        $totalQuantity += $stockDetails->quantity;
+                                                        $totalWeight += $stockDetails->weight;
+                                                        $payable += $stockDetails->total_amount;
+                                                    @endphp
+                                                @endforeach
+                                            @endforeach
+
+                                        </tbody>
+                                    </table>
                                 </div>
-                                <div class="col-sm-2">
-                                    <input type="number" name="weight" value="" id="weight" class="form-control form-control card" placeholder="Total Jewellery">
-                                </div>
-                                <div class="col-sm-2">
-                                    <input type="number" name="total" value="" id="total" class="form-control form-control card bg-dark border-dark text-light" placeholder="payable">
+                                <div class="row my-4 justify-content-end">
+                                    <div class="col-sm-2">
+                                        <input type="number" step="any" name="quantity" id="quantity"
+                                            class="form-control form-control card" placeholder="Total Metal"
+                                            value="{{ $totalQuantity }}">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <input type="number" name="weight" id="weight" value="{{ $totalWeight }}"
+                                            class="form-control form-control card" placeholder="Total Jewellery">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <input type="number" name="total" id="total" value="{{ $payable }}"
+                                            class="form-control form-control card bg-dark border-dark text-light"
+                                            placeholder="payable">
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="d-flex justify-content-end">
-                            <button class="btn btn-primary" id="printDataTable">Print Data</button>
+                        <div class="row">
+                            <div class="d-flex justify-content-end">
+                                <button class="btn btn-primary" id="printDataTable">Print Data</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection
 @section('scripts')
-<script>
-    function GetData() {
-        $.ajax({
-            url: "functions.php",
-            type: "POST",
-            data: {
-                function: "GetStockData"
-            },
-            success: function(data) {
-                console.log(data);
-                data = JSON.parse(data);
-                console.log(data);
-                var table = $('#stock-table').DataTable({
-                    data: data,
-                    columns: [{
-                            data: 'stock_date',
-                            title: 'Date',
-                            render: function(data, type, row) {
-                                if (type === 'display' || type === 'filter') {
-                                    return data.slice(0, 10);
-                                } else {
-                                    return data;
-                                }
-                            }
-                        },
-                        {
-                            data: 'barcode',
-                            title: 'Barcode'
-                        },
-                        {
-                            data: 'detail',
-                            title: 'Detail'
-                        },
-                        {
-                            data: 'type',
-                            title: 'Type'
-                        },
-                        {
-                            data: 'price_per',
-                            title: 'Price Per'
-                        },
-                        {
-                            data: 'total_quantity',
-                            title: 'Quantity'
-                        },
-                        {
-                            data: 'total_weight',
-                            title: 'Weight'
-                        },
-                        {
-                            data: 'rate',
-                            title: 'Rate'
-                        },
-                        {
-                            data: 'total_amount',
-                            title: 'Total',
-                            data: 'barcode',
-                            title: 'Barcode',
-                            render: function(data, type, row) {
-                                if (type === 'display' || type === 'filter') {
-                                    // Create a button element with the barcode as a data attribute
-                                    return '<button class="print-button" onclick="Print(this)">Print</button>';
-                                } else {
-                                    return data;
-                                }
-                            }
-                        },
-                        {
-                            data: 'id',
-                            title: 'Delete',
-                            render: function(data, type, row) {
-                                if (type === 'display' || type === 'filter') {
-                                    // Create a button element with the barcode as a data attribute
-                                    return '<button class="delete-button" onclick="Delete(' + data + ')">Delete</button>';
-                                } else {
-                                    return data;
-                                }
-                            }
-                        }
-                    ],
-                    responsive: true
-                });
-                calculateSums(table.data());
-                $('#stock-table').on('draw.dt', function() {
-                    var filteredData = table.rows({
-                        search: 'applied'
-                    }).data();
-                    calculateSums(filteredData);
-                });
-            }
-        });
-    }
-    function Print(barcode) {
-        var parent = barcode.parentNode.parentNode;
-        let printWindow = window.open("", "_blank");
-        let slipContent = `
+    <script>
+        function Print(barcode) {
+            var parent = barcode.parentNode.parentNode;
+            let printWindow = window.open("", "_blank");
+            let slipContent = `
                             <!DOCTYPE html>
                             <html>
                             <head>
@@ -197,67 +151,69 @@
                 </body>
                 </html>
             `;
-        // Write slip content to the new tab
-        printWindow.document.open();
-        printWindow.document.write(slipContent);
-        printWindow.print();
-        printWindow.document.close();
-    }
-    function Delete(id) {
-        $.ajax({
-            url: "functions.php",
-            type: "POST",
-            data: {
-                function: "DeleteStock",
-                id: id
-            },
-            success: function(data) {
-                console.log('data', data);
-                data = JSON.parse(data);
-                if (data == 'success') {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Success',
-                        text: 'Stock deleted successfully!',
-                    })
-                    location.reload();
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Something went wrong!',
-                    })
+            // Write slip content to the new tab
+            printWindow.document.open();
+            printWindow.document.write(slipContent);
+            printWindow.print();
+            printWindow.document.close();
+        }
+
+        function Delete(id) {
+            url = "{{ route('stock.destroy', ':id') }}";
+            url = url.replace(':id', id);
+            $.ajax({
+                url: url,
+                type: "Delete",
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                success: function(data) {
+                    if (data['alert-type'] == 'success') {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: 'Stock deleted successfully!',
+                        })
+                        location.reload();
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Something went wrong!',
+                        })
+                    }
                 }
-            }
-        });
-    }
-    function calculateSums(filteredData) {
-        var totalAmountSum = filteredData
-            .toArray()
-            .reduce(function(sum, row) {
-                return sum + parseFloat(row.total_amount);
-            }, 0);
-        var totalQuantitySum = filteredData
-            .toArray()
-            .reduce(function(sum, row) {
-                return sum + parseFloat(row.total_quantity);
-            }, 0);
-        var totalWeightSum = filteredData
-            .toArray()
-            .reduce(function(sum, row) {
-                return sum + parseFloat(row.total_weight);
-            }, 0);
-        $('#quantity').val(totalQuantitySum.toFixed(2));
-        $('#weight').val(totalWeightSum.toFixed(2));
-        $('#total').val(totalAmountSum.toFixed(2));
-    }
-    function printCurrentDataTable() {
-        var table = $('#stock-table').DataTable();
-        var visibleRows = table.rows({
-            search: 'applied'
-        }).data().toArray();
-        var styles = "<style>";
-        styles += `
+            });
+        }
+
+        function calculateSums(filteredData) {
+            var totalAmountSum = filteredData
+                .toArray()
+                .reduce(function(sum, row) {
+                    return sum + parseFloat(row.total_amount);
+                }, 0);
+            var totalQuantitySum = filteredData
+                .toArray()
+                .reduce(function(sum, row) {
+                    return sum + parseFloat(row.total_quantity);
+                }, 0);
+            var totalWeightSum = filteredData
+                .toArray()
+                .reduce(function(sum, row) {
+                    return sum + parseFloat(row.total_weight);
+                }, 0);
+            $('#quantity').val(totalQuantitySum.toFixed(2));
+            $('#weight').val(totalWeightSum.toFixed(2));
+            $('#total').val(totalAmountSum.toFixed(2));
+        }
+
+        function printCurrentDataTable() {
+            var table = $('#stock-table').DataTable();
+            var visibleRows = table.rows({
+                search: 'applied'
+            }).data().toArray();
+            var styles = "<style>";
+            styles += `
                     @media print {
                         body {
                             width: 210mm;
@@ -294,36 +250,41 @@
                         }
                     }
             `;
-        styles += "</style>";
-        var printContent = "<div class='centered-content'><table class='table table-bordered'>";
-        printContent += "<thead><tr>";
-        $('#stock-table thead th').each(function() {
-            printContent += "<th>" + $(this).text() + "</th>";
-        });
-        printContent += "</tr></thead>";
-        printContent += "<tbody>";
-        for (var i = 0; i < visibleRows.length; i++) {
-            printContent += "<tr>";
-            $.each(visibleRows[i], function(key, value) {
-                printContent += "<td>" + value + "</td>";
+            styles += "</style>";
+            var printContent = "<div class='centered-content'><table class='table table-bordered'>";
+            printContent += "<thead><tr>";
+            $('#stock-table thead th').each(function() {
+                printContent += "<th>" + $(this).text() + "</th>";
             });
-            printContent += "</tr>";
+            printContent += "</tr></thead>";
+            printContent += "<tbody>";
+            for (var i = 0; i < visibleRows.length; i++) {
+                printContent += "<tr>";
+                $.each(visibleRows[i], function(key, value) {
+                    printContent += "<td>" + value + "</td>";
+                });
+                printContent += "</tr>";
+            }
+            printContent += "</table></div>";
+            var printWindow = window.open('', '', 'width=800, height=600');
+            printWindow.document.write('<html><head><title>Print</title>');
+            printWindow.document.write(styles);
+            printWindow.document.write('</head><body>');
+            printWindow.document.write(printContent);
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+            printWindow.print();
         }
-        printContent += "</table></div>";
-        var printWindow = window.open('', '', 'width=800, height=600');
-        printWindow.document.write('<html><head><title>Print</title>');
-        printWindow.document.write(styles);
-        printWindow.document.write('</head><body>');
-        printWindow.document.write(printContent);
-        printWindow.document.write('</body></html>');
-        printWindow.document.close();
-        printWindow.print();
-    }
-    $(document).ready(function() {
-        GetData();
-    });
-    $(document).on('click', '#printDataTable', function() {
-        printCurrentDataTable();
-    });
-</script>
+        $(document).ready(function() {
+            $('#stock-table').on('draw.dt', function() {
+                var filteredData = table.rows({
+                    search: 'applied'
+                }).data();
+                calculateSums(filteredData);
+            });
+        });
+        $(document).on('click', '#printDataTable', function() {
+            printCurrentDataTable();
+        });
+    </script>
 @endsection
