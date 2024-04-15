@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('purchasing_details', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('p_id')->index('p_id');
+            $table->string('p_id')->index('p_id');
             $table->unsignedBigInteger('item_id')->index('item_id');
             $table->string('detail');
             $table->string('price_per');

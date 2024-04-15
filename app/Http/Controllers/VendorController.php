@@ -25,7 +25,7 @@ class VendorController extends Controller
         } elseif ($currentRoute == 'stone-setter') {
             $type = 'Stone Setting';
         } else {
-            $type = 'Additional Vendors';
+            $type = 'Additional Vendor';
         }
         return view('admin.vendor.index', compact('type'));
     }

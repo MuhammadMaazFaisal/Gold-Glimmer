@@ -189,9 +189,6 @@
             $('select').selectize({
                 sortField: 'text'
             });
-            // type is end of the url
-            let type = window.location.href.split("/").pop();
-            console.log(type);
             $.ajax({
                 url: "{{ route('vendor.index') }}",
                 headers: {
@@ -199,7 +196,7 @@
                 },
                 method: "POST",
                 data: {
-                    type: type
+                    type: "{{ $type }}"
                 },
                 success: function(data) {
                     console.log(data);
@@ -239,7 +236,7 @@
                 url = url.replace(':id', id);
             } else {
                 var url = `{{ route('vendor.store') }}`;
-                data.append("type", window.location.href.split("/").pop());
+                data.append("type", "{{ $type }}");
             }
             $.ajax({
                 url: url,

@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('purchasings', function (Blueprint $table) {
-            $table->id();
+            $table->string('id')->primary();
             $table->string('vendor_id')->index('vendor_id');
             $table->integer('total');
             $table->softDeletes();

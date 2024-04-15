@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('stocks', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('p_id')->index('p_id');
+            $table->string('id')->primary();
+            $table->string('p_id')->index('p_id');
             $table->float('total');
             $table->softDeletes();
             $table->timestamps();

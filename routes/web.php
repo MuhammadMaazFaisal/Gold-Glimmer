@@ -56,6 +56,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('stock', [StockController::class, 'store'])->name('stock.store');
     Route::post('stock/{id}', [StockController::class, 'update'])->name('stock.update');
     Route::delete('stock/{id}', [StockController::class, 'destroy'])->name('stock.destroy');
+    Route::get('next-stock-number', [StockController::class, 'getNextStockNumber'])->name('next-stock-number');
 
     Route::get('purchasing-list', [PurchasingController::class, 'index'])->name('purchasing.index');
     Route::get('create-purchasing', [PurchasingController::class, 'create'])->name('purchasing.create');
@@ -63,6 +64,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('purchasing', [PurchasingController::class, 'store'])->name('purchasing.store');
     Route::post('purchasing/{id}', [PurchasingController::class, 'update'])->name('purchasing.update');
     Route::delete('purchasing/{id}', [PurchasingController::class, 'destroy'])->name('purchasing.destroy');
+    Route::get('get-purchasing-vendors', [PurchasingController::class, 'getPurchasingVendors'])->name('purchasing.vendors');
+    Route::get('next-purchasing-number', [PurchasingController::class, 'getNextPurchasingNumber'])->name('next-purchasing-number');
 
     Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('profile', [ProfileController::class, 'update'])->name('profile.update');

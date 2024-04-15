@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('stock_details', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('s_id')->index('s_id');
+            $table->string('s_id')->index('s_id');
             $table->unsignedBigInteger('item_id')->index('item_id');
             $table->string('detail');
             $table->string('price_per');
