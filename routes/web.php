@@ -4,6 +4,8 @@ use App\Http\Controllers\CashController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MetalController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PurchasingController;
+use App\Http\Controllers\StockController;
 use App\Http\Controllers\VendorController;
 use Illuminate\Support\Facades\Route;
 
@@ -46,6 +48,21 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('cash', [CashController::class, 'store'])->name('cash.store');
     Route::post('cash/{id}', [CashController::class, 'update'])->name('cash.update');
     Route::delete('cash/{id}', [CashController::class, 'destroy'])->name('cash.destroy');
+
+    // Stock Management
+    Route::get('stock-list', [StockController::class, 'index'])->name('stock.index');
+    Route::get('create-stock', [StockController::class, 'create'])->name('stock.create');
+    Route::get('stock/{id}', [StockController::class, 'edit'])->name('stock.edit');
+    Route::post('stock', [StockController::class, 'store'])->name('stock.store');
+    Route::post('stock/{id}', [StockController::class, 'update'])->name('stock.update');
+    Route::delete('stock/{id}', [StockController::class, 'destroy'])->name('stock.destroy');
+
+    Route::get('purchasing-list', [PurchasingController::class, 'index'])->name('purchasing.index');
+    Route::get('create-purchasing', [PurchasingController::class, 'create'])->name('purchasing.create');
+    Route::get('purchasing/{id}', [PurchasingController::class, 'edit'])->name('purchasing.edit');
+    Route::post('purchasing', [PurchasingController::class, 'store'])->name('purchasing.store');
+    Route::post('purchasing/{id}', [PurchasingController::class, 'update'])->name('purchasing.update');
+    Route::delete('purchasing/{id}', [PurchasingController::class, 'destroy'])->name('purchasing.destroy');
 
     Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('profile', [ProfileController::class, 'update'])->name('profile.update');

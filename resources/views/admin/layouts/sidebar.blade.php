@@ -76,9 +76,9 @@
                         <span data-key="t-bank">Manage Stock</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="stock.php" data-key="t-register">Stock</a></li>
-                        <li><a href="purchasing.php" data-key="t-register">Purchasing</a></li>
-                        <li><a href="add_stock.php" data-key="t-register">Add Stock</a></li>
+                        <li><a href="{{ route('stock.index') }}" data-key="t-register">Stock</a></li>
+                        <li><a href="{{ route('purchasing.create') }}" data-key="t-register">Purchasing</a></li>
+                        <li><a href="{{ route('stock.create') }}"data-key="t-register">Add Stock</a></li>
                     </ul>
                 </li>
                 <li>
