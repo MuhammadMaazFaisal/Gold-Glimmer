@@ -169,9 +169,8 @@
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
-                    success: function(response) {
-                        var data = JSON.parse(response);
-                        if (data.status == 'success') {
+                    success: function(data) {
+                        if (data['alert-type'] == 'success') {
                             location.reload();
                         }
                     }
@@ -266,7 +265,7 @@
             let url = "{{ route('purchasing.edit', ':id') }}";
             url = url.replace(':id', id);
             $.ajax({
-                url: "{{ route('purchasing.edit', ':id') }}",
+                url: url,
                 method: "GET",
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -377,10 +376,10 @@
                         td1.innerHTML = i + 1;
                         td2.innerHTML = data[i].id;
                         td3.innerHTML = data[i].vendor_id;
-                        td4.innerHTML = data[i].name;
+                        td4.innerHTML = data[i].vendor.name;
                         td4_1.innerHTML = data[i].total;
-                        date = data[i].date;
-                        const inputDateStr = data[i].date;
+                        date = data[i].created_at;
+                        const inputDateStr = data[i].created_at;
                         const inputDate = new Date(inputDateStr);
                         const day = inputDate.getDate().toString().padStart(2, '0');
                         const month = (inputDate.getMonth() + 1).toString().padStart(2, '0');
@@ -462,9 +461,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(data) {
-                    console.log("form submit", data);
-                    data = JSON.parse(data);
-                    if (data[0] == "success" && data[1] == "success") {
+                    if (data['alert-type'] == 'success') {
                         Swal.fire({
                             icon: 'success',
                             title: 'Success',

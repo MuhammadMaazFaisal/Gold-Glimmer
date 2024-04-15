@@ -16,5 +16,4 @@ class StockController extends Controller
     {
         return view('admin.stock.create');
     }
-
 }

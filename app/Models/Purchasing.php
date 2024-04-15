@@ -11,4 +11,14 @@ class Purchasing extends Model
 
     protected $primaryKey = 'id';
     public $incrementing = false; 
+
+    public function vendor()
+    {
+        return $this->belongsTo(Vendor::class);
+    }
+
+    public function purchasingDetails()
+    {
+        return $this->hasMany(PurchasingDetail::class, 'p_id', 'id');
+    }
 }

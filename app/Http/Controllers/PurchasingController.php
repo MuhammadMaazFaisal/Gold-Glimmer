@@ -15,7 +15,7 @@ class PurchasingController extends Controller
 {
     public function index()
     {
-        $purchasings = Purchasing::all();
+        $purchasings = Purchasing::with('vendor')->get();
         return response()->json($purchasings);
     }
 
@@ -91,7 +91,7 @@ class PurchasingController extends Controller
             'alert-type' => 'success'
         );
 
-        return response()->json(['data' => $notification]);
+        return response()->json($notification);
     }
 
     public function update(Request $request, $id)
@@ -167,12 +167,12 @@ class PurchasingController extends Controller
             'alert-type' => 'success'
         );
 
-        return response()->json(['data' => $notification]);
+        return response()->json($notification);
     }
 
     public function edit($id)
     {
-        $purchasing = Purchasing::find($id);
+        $purchasing = PurchasingDetail::where('p_id', $id)->get();
         return response()->json($purchasing);
     }
 
@@ -185,8 +185,34 @@ class PurchasingController extends Controller
 
     public function getNextPurchasingNumber()
     {
-        $lastPurchasing = Purchasing::latest()->first();
-        $nextPurchasingNumber = $lastPurchasing ? str_pad($lastPurchasing->id + 1, 4, '0', STR_PAD_LEFT) : '0001';
+        $count = Purchasing::count();
+        $nextPurchasingNumber = $count ? str_pad($count + 1, 4, '0', STR_PAD_LEFT) : '0001';
         return response()->json($nextPurchasingNumber);
+    }
+
+    public function destroy($id)
+    {
+        // first stock details then stock then purchasing details then purchasing
+        $stock = Stock::where('p_id', $id)->first();
+        $stockDetails = StockDetail::where('s_id', $stock->id)->get();
+        foreach ($stockDetails as $stockDetail) {
+            $stockDetail->delete();
+        }
+        $stock->delete();
+
+        $purchasingDetails = PurchasingDetail::where('p_id', $id)->get();
+        foreach ($purchasingDetails as $purchasingDetail) {
+            $purchasingDetail->delete();
+        }
+
+        $purchasing = Purchasing::find($id);
+        $purchasing->delete();
+
+        $notification = array(
+            'message' => 'Purchasing deleted successfully!',
+            'alert-type' => 'success'
+        );
+
+        return response()->json($notification);
     }
 }
