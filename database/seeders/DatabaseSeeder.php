@@ -3,7 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\MetalType;
+use App\Models\Purchasing;
 use App\Models\User;
+use App\Models\Vendor;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\VendorType;
@@ -47,5 +49,25 @@ class DatabaseSeeder extends Seeder
                 'name' => $metalType,
             ]);
         }
+
+
+        // Create vendor
+        $vendor = Vendor::create([
+            'id' => 'existing',
+            'name' => 'existing',
+            'type' => 4,
+            'address' => 'Address',
+            'phone' => '1234567890',
+            '18k' => 0,
+            '21k' => 0,
+            '22k' => 0,
+            'status' => 1,
+        ]);
+
+        Purchasing::create([
+            'id' => 'existing',
+            'vendor_id' => 'existing',
+            'total' => 0,
+        ]);
     }
 }

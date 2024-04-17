@@ -100,12 +100,10 @@ class PurchasingController extends Controller
             'vendor_id' => 'required',
             'invoice' => 'required',
             'total' => 'required',
-            'status' => 'required',
         ]);
-
         $purchasing = Purchasing::find($id);
         $purchasing->vendor_id = $request->vendor_id;
-        $purchasing->total = $request->total;
+        $purchasing->total = $request->grand_total;
         $purchasing->save();
 
         for ($i = 0; $i < count($request->total); $i++) {
@@ -123,7 +121,7 @@ class PurchasingController extends Controller
             $purchasingDetails->item_id = $inventory_item->id;
             $purchasingDetails->detail = $request->detail[$i];
             $purchasingDetails->quantity = $request->quantity[$i];
-            $purchasingDetails->remaining_quantity = $request->quantity[$i];
+            $purchasingDetails->remaining_quantity = $request->quantity[$i];    
             $purchasingDetails->price_per = $request->price_per[$i];
             $purchasingDetails->weight = $request->weight[$i];
             $purchasingDetails->remaining_weight = $request->weight[$i];
@@ -135,10 +133,8 @@ class PurchasingController extends Controller
         }
 
         $stock = Stock::where('p_id', $id)->first();
-        $stock->total = $request->total[0];
-        $stock->status = 'Active';
+        $stock->total = $request->grand_total;
         $stock->save();
-
         $stockDetails = StockDetail::where('s_id', $stock->id)->get();
         for ($i = 0; $i < count($request->total); $i++) {
             if ($request->checkbox_values[$i] == 1) {

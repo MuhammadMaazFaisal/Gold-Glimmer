@@ -3,6 +3,7 @@
 use App\Http\Controllers\CashController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MetalController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PurchasingController;
 use App\Http\Controllers\StockController;
@@ -70,6 +71,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('profile', [ProfileController::class, 'destroy'])->name('profile.destroy'); 
+
+    // Product Management
+    Route::get('product', [ProductController::class, 'index'])->name('product.index');
 });
 
 

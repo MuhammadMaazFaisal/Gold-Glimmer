@@ -32,6 +32,7 @@
                                             <div class="col-sm-2">
                                                 <input type="text" name="invoice" id="invoice" class="form-control"
                                                     placeholder="Invoice" readonly required>
+                                                <input type="hidden" name="id" id="id" class="form-control" placeholder="id">
                                             </div>
                                         </div>
                                         <div class="table-responsive">
@@ -58,14 +59,8 @@
                                                                 placeholder="Details"></textarea>
                                                         </td>
                                                         <td colspan="2"><select class="form-control price_per"
-                                                                id="price_per[]" name="p_price_per[]"
+                                                                id="price_per[]" name="price_per[]"
                                                                 placeholder="Price per">
-                                                                <option value="Qty">Qty</option>
-                                                                <option value="Tola">Tola</option>
-                                                                <option value="K">K</option>
-                                                            </select>
-                                                            <select class="form-control price_per d-none" id="s_price_per[]"
-                                                                name="price_per[]" placeholder="Price per">
                                                                 <option value="Qty">Qty</option>
                                                                 <option value="Tola">Tola</option>
                                                                 <option value="K">K</option>
@@ -185,12 +180,7 @@
                 `<th scope="row">1</th>
                               <td class="d-none"> <input type="text"  id="id[]" name="id[]" value="" placeholder="id" class="form-control d-none"></td>
                             <td><textarea type="text" name="detail[]" id="detail[]" class="form-control" style="height: 20px;" placeholder="Details"></textarea></td>
-                            <td colspan="2"><select class="form-control price_per" id="price_per[]" name="p_price_per[]" placeholder="Price per">
-                                <option value="Qty">Qty</option>
-                                <option value="Tola">Tola</option>
-                                <option value="K">K</option>
-                            </select>
-                            <select class="form-control price_per d-none" id="s_price_per[]" name="price_per[]" placeholder="Price per">
+                            <td colspan="2"><select class="form-control price_per" id="price_per[]" name="price_per[]" placeholder="Price per">
                                 <option value="Qty">Qty</option>
                                 <option value="Tola">Tola</option>
                                 <option value="K">K</option>
@@ -256,6 +246,7 @@
             $('#product-modal').modal('hide');
             var product = document.getElementById("invoice");
             product.value = id;
+            document.getElementById('id').value = id;
             GetPurchasingDetails(id, vendor_id, total);
         }
 
@@ -284,7 +275,7 @@
                                 <td scope="row">1</td>
                                 <td class="d-none"> <input type="text"  id="id[]" name="id[]" value="${data[i].id}" placeholder="id" class="form-control d-none"></td>
                                 <td><textarea type="text" name="detail[]" id="detail[]" class="form-control" style="height: 20px;" placeholder="Details">${data[i].detail}</textarea></td>
-                               <td colspan="2"><select class="form-control price_per" id="price_per[]" name="p_price_per[]" placeholder="Price per">`;
+                               <td colspan="2"><select class="form-control price_per" id="price_per[]" name="price_per[]" placeholder="Price per">`;
                         if (data[i].price_per == "Qty") {
                             tr += `<option value="Qty" selected>Qty</option>
                                         <option value="Tola">Tola</option>
@@ -305,7 +296,7 @@
                                 <td><input type="number" step="any"  id="total[]" name="total[]" value="${data[i].total_amount}" class="form-control" placeholder="Total" onchange="GrandTotal()" required></td>
                                 <td><input id="barcode[]" name="barcode[]" value="${data[i].barcode}" type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" readonly></td>
                                 <td><div class="pt-2 form-check d-flex justify-content-center">
-                                    <input class="form-check-input" type="checkbox" name="checkbox[]" onclick="GenerateBarcode(this)" id="checkbox[]">
+                                    <input class="form-check-input" checked type="checkbox" name="checkbox[]" onclick="GenerateBarcode(this)" id="checkbox[]">
                                 </div></td>`;
                         if (i == 0) {
                             tr += `<td><i onclick="AddProduct()" class="fa fa-plus-circle fa-1x p-3"></i></td>`;
@@ -449,7 +440,13 @@
             }
             let formData = new FormData(this);
             formData.append("checkbox_values", JSON.stringify(checkbox_values));
-            url = "{{ route('purchasing.store') }}";
+            if (document.getElementById('id').value != "") {
+                url = "{{ route('purchasing.update', ':id') }}";
+                url = url.replace(':id', document.getElementById('id').value);
+            }else{
+                url = "{{ route('purchasing.store') }}";
+            }
+            console.log(url);
 
             $.ajax({
                 url: url,
@@ -465,9 +462,8 @@
                         Swal.fire({
                             icon: 'success',
                             title: 'Success',
-                            text: 'Purchasing Added Successfully',
-                            showConfirmButton: false,
-                            timer: 1500
+                            text: data['message'],
+                            showConfirmButton: true
                         }).then(function() {
                             location.reload();
                         });

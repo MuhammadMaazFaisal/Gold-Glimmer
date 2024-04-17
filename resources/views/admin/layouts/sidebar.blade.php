@@ -16,7 +16,8 @@
                         <span data-key="t-authentication">Manufacturer Panel</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="production_page.php" data-key="t-register">Add Production</a></li>
+                        <li><a href="{{ route('product.index') }}"
+                            data-key="t-register">Add Production</a></li>
                     </ul>
                 </li>
                 <li>
