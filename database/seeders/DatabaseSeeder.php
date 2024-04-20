@@ -27,9 +27,9 @@ class DatabaseSeeder extends Seeder
 
         // Create vendor type (Manufacturer, Polisher, Stone-Setter, Additional Vendor)
         $vendorTypes = [
-            'Manufacturer',
-            'Polisher',
-            'Stone-Setter',
+            'Manufacturing',
+            'Polishing',
+            'Stone Setting',
             'Additional Vendor',
         ];
 

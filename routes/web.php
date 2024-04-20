@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\CashController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MetalController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PurchasingController;
@@ -74,6 +76,19 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Product Management
     Route::get('product', [ProductController::class, 'index'])->name('product.index');
+
+    // Order Management
+    Route::get('order', [OrderController::class, 'index'])->name('order.index');
+
+    // Customer Management
+    Route::post('customer-list', [CustomerController::class, 'index'])->name('customer.index');
+    Route::get('customer', [CustomerController::class, 'create'])->name('customer.create');
+    Route::get('customer/{id}', [CustomerController::class, 'edit'])->name('customer.edit');
+    Route::post('customer', [CustomerController::class, 'store'])->name('customer.store');
+    Route::post('customer/{id}', [CustomerController::class, 'update'])->name('customer.update');
+    Route::delete('customer/{id}', [CustomerController::class, 'destroy'])->name('customer.destroy');
+    Route::get('next-customer-number', [CustomerController::class, 'getNextCustomerNumber'])->name('next-customer-number');
+
 });
 
 

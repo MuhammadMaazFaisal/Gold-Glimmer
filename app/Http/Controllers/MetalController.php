@@ -93,7 +93,7 @@ class MetalController extends Controller
     
     public function getMetalVendors(Request $request)
     {
-        $vendors = Vendor::wherein('type', [VendorType::where('name', 'Manufacturer')->first()->id, VendorType::where('name', 'Polisher')->first()->id, VendorType::where('name', 'Stone-Setter')->first()->id])->get();
+        $vendors = Vendor::wherein('type', [VendorType::where('name', 'Manufacturing')->first()->id, VendorType::where('name', 'Polishing')->first()->id, VendorType::where('name', 'Stone Setting')->first()->id])->get();
         return response()->json(['data' => $vendors]);
     }
 
