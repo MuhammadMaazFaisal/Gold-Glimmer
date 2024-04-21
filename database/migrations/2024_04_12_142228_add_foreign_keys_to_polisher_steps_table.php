@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::table('polisher_steps', function (Blueprint $table) {
-            $table->foreign(['vendor_id'], 'polisher_steps_ibfk_1')->references(['id'])->on('vendors')->onUpdate('no action')->onDelete('no action');
-            $table->foreign(['product_id'], 'polisher_steps_ibfk_2')->references(['id'])->on('products')->onUpdate('no action')->onDelete('no action');
+            $table->foreign(['vendor_id'], 'polisher_steps_ibfk_1')->references(['id'])->on('vendors');
+            $table->foreign(['product_id'], 'polisher_steps_ibfk_2')->references(['id'])->on('products');
             $table->foreign(['polishing_type'], 'polisher_steps_ibfk_3')->references(['id'])->on('polishing_types')->onUpdate('restrict')->onDelete('restrict');
         });
     }

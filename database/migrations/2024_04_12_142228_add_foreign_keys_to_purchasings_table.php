@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('purchasings', function (Blueprint $table) {
-            $table->foreign(['vendor_id'], 'purchasings_ibfk_1')->references(['id'])->on('vendors')->onUpdate('no action')->onDelete('no action');
+            $table->foreign(['vendor_id'], 'purchasings_ibfk_1')->references(['id'])->on('vendors');
         });
     }
 

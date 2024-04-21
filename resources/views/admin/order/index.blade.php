@@ -34,8 +34,6 @@
 
 
                                         <form id="form" method="POST" enctype="multipart/form-data">
-                                            <input style="display: none;" type="number" step="any" name="product_id"
-                                                id="product_id" class="form-control">
                                             <div class="row mb-4">
                                                 <label for="date" class="col-sm-1 col-form-label">Date:</label>
                                                 <div class="col-sm-4">
@@ -71,15 +69,6 @@
                                                         @endforeach
                                                     </select>
                                                 </div>
-                                                <label for="horizontal-firstname-input"
-                                                    class="col-sm-2 col-form-label d-flex justify-content-end">Total
-                                                    Weight:</label>
-                                                <div class="col-sm-5">
-
-                                                    <input type="number" step="any" name="total_weight"
-                                                        id="total_weight" class="form-control" placeholder="Total Weight"
-                                                        required>
-                                                </div>
                                                 <h4 class="my-4">
                                                     Product Details
                                                 </h4>
@@ -93,7 +82,7 @@
                                                                 class="col-sm-1 col-form-label d-flex justify-content-end">Type:</label>
                                                             <div class="col-sm-3">
 
-                                                                <select required="" name="type[]" id="type"
+                                                                <select required="" name="type[]" required id="type[]"
                                                                     class="form-control form-select">
                                                                     <option>Select Type</option>
                                                                     <option value="Set">Set</option>
@@ -112,7 +101,6 @@
                                                                     <option value="Bindia">Bindia</option>
                                                                     <option value="Kara + Locket set">Kara +
                                                                         Locket set</option>
-                                                                    <option value="Order">Order</option>
                                                                     <option value="Latkan">Latkan</option>
                                                                     <option value="Bangles Set">Bangles Set
                                                                     </option>
@@ -130,15 +118,15 @@
                                                                 class="col-sm-1 col-form-label d-flex justify-content-end">Quantity:</label>
                                                             <div class="col-sm-2">
 
-                                                                <input type="number" value="" id="quantity"
+                                                                <input type="number" value="" id="quantity][]"
                                                                     name="quantity[]" class="form-control"
                                                                     placeholder="QTY" required>
                                                             </div>
                                                             <label for="horizontal-firstname-input"
                                                                 class="col-sm-1 col-form-label d-flex justify-content-end">Purity:</label>
                                                             <div class="col-sm-3">
-                                                                <select required="" name="purity"
-                                                                    id="select-manufacturer-purity"
+                                                                <select required="" name="purity[]"
+                                                                    id="select-manufacturer-purity[]"
                                                                     class="form-control form-select" placeholder="Purity"
                                                                     required>
                                                                     <option value="">Select Purity
@@ -147,6 +135,7 @@
                                                                     <option value="21k">21k</option>
                                                                     <option value="22k">22k</option>
                                                                 </select>
+                                                                <input type="hidden" name="purity_text[]" value="">
                                                             </div>
                                                             <div class="col-sm-1">
 
@@ -159,15 +148,15 @@
                                                             <div class="col-sm-3">
 
                                                                 <input type="number" step="any" name="weight[]"
-                                                                    value="" id="weight" class="form-control"
+                                                                    value="" id="weight[]" class="form-control"
                                                                     placeholder="Weight" required>
                                                             </div>
                                                             <label for="horizontal-firstname-input"
                                                                 class="col-sm-1 col-form-label d-flex justify-content-end">Dimensions:</label>
                                                             <div class="col-sm-2">
 
-                                                                <input type="text" step="any" name="dimensions[]"
-                                                                    id="dimensions" value="" class="form-control"
+                                                                <input type="text" step="any" name="dimension[]"
+                                                                    id="dimension[]" value="" class="form-control"
                                                                     placeholder="Dimensions" required>
                                                             </div>
                                                             <label for="horizontal-firstname-input"
@@ -175,7 +164,7 @@
                                                                 Upload:</label>
                                                             <div class="col-sm-3">
 
-                                                                <input type="file" id="image[]" name="image[]"
+                                                                <input type="file" id="image[]" name="image[]" required
                                                                     value="" class="form-control" accept="image/*">
                                                             </div>
                                                         </div>
@@ -252,78 +241,34 @@
     <script>
         $(document).ready(function() {
             GetDate();
+            addEventListeners();
             $('#vendor').selectize({
                 sortField: 'text'
             });
             $('#customer').selectize({
                 sortField: 'text'
             });
-            $.ajax({
-                url: "functions.php",
-                method: "POST",
-                data: {
-                    function: "GetAllVendorData",
-                    type: "manufacturer"
-                },
-                success: function(response) {
-                    var data = JSON.parse(response);
-                    console.log(data);
-
-                    var select = $('#vendor')[0].selectize;
-                    for (var i = 0; i < data.length; i++) {
-                        var newOption = {
-                            value: data[i].id,
-                            text: data[i].id + " | " + data[i].name
-                        };
-                        select.addOption(newOption);
-                    }
-                    select.close();
-
-                }
-            });
-            $.ajax({
-                url: "functions.php",
-                method: "POST",
-                data: {
-                    function: "GetAllVendorData",
-                    type: "vendor"
-                },
-                success: function(response) {
-                    var data = JSON.parse(response);
-                    console.log(data);
-
-                    var p_select = $('#customer')[0].selectize;
-                    for (var i = 0; i < data.length; i++) {
-                        var newOption = {
-                            value: data[i].id,
-                            text: data[i].id + " | " + data[i].name
-                        };
-                        p_select.addOption(newOption);
-                    }
-                    p_select.close();
-
-                }
-            });
         });
 
         $('#form').submit(function(e) {
             e.preventDefault();
             var formData = new FormData(this);
-            formData.append('function', 'CreateOrder');
             $.ajax({
-                url: "functions.php",
+                url: "{{ route('order.store') }}",
                 method: "POST",
                 data: formData,
                 contentType: false,
                 processData: false,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
                 success: function(response) {
                     console.log(response);
-                    if (response == "success") {
+                    if (response["alert-type"] == "success") {
                         Swal.fire({
                             icon: 'success',
                             title: 'Order Created Successfully',
-                            showConfirmButton: false,
-                            timer: 1500
+                            showConfirmButton: true,
                         }).then((result) => {
                             location.reload();
                         })
@@ -346,7 +291,7 @@
         <div class="row mb-4">
             <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Type:</label>
             <div class="col-sm-3">
-                <select required="" name="type[]" id="type" class="form-control form-select">
+                <select required="" name="type[]" required id="type[]" class="form-control form-select">
                     <option>Select Type</option>
                     <option value="Set">Set</option>
                     <option value="Tops">Tops</option>
@@ -364,7 +309,6 @@
                     <option value="Bindia">Bindia</option>
                     <option value="Kara + Locket set">Kara +
                         Locket set</option>
-                    <option value="Order">Order</option>
                     <option value="Latkan">Latkan</option>
                     <option value="Bangles Set">Bangles Set
                     </option>
@@ -381,18 +325,19 @@
             <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Quantity:</label>
             <div class="col-sm-2">
 
-                <input type="number" value="" id="quantity" name="quantity[]" class="form-control" placeholder="QTY" required>
+                <input type="number" value="" id="quantity[]" name="quantity[]" class="form-control" placeholder="QTY" required>
             </div>
             <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">
                 Purity:</label>
             <div class="col-sm-3">
-                <select required="" name="purity" id="select-manufacturer-purity" class="form-control form-select" placeholder="Purity" required>
+                <select required="" name="purity[]" id="select-manufacturer-purity[]" class="form-control form-select" placeholder="Purity" required>
                     <option value="">Select Purity
                     </option>
                     <option value="18k">18k</option>
                     <option value="21k">21k</option>
                     <option value="22k">22k</option>
                 </select>
+                <input type="hidden" name="purity_text[]" value="">
             </div>
 
             <div class="col-sm-1">
@@ -404,21 +349,32 @@
             <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Weight:</label>
             <div class="col-sm-3">
 
-                <input type="number" step="any" name="weight[]" value="" id="weight" class="form-control" placeholder="Weight" required>
+                <input type="number" step="any" name="weight[]" value="" id="weight[]" class="form-control" placeholder="Weight" required>
             </div>
             <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Dimensions:</label>
             <div class="col-sm-2">
 
-                <input type="text" step="any" name="dimensions[]" id="dimensions" value="" class="form-control" placeholder="Dimensions" required>
+                <input type="text" step="any" name="dimension[]" id="dimension[]" value="" class="form-control" placeholder="Dimensions" required>
             </div>
             <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Image
                 Upload:</label>
             <div class="col-sm-3">
 
-                <input type="file" id="image[]" name="image[]" value="" class="form-control" accept="image/*">
+                <input type="file" id="image[]" name="image[]" required value="" class="form-control" accept="image/*">
             </div>
         </div>`;
             product_container.appendChild(product);
+            addEventListeners();
+        }
+
+        function addEventListeners() {
+            var selects = document.querySelectorAll('select[name="purity[]"]');
+            for (let i = 0; i < selects.length; i++) {
+                selects[i].addEventListener('change', function(e) {
+                    var value = e.target.value;
+                    e.target.nextElementSibling.value = value;
+                });
+            }
         }
 
         function Remove(e) {

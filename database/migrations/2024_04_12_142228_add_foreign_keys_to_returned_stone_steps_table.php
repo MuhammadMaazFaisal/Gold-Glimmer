@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::table('returned_stone_steps', function (Blueprint $table) {
-            $table->foreign(['product_id'], 'returned_stone_steps_ibfk_1')->references(['id'])->on('products')->onUpdate('no action')->onDelete('no action');
-            $table->foreign(['vendor_id'], 'returned_stone_steps_ibfk_2')->references(['id'])->on('vendors')->onUpdate('no action')->onDelete('no action');
+            $table->foreign(['product_id'], 'returned_stone_steps_ibfk_1')->references(['id'])->on('products');
+            $table->foreign(['vendor_id'], 'returned_stone_steps_ibfk_2')->references(['id'])->on('vendors');
         });
     }
 

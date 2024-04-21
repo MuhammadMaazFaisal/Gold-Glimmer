@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\MetalType;
+use App\Models\ProductType;
 use App\Models\Purchasing;
 use App\Models\User;
 use App\Models\Vendor;
@@ -39,7 +40,7 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        $metalTypes= [
+        $metalTypes = [
             'issue',
             'receive',
         ];
@@ -69,5 +70,36 @@ class DatabaseSeeder extends Seeder
             'vendor_id' => 'existing',
             'total' => 0,
         ]);
+
+        $productTypes = [
+            'Set',
+            'Tops',
+            'Ring',
+            'Braclet',
+            'Safety Chain',
+            'Clip',
+            'Kariyan',
+            'Locket',
+            'Locket Set',
+            'Bangles',
+            'Kara',
+            'Bindia',
+            'Kara + Locket set',
+            'Order',
+            'Latkan',
+            'Bangles Set',
+            'Set+ring',
+            'Repairing',
+            'Natt',
+            'Cap',
+            'Polish paid',
+            'Jhumar',
+        ];
+
+        foreach ($productTypes as $productType) {
+            ProductType::create([
+                'name' => $productType,
+            ]);
+        }
     }
 }

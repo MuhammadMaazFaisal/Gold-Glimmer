@@ -18,9 +18,10 @@ return new class extends Migration
             $table->string('vendor_id')->index('vendor_id');
             $table->date('date');
             $table->string('image');
-            $table->text('note');
+            $table->text('note')->nullable();
             $table->unsignedBigInteger('product_type')->index('product_type');
             $table->integer('quantity');
+            $table->string('dimension');
             $table->float('purity');
             $table->string('purity_text');
             $table->float('unpolished_weight');

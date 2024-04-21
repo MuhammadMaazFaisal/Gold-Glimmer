@@ -79,6 +79,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Order Management
     Route::get('order', [OrderController::class, 'index'])->name('order.index');
+    Route::get('create-order', [OrderController::class, 'create'])->name('order.create');
+    Route::get('order/{id}', [OrderController::class, 'edit'])->name('order.edit');
+    Route::post('order', [OrderController::class, 'store'])->name('order.store');
 
     // Customer Management
     Route::post('customer-list', [CustomerController::class, 'index'])->name('customer.index');
