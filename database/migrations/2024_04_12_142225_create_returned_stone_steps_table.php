@@ -26,7 +26,6 @@ return new class extends Migration
             $table->float('wastage');
             $table->float('grand_weight');
             $table->float('payable');
-            $table->timestamp('date')->useCurrentOnUpdate()->useCurrent();
             $table->softDeletes();
             $table->timestamps();
         });

@@ -16,9 +16,8 @@ return new class extends Migration
         Schema::create('stones', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('item_id')->index('item_id');
-            $table->string('vendor_id')->index('vendor_id');
-            $table->string('product_id')->index('product_id');
-            $table->float('price');
+            $table->foreignId('stone_setter_step_id')->constrained();
+            $table->float('price')->nullable();
             $table->float('weight');
             $table->integer('quantity');
             $table->softDeletes();

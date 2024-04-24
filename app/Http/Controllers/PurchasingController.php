@@ -174,7 +174,7 @@ class PurchasingController extends Controller
 
     public function getPurchasingVendors()
     {
-        $vendors = Vendor::where('type', VendorType::where('name', 'Additional Vendor')->first()->id)
+        $vendors = Vendor::where('type', VendorType::where('name', 'Additional Vendor')->first()->id)->where('name', '!=', 'existing')
             ->get();
         return response()->json($vendors);
     }

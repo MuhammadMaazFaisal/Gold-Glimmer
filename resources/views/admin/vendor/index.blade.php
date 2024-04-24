@@ -46,30 +46,35 @@
                                                     class="form-control" placeholder="Address" required>
                                             </div>
                                         </div>
-                                        <h6>By Default</h6>
-                                        <div class="ms-md-5">
-                                            <div class="row mb-4 ms-md-3">
-                                                <label for="18k" class="ps-md-5 col-sm-1 col-form-label">18k:</label>
-                                                <div class="col-sm-5">
-                                                    <input type="number" name="18k" id="18k" step="any"
-                                                        class="form-control" required>
+                                        @if ($type != 'Additional Vendor')
+                                            <h6>By Default</h6>
+                                            <div class="ms-md-5">
+                                                <div class="row mb-4 ms-md-3">
+                                                    <label for="18k"
+                                                        class="ps-md-5 col-sm-1 col-form-label">18k:</label>
+                                                    <div class="col-sm-5">
+                                                        <input type="number" name="18k" id="18k" step="any"
+                                                            class="form-control" required>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-4 ms-md-3">
+                                                    <label for="21k"
+                                                        class="ps-md-5 col-sm-1 col-form-label">21k:</label>
+                                                    <div class="col-sm-5">
+                                                        <input type="number" name="21k" id="21k" step="any"
+                                                            class="form-control" required>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-4 ms-md-3">
+                                                    <label for="22k"
+                                                        class="ps-md-5 col-sm-1 col-form-label">22k:</label>
+                                                    <div class="col-sm-5">
+                                                        <input type="number" name="22k" id="22k" step="any"
+                                                            class="form-control" required>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="row mb-4 ms-md-3">
-                                                <label for="21k" class="ps-md-5 col-sm-1 col-form-label">21k:</label>
-                                                <div class="col-sm-5">
-                                                    <input type="number" name="21k" id="21k" step="any"
-                                                        class="form-control" required>
-                                                </div>
-                                            </div>
-                                            <div class="row mb-4 ms-md-3">
-                                                <label for="22k" class="ps-md-5 col-sm-1 col-form-label">22k:</label>
-                                                <div class="col-sm-5">
-                                                    <input type="number" name="22k" id="22k" step="any"
-                                                        class="form-control" required>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        @endif
                                         <div class="row justify-content-end">
                                             <div class="col-sm-9 d-flex justify-content-end me-4">
                                                 <button type="button" id="delete"
@@ -141,7 +146,8 @@
                             confirmButtonText: 'Ok'
                         })
                     }
-                },error: function(response) {
+                },
+                error: function(response) {
                     let errors = response.responseJSON.errors;
                     let message = "";
                     for (let key in errors) {

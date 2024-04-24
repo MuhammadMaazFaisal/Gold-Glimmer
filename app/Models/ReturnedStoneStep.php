@@ -5,21 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class ReturnedStoneStep extends Model
 {
     use HasFactory;
-
-    protected $primaryKey = 'id';
-    public $incrementing = false; 
 
     public function vendor()
     {
         return $this->belongsTo(Vendor::class);
     }
 
-    public function productType()
+    public function returnedItems()
     {
-        return $this->belongsTo(ProductType::class, 'product_type');
+        return $this->hasMany(ReturnedItem::class);
     }
-    
 }

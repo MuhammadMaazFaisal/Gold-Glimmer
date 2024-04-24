@@ -19,14 +19,14 @@ return new class extends Migration
             $table->string('product_id', 191)->nullable()->index('product_id');
             $table->string('vendor_id')->nullable()->index('vendor_id');
             $table->unsignedBigInteger('polishing_type')->index('polishing_type');
+            $table->float('polish_weight');
             $table->text('image')->nullable();
             $table->text('details')->nullable();
             $table->float('difference')->nullable();
             $table->float('rate');
-            $table->float('Wastage')->nullable();
-            $table->float('Payable')->nullable();
+            $table->float('wastage')->nullable();
+            $table->float('payable')->nullable();
             $table->string('status', 191)->default('Active');
-            $table->string('polisherbarcode');
             $table->softDeletes();
             $table->timestamps();
         });

@@ -13,14 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('returned_items', function (Blueprint $table) {
+        Schema::create('finished_products', function (Blueprint $table) {
             $table->id();
-            $table->string('code');
-            $table->string('vendor_id')->index('vendor_id');
             $table->string('product_id')->index('product_id');
-            $table->float('price');
+            $table->string('vendor_id')->index('vendor_id');
             $table->float('weight');
-            $table->integer('quantity');
+            $table->float('price');
+            $table->string('category');
+            $table->text('description');
+            $table->string('image');
+            $table->status('status');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -33,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('returned_items');
+        //
     }
 };

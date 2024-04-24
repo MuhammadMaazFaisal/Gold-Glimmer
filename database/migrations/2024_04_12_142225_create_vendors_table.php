@@ -19,9 +19,9 @@ return new class extends Migration
             $table->unsignedBigInteger('type')->index('type');
             $table->string('phone')->nullable();
             $table->text('address')->nullable();
-            $table->float('18k');
-            $table->float('21k');
-            $table->float('22k');
+            $table->float('18k')->nullable();
+            $table->float('21k')->nullable();
+            $table->float('22k')->nullable();
             $table->string('status')->comment('0: Inactive, 1: Active');
             $table->softDeletes();
             $table->timestamps();

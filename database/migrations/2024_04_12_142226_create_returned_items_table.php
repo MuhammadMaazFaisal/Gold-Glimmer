@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('zircons', function (Blueprint $table) {
+        Schema::create('returned_items', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('item_id')->index('item_id');
-            $table->foreignId('stone_setter_step_id')->constrained();
-            $table->float('weight');
+            $table->string('code');
+            $table->foreignId('returned_stone_step_id')->constrained();
             $table->float('price')->nullable();
+            $table->float('weight');
             $table->integer('quantity');
             $table->softDeletes();
             $table->timestamps();
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('zircons');
+        Schema::dropIfExists('returned_items');
     }
 };

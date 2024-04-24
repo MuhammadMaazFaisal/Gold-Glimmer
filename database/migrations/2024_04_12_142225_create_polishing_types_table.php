@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('polishing_types', function (Blueprint $table) {
             $table->id();
-            $table->integer('name');
+            $table->string('name');
             $table->softDeletes();
             $table->timestamps();
         });

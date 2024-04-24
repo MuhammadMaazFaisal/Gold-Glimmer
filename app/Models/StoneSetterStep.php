@@ -5,21 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class StoneSetterStep extends Model
 {
     use HasFactory;
-
-    protected $primaryKey = 'id';
-    public $incrementing = false; 
 
     public function vendor()
     {
         return $this->belongsTo(Vendor::class);
     }
 
-    public function productType()
+    public function zircons()
     {
-        return $this->belongsTo(ProductType::class, 'product_type');
+        return $this->hasMany(Zircon::class);
+    }
+
+    public function stones()
+    {
+        return $this->hasMany(Stone::class);
     }
     
 }

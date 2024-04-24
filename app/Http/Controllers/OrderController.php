@@ -22,7 +22,6 @@ class OrderController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->all());
         $request->validate([
             'customer' => 'required',
             'vendor' => 'required',

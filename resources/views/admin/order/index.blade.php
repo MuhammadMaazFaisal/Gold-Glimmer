@@ -19,10 +19,10 @@
 
                         </div>
                         <!-- <div class="col d-flex justify-content-end me-4">
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" onclick="SelectMetal()" data-bs-target="#product-modal">
-                                Show History
-                            </button>
-                        </div> -->
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" onclick="SelectMetal()" data-bs-target="#product-modal">
+                                    Show History
+                                </button>
+                            </div> -->
                         <div class="card-body p-4 ">
 
 
@@ -46,7 +46,7 @@
                                                     <select id="vendor" name="vendor" required
                                                         class="form-control form-select">
                                                         <option value="">Select Manufacturer</option>
-                                                        @foreach($manufacturers as $manufacturer)
+                                                        @foreach ($manufacturers as $manufacturer)
                                                             <option value="{{ $manufacturer->id }}">{{ $manufacturer->id }}
                                                                 | {{ $manufacturer->name }}</option>
                                                         @endforeach
@@ -63,7 +63,7 @@
                                                     <select required="" name="customer" id="customer"
                                                         class="form-control form-select" required>
                                                         <option value="">Select Customer</option>
-                                                        @foreach($customers as $customer)
+                                                        @foreach ($customers as $customer)
                                                             <option value="{{ $customer->id }}">{{ $customer->id }}
                                                                 | {{ $customer->name }}</option>
                                                         @endforeach
@@ -82,9 +82,9 @@
                                                                 class="col-sm-1 col-form-label d-flex justify-content-end">Type:</label>
                                                             <div class="col-sm-3">
 
-                                                                <select required="" name="type[]" required id="type[]"
+                                                                <select name="type[]" required id="type[]"
                                                                     class="form-control form-select">
-                                                                    <option>Select Type</option>
+                                                                    <option value="">Select Type</option>
                                                                     <option value="Set">Set</option>
                                                                     <option value="Tops">Tops</option>
                                                                     <option value="Ring">Ring</option>
@@ -119,8 +119,8 @@
                                                             <div class="col-sm-2">
 
                                                                 <input type="number" value="" id="quantity][]"
-                                                                    name="quantity[]" class="form-control"
-                                                                    placeholder="QTY" required>
+                                                                    name="quantity[]" class="form-control" placeholder="QTY"
+                                                                    required>
                                                             </div>
                                                             <label for="horizontal-firstname-input"
                                                                 class="col-sm-1 col-form-label d-flex justify-content-end">Purity:</label>
@@ -135,7 +135,8 @@
                                                                     <option value="21k">21k</option>
                                                                     <option value="22k">22k</option>
                                                                 </select>
-                                                                <input type="hidden" name="purity_text[]" value="">
+                                                                <input type="hidden" name="purity_text[]"
+                                                                    value="">
                                                             </div>
                                                             <div class="col-sm-1">
 
@@ -164,8 +165,9 @@
                                                                 Upload:</label>
                                                             <div class="col-sm-3">
 
-                                                                <input type="file" id="image[]" name="image[]" required
-                                                                    value="" class="form-control" accept="image/*">
+                                                                <input type="file" id="image[]" name="image[]"
+                                                                    required value="" class="form-control"
+                                                                    accept="image/*">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -211,13 +213,11 @@
                                 <th scope="col">Vendor Name</th>
                                 <th scope="col">Issued Weight</th>
                                 <th scope="col">Purity</th>
-                                <th scope="col">Pure Weight</th>
                                 <th scope="col">Date</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody id="product-table-body">
-
                         </tbody>
                     </table>
                 </div>
@@ -291,8 +291,8 @@
         <div class="row mb-4">
             <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Type:</label>
             <div class="col-sm-3">
-                <select required="" name="type[]" required id="type[]" class="form-control form-select">
-                    <option>Select Type</option>
+                <select name="type[]" required id="type[]" class="form-control form-select">
+                    <option value="">Select Type</option>
                     <option value="Set">Set</option>
                     <option value="Tops">Tops</option>
                     <option value="Ring">Ring</option>

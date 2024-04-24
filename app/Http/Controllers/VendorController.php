@@ -11,7 +11,7 @@ class VendorController extends Controller
 
     public function index(Request $request)
     {
-        $vendors = Vendor::where('type', VendorType::where('name', $request->type)->first()->id)->get();
+        $vendors = Vendor::where('type', VendorType::where('name', $request->type)->first()->id)->where('name', '!=', 'existing')->get();
         return $vendors;
     }
 
@@ -44,9 +44,11 @@ class VendorController extends Controller
         $vendor->phone = $request->phone;
         $vendor->address = $request->address;
         $vendor->type = VendorType::where('name', $request->type)->first()->id;
-        $vendor['18k'] = $request['18k'];
-        $vendor['21k'] = $request['21k'];
-        $vendor['22k'] = $request['22k'];
+        if ($request->type != 'Additional Vendor') {
+            $vendor['18k'] = $request['18k'];
+            $vendor['21k'] = $request['21k'];
+            $vendor['22k'] = $request['22k'];
+        }
         $vendor->status = 1;
         $vendor->save();
 
@@ -76,9 +78,11 @@ class VendorController extends Controller
         $vendor->name = $request->name;
         $vendor->phone = $request->phone;
         $vendor->address = $request->address;
-        $vendor['18k'] = $request['18k'];
-        $vendor['21k'] = $request['21k'];
-        $vendor['22k'] = $request['22k'];
+        if ($request->type != 'Additional Vendor') {
+            $vendor['18k'] = $request['18k'];
+            $vendor['21k'] = $request['21k'];
+            $vendor['22k'] = $request['22k'];
+        }
         $vendor->status = 1;
         $vendor->save();
 

@@ -76,6 +76,21 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Product Management
     Route::get('product', [ProductController::class, 'index'])->name('product.index');
+    Route::get('create-product', [ProductController::class, 'create'])->name('product.create');
+    Route::post('store-product', [ProductController::class, 'store'])->name('product.store');
+    Route::get('product/{id}', [ProductController::class, 'edit'])->name('product.edit');
+    Route::post('product-step-one', [ProductController::class, 'storeStepOne'])->name('product.stepone.store');
+    Route::post('product-step-two', [ProductController::class, 'storeStepTwo'])->name('product.steptwo.store');
+    Route::post('product-step-three', [ProductController::class, 'storeStepThree'])->name('product.stepthree.store');
+    Route::post('product-returned-step-three', [ProductController::class, 'storeReturnedStepThree'])->name('product.returned.stepthree.store');
+    Route::get('complete-product/{id}', [ProductController::class, 'completeProduct'])->name('product.complete');
+    Route::post('product-step-four', [ProductController::class, 'storeStepFour'])->name('product.stepfour.store');
+    Route::post('get-manufacturer-purity', [ProductController::class, 'getManufacturerPurity'])->name('product.manufacturer.purity');
+    Route::post('get-polisher-rate', [ProductController::class, 'getPolisherRate'])->name('product.polisher.rate');
+    Route::post('get-stone-setter-rate', [ProductController::class, 'getStoneSetterRate'])->name('product.stone.setter.rate');
+    Route::post('get-stock-items', [ProductController::class, 'getStockItems'])->name('product.stock.items');
+    Route::post('get-stock-item-detail', [ProductController::class, 'getStockItemDetail'])->name('product.stock.item.detail');
+
 
     // Order Management
     Route::get('order', [OrderController::class, 'index'])->name('order.index');
