@@ -92,7 +92,7 @@
                         <li><a href="{{ route('stock.create') }}"data-key="t-register">Add Stock</a></li>
                     </ul>
                 </li>
-                <li>
+                {{-- <li>
                     <a href="javascript: void(0);" class=" ">
                         <i data-feather="layers"></i>
                         <span data-key="t-authentication">Reports</span>
@@ -103,8 +103,8 @@
                         <li><a href="stone_setter_report.php" data-key="t-register">Stone Setting Report</a></li>
                         <li><a href="additional_report.php" data-key="t-register">Additional Accounts Report</a></li> -->
                     </ul>
-                </li>
-                <li>
+                </li> --}}
+                {{-- <li>
                     <a href="javascript: void(0);" class=" ">
                         <i data-feather="settings"></i>
                         <span data-key="t-authentication">Settings</span>
@@ -112,7 +112,7 @@
                     <!-- <ul class="sub-menu" aria-expanded="false">
                         <li><a href="#" data-key="t-register">System Settings</a></li>
                     </ul> -->
-                </li>
+                </li> --}}
             </ul>
         </div>
         <!-- Sidebar -->
