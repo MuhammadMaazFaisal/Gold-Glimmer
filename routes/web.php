@@ -5,6 +5,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MetalController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\POSController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PurchasingController;
@@ -90,6 +91,19 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('get-stone-setter-rate', [ProductController::class, 'getStoneSetterRate'])->name('product.stone.setter.rate');
     Route::post('get-stock-items', [ProductController::class, 'getStockItems'])->name('product.stock.items');
     Route::post('get-stock-item-detail', [ProductController::class, 'getStockItemDetail'])->name('product.stock.item.detail');
+
+    // Finished Product Management
+    Route::get('finished-product', [ProductController::class, 'finishedProduct'])->name('finished.product');
+
+    // POS
+    Route::get('pos', [POSController::class, 'index'])->name('pos.index');
+    Route::post('get-product-details/{id}', [POSController::class, 'getProductDetails'])->name('pos.product.details');
+    // edit pos order
+    Route::get('pos/{id}', [POSController::class, 'edit'])->name('pos.order.edit');
+    Route::post('pos', [POSController::class, 'store'])->name('pos.store');
+    // pos order list
+    Route::get('pos-order-list', [POSController::class, 'posOrderList'])->name('pos.order.list');
+
 
 
     // Order Management

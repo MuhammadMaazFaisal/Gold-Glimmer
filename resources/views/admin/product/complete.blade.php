@@ -19,7 +19,7 @@
                                 </h4>
                             </div>
                             <div class="card-body">
-                                <form action="{{ route('product.store') }}" method="POST">
+                                <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row my-1">
                                         <div class="col-md-6">
@@ -55,7 +55,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="weight">Weight (g)</label>
-                                                        <input type="text" class="form-control" id="weight[]" required
+                                                        <input type="number" step="any" class="form-control" id="weight[]" required
                                                             name="weight[]" placeholder="Enter weight in grams">
                                                     </div>
                                                 </div>
@@ -79,7 +79,7 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="image">Image</label>
-                                                        <input type="file" class="form-control" id="image[]"
+                                                        <input type="file" class="form-control" id="image[]" accept="image/*"
                                                             name="image[]" required>
                                                     </div>
                                                 </div>

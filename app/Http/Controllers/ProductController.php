@@ -60,22 +60,35 @@ class ProductController extends Controller
     {
         for ($i = 0; $i < count($request->barcode); $i++) {
             $product= new FinishedProduct();
+            $product->vendor_id = $request->vendor_id;
+            $product->product_id = $request->m_product_id;
             $product->barcode = $request->barcode[$i];
             $product->weight = $request->weight[$i];
             $product->price = $request->price[$i];
             $product->category = $request->category[$i];
             $product->description = $request->description[$i];
-            if (isset($request->image) && $request->image != null) {
-                $image = $request->image;
-                $imageName = time() . uniqid() . '.' . $image->extension();
+            if (isset($request->image[$i]) && $request->image[$i] != null) {
+                $image = $request->image[$i];
+                $uniqueId = time() . uniqid();
+                $imageName = time() . $uniqueId . '.' . $image->extension();
                 $image->move(public_path('images/products'), $imageName);
                 $product->image = $imageName;
             }
-            $product->status = 0;
             $product->save();
         }
 
-        return response()->json($notification);
+        $notification = array(
+            'message' => 'All products created successfully!',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('finished.product')->with($notification);
+    }
+
+    public function finishedProduct()
+    {
+        $products = FinishedProduct::with('product', 'vendor')->get();
+        return view('admin.product.finished', compact('products'));
     }
 
     public function storeStepOne(Request $request)

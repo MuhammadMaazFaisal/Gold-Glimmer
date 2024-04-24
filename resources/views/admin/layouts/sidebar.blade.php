@@ -11,14 +11,10 @@
                     </a>
                 </li>
                 <li>
-                    <a href="javascript: void(0);" class=" ">
+                    <a href="{{ route('product.index') }}" class=" ">
                         <i data-feather="file-text"></i>
                         <span data-key="t-authentication">Manufacturer Panel</span>
                     </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="{{ route('product.index') }}"
-                            data-key="t-register">Add Production</a></li>
-                    </ul>
                 </li>
                 <li>
                     <a href="javascript: void(0);" class=" ">
@@ -38,13 +34,19 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="javascript: void(0);" class=" ">
+                    <a href="{{ route('finished.product') }}" class=" ">
                         <i data-feather="file-text"></i>
                         <span data-key="t-authentication">Products</span>
                     </a>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class=" ">
+                        <i data-feather="file-text"></i>
+                        <span data-key="t-authentication">POS</span>
+                    </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="#" data-key="t-register">Semi-Finished</a></li>
-                        <!-- <li><a href="add_product.php" data-key="t-register">Add Product</a></li> -->
+                        <li><a href="{{ route('pos.index') }}" data-key="t-register">Create</a></li>
+                        <li><a href="{{ route('pos.order.list') }}" data-key="t-register">List</a></li>
                     </ul>
                 </li>
                 <li>

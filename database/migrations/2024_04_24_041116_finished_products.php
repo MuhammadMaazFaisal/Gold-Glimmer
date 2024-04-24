@@ -15,17 +15,23 @@ return new class extends Migration
     {
         Schema::create('finished_products', function (Blueprint $table) {
             $table->id();
-            $table->string('product_id')->index('product_id');
-            $table->string('vendor_id')->index('vendor_id');
+            $table->string('barcode');
+            $table->string('vendor_id'); // Changed to string
+            $table->string('product_id'); // Changed to string
             $table->float('weight');
             $table->float('price');
             $table->string('category');
             $table->text('description');
             $table->string('image');
-            $table->status('status');
+            $table->integer('status')->default(1);
             $table->softDeletes();
             $table->timestamps();
+        
+            // Define foreign key constraints separately
+            $table->foreign('vendor_id')->references('id')->on('vendors');
+            $table->foreign('product_id')->references('id')->on('products');
         });
+        
     }
 
     /**
@@ -35,6 +41,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('finished_products');
     }
 };
