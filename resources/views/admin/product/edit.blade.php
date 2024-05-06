@@ -189,7 +189,7 @@
                                                         <div class="col-sm-3">
                                                             <input type="text" name="dimension" id="dimension"
                                                                 class="form-control" value="{{ $product->dimension }}"
-                                                                placeholder="Dimensions" required>
+                                                                placeholder="Dimensions">
                                                         </div>
                                                         <label for="horizontal-firstname-input"
                                                             class="col-sm-1 col-form-label d-flex justify-content-end">Unpolish
@@ -230,7 +230,7 @@
                                                     <div class="col-sm-9">
                                                         <div>
                                                             <button type="button"
-                                                                class="btn btn-success waves-effect waves-light"
+                                                                class="btn btn-success waves-effect waves-light  d-none"
                                                                 onclick="PrintManufacturer()">Print</button>
                                                             <button type="submit" class="btn btn-primary btn1"
                                                                 id="m_save" value="Save">Save</button>
@@ -396,7 +396,7 @@
                                                     <div class="col-sm-9">
                                                         <div>
                                                             <button type="button" id="polisher_print_btn"
-                                                                class="btn btn-success waves-effect waves-light"
+                                                                class="btn btn-success waves-effect waves-light  d-none"
                                                                 onclick="PrintPolisher()">Print</button>
                                                             <button type="submit" id="polisher_save_btn"
                                                                 class="btn btn-primary btn1" value="Save">Save</button>
@@ -715,7 +715,7 @@
                                                             <div class="col-sm-9">
                                                                 <div>
                                                                     <button type="button"
-                                                                        class="btn btn-success waves-effect waves-light"
+                                                                        class="btn btn-success waves-effect waves-light  d-none"
                                                                         onclick="PrintSetter(this)">Print</button>
                                                                     <button type="submit" class="btn btn-primary btn1"
                                                                         id="s_save">Save</button>
@@ -737,6 +737,10 @@
                                                                     value="{{ isset($returnedStoneStep) ? $returnedStoneStep->received_weight : '' }}"
                                                                     id="received_weight" class="form-control"
                                                                     placeholder="Received weight">
+                                                            </div>
+                                                            <div class="col-sm-4 mb-4">
+                                                                <input type="date" name="date[]"
+                                                                    class="form-control" placeholder="Date">
                                                             </div>
                                                             <div id="returned-area[]" class="row">
                                                                 <h5>Zircon/Stone Return:</h5>
@@ -893,7 +897,7 @@
                                                             <div class="col-sm-9">
                                                                 <div>
                                                                     <button type="button"
-                                                                        class="btn btn-success waves-effect waves-light"
+                                                                        class="btn btn-success waves-effect waves-light  d-none"
                                                                         onclick="PrintReturned(this)">Print</button>
                                                                     <button type="submit" class="btn btn-primary btn1"
                                                                         id="r_save">Save</button>
@@ -1124,7 +1128,7 @@
                                                         <div class="col-sm-9">
                                                             <div>
                                                                 <button type="button"
-                                                                    class="btn btn-success waves-effect waves-light"
+                                                                    class="btn btn-success waves-effect waves-light  d-none"
                                                                     onclick="PrintSetter(this)">Print</button>
                                                                 <button type="submit" class="btn btn-primary btn1"
                                                                     id="s_save">Save</button>
@@ -1139,6 +1143,10 @@
                                                             <input type="number" step="any" name="received_weight"
                                                                 value="" id="received_weight" class="form-control"
                                                                 placeholder="Received weight">
+                                                        </div>
+                                                        <div class="col-sm-4 mb-4">
+                                                            <input type="date" name="date[]"
+                                                                class="form-control" placeholder="Date">
                                                         </div>
                                                         <div id="returned-area[]" class="row">
                                                             <h5>Zircon/Stone Return:</h5>
@@ -1243,7 +1251,7 @@
                                                         <div class="col-sm-9">
                                                             <div>
                                                                 <button type="button"
-                                                                    class="btn btn-success waves-effect waves-light"
+                                                                    class="btn btn-success waves-effect waves-light  d-none"
                                                                     onclick="PrintReturned(this)">Print</button>
                                                                 <button type="submit" class="btn btn-primary btn1"
                                                                     id="r_save">Save</button>

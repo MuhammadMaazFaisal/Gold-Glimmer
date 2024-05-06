@@ -111,11 +111,16 @@
                                                 </div>
                                             </div>
                                             <div class="row mb-4 ">
-                                                <div class="col-8">
+                                                <div class="col-12 d-flex justify-content-between mb-3">
                                                     <div class="col-sm-3">
                                                         <input type="number" step="any" name="total"
                                                             value="{{ $order->total }}" id="total" class="form-control"
                                                             placeholder="Total" required readonly>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <input type="number" step="any" name="advance" value="{{ $order->advance }}"
+                                                            id="advance" class="form-control" placeholder="Advance"
+                                                            required>
                                                     </div>
                                                 </div>
 

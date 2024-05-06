@@ -10,6 +10,14 @@
                             <option value="">Select a customer...</option>
                         </select>
                     </div>
+                    {{-- <div id="balance-area" class=" d-none col-7 row">
+                        <label for="horizontal-firstname-input"
+                            class="col-sm-4 col-form-label text-end">Balance:</label>
+                        <div class="col-sm-6">
+                            <input type="text" name="balance" id="balance" value="" class="form-control"
+                                placeholder="Balance" readonly>
+                        </div>
+                    </div> --}}
                 </div>
                 <div class="card ">
                     <div class="card-header card border border-danger">
@@ -79,6 +87,8 @@
                     document.getElementById("name").value = response.customer.name;
                     document.getElementById("phone").value = response.customer.phone;
                     document.getElementById("address").value = response.customer.address;
+                    // document.getElementById("balance").value = response.customer.balance;
+                    // document.getElementById("balance-area").classList.remove("d-none");
                     document.getElementById("name").readOnly = true;
                 }
             });
@@ -114,7 +124,8 @@
                             confirmButtonText: 'Ok'
                         })
                     }
-                },error: function(response) {
+                },
+                error: function(response) {
                     let errors = response.responseJSON.errors;
                     let message = "";
                     for (let key in errors) {

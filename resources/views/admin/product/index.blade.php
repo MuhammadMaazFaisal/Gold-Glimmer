@@ -142,7 +142,7 @@
                                                         <div class="col-sm-3">
                                                             <input type="text" name="dimension" id="dimension"
                                                                 value="" class="form-control"
-                                                                placeholder="Dimensions" required>
+                                                                placeholder="Dimensions">
                                                         </div>
                                                         <label for="horizontal-firstname-input"
                                                             class="col-sm-1 col-form-label d-flex justify-content-end">Unpolish

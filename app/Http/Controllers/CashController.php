@@ -84,7 +84,7 @@ class CashController extends Controller
     
     public function getCashVendors(Request $request)
     {
-        $vendors = Vendor::wherein('type', [VendorType::where('name', 'Manufacturing')->first()->id, VendorType::where('name', 'Polishing')->first()->id, VendorType::where('name', 'Stone Setting')->first()->id])->get();
+        $vendors = Vendor::wherein('type', [VendorType::where('name', 'Additional Vendor')->first()->id])->where('name', '!=', 'existing')->get();
         return response()->json(['data' => $vendors]);
     }
 

@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('customer_id');
             $table->decimal('total', 10, 2);
+            $table->float('advance')->default(0);
+            $table->float('balance')->default(0);
             $table->integer('status')->default(1);
             $table->timestamps();
             $table->softDeletes();

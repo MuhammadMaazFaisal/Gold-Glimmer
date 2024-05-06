@@ -15,7 +15,7 @@ class PurchasingController extends Controller
 {
     public function index()
     {
-        $purchasings = Purchasing::with('vendor')->get();
+        $purchasings = Purchasing::with('vendor')->where('name', '!=', 'existing')->get();
         return response()->json($purchasings);
     }
 

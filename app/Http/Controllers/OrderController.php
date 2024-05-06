@@ -30,7 +30,6 @@ class OrderController extends Controller
             'type' => 'required',
             'purity' => 'required',
             'purity_text' => 'required',
-            'dimension' => 'required',
         ]);
 
         $order = new Order();

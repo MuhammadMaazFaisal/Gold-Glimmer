@@ -24,7 +24,6 @@
                                                 <th>Weight</th>
                                                 <th>Rate</th>
                                                 <th>Total</th>
-                                                <th>Delete</th>
                                             </tr>
                                         </thead>
                                         <tbody id="tbody">
@@ -44,10 +43,6 @@
                                                         <td>{{ $stockDetails->weight }}</td>
                                                         <td>{{ $stockDetails->rate }}</td>
                                                         <td>{{ $stockDetails->total_amount }}</td>
-                                                        <td>
-                                                            <button class="delete-button"
-                                                                onclick="Delete({{ $stockDetails->id }})">Delete</button>
-                                                        </td>
                                                     </tr>
                                                     @php
                                                         $totalQuantity += $stockDetails->quantity;

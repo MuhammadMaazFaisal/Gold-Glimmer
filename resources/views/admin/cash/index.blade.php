@@ -128,6 +128,77 @@
 @endsection
 @section('scripts')
 <script>
+     function PrintSlip() {
+            var vendor = $('#vendor').val();
+            var date = $('#date').val();
+            var type = "{{ $type }}";
+            var amount = $('#amount').val();
+            let printContents = `<!DOCTYPE html>
+                    <html>
+                    <head>
+                        <style>
+                            @media print {
+                                @page {
+                                    size: 80mm 200mm;
+                                    margin: 0;
+                                    margin-top: -20px;
+                                }
+                                body {
+                                    font-family: Arial, sans-serif;
+                                    font-size: 12px;
+                                    padding: 10px;
+                                }
+                                h1 {
+                                    font-size: 16px;
+                                    text-align: center;
+                                    margin: 10px 0;
+                                    color: #333;
+                                }
+                                p {
+                                    margin-bottom: 5px;
+                                }
+                                .label {
+                                    font-weight: bold;
+                                }
+                                table {
+                                    width: 100%;
+                                    border-collapse: collapse;
+                                }
+                                th {
+                                    background-color: #f2f2f2;
+                                    border: 1px solid #ddd;
+                                    padding: 8px;
+                                    text-align: left;
+                                }
+                                td {
+                                    border: 1px solid #ddd;
+                                    padding: 8px;
+                                }
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <h1>Metal Slip</h1>
+                        <p class="label">Vendor: <span>${vendor}</span></p>
+                        <p class="label">Date: <span>${date}</span></p>
+                        <p class="label">Type: <span>${type}</span></p>
+                        <p class="label">Amount: <span>${amount}</span></p>
+                    </body>
+                    </html>
+                    <script>
+                        window.onload = function() {
+                            window.print();
+                        }
+                        <\/script>
+                    `;
+
+            let slipContent = printContents;
+            let printWindow = window.open("", "_blank");
+            printWindow.document.open();
+            printWindow.document.write(slipContent);
+            printWindow.document.close();
+        }
+
     $(document).on('click', '.select-btn', function() {
         var productId = $(this).data('product-id');
         var vendorId = $(this).data('vendor-id');
@@ -240,6 +311,7 @@
 
     function Print() {
         let printWindow = window.open("", "_blank");
+        var type = "{{$type}}";
 
         // Generate slip content
         let slipContent = `<!DOCTYPE html>
@@ -278,8 +350,9 @@
                             <body>
                             <p><span class="label" style="margin-right:6px";>Date:</span><span>${$('#date').val()}</span></p>
                             <p><span class="label" style="margin-right:6px";>Vendor ID:</span><span>${$("#vendor").selectize()[0].selectize.options[$("#vendor").selectize()[0].selectize.getValue()].text}</span></p>
+                            <p><span class="label" style="margin-right:6px";>Type:</span><span>${type}</span></p>
+                            <p><span class="label" style="margin-right:6px";>Amount:</span><span>Rs ${$('#amount').val()}</span></p>
                             <p><span class="label" style="margin-right:6px";>Detail:</span><span>${$('#detail').val()}</span></p>
-                            <p><span class="label" style="margin-right:6px";>Amount:</span><span>${$('#amount').val()}</span></p>
                             </body>
                             </html>`;
 
@@ -363,6 +436,7 @@
                         confirmButtonText: 'Ok'
                     }).then((result) => {
                         if (result.isConfirmed) {
+                            PrintSlip();
                             location.reload();
                         }
                     });

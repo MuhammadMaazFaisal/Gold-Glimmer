@@ -117,7 +117,8 @@
                         <label for="total_issued_weight" class="form-label">Total Pure Weight:</label>
                     </div>
                     <div class="col-3">
-                        <input type="number" step="any" id="total_pure_weight" class="form-control" placeholder="Total Pure Weight">
+                        <input type="number" step="any" id="total_pure_weight" class="form-control"
+                            placeholder="Total Pure Weight">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -129,6 +130,82 @@
 @endsection
 @section('scripts')
     <script>
+        function PrintSlip() {
+            var vendor = $('#vendor').val();
+            var date = $('#date').val();
+            var type = "{{ $type }}";
+            var issued_weight = $('#issued_weight').val();
+            var purity = $('#purity').val();
+            var pure_weight = $('#pure_weight').val();
+            let printContents = `<!DOCTYPE html>
+                    <html>
+                    <head>
+                        <style>
+                            @media print {
+                                @page {
+                                    size: 80mm 200mm;
+                                    margin: 0;
+                                    margin-top: -20px;
+                                }
+                                body {
+                                    font-family: Arial, sans-serif;
+                                    font-size: 12px;
+                                    padding: 10px;
+                                }
+                                h1 {
+                                    font-size: 16px;
+                                    text-align: center;
+                                    margin: 10px 0;
+                                    color: #333;
+                                }
+                                p {
+                                    margin-bottom: 5px;
+                                }
+                                .label {
+                                    font-weight: bold;
+                                }
+                                table {
+                                    width: 100%;
+                                    border-collapse: collapse;
+                                }
+                                th {
+                                    background-color: #f2f2f2;
+                                    border: 1px solid #ddd;
+                                    padding: 8px;
+                                    text-align: left;
+                                }
+                                td {
+                                    border: 1px solid #ddd;
+                                    padding: 8px;
+                                }
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <h1>Metal Slip</h1>
+                        <p class="label">Vendor: <span>${vendor}</span></p>
+                        <p class="label">Date: <span>${date}</span></p>
+                        <p class="label">Type: <span>${type}</span></p>
+                        <p class="label">Issued Weight: <span>${issued_weight}</span></p>
+                        <p class="label">Purity: <span>${purity}</span></p>
+                        <p class="label">Pure Weight: <span>${pure_weight}</span></p>
+                    </body>
+                    </html>
+                    <script>
+                        window.onload = function() {
+                            window.print();
+                        }
+                        <\/script>
+                    `;
+
+            let slipContent = printContents;
+            let printWindow = window.open("", "_blank");
+            printWindow.document.open();
+            printWindow.document.write(slipContent);
+            printWindow.document.close();
+        }
+
+
         $(document).on('click', '.select-btn', function() {
             var productId = $(this).data('product-id');
             var vendorId = $(this).data('vendor-id');
@@ -237,9 +314,9 @@
                 $.ajax({
                     url: url,
                     type: "DELETE",
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
                     success: function(data) {
                         console.log(data);
                         data = JSON.parse(data);
@@ -429,7 +506,7 @@
             if ($('#product_id').val() != '') {
                 var url = `{{ route('metal.update', ':id') }}`;
                 url = url.replace(':id', $('#product_id').val());
-            }else{
+            } else {
                 var url = `{{ route('metal.store') }}`;
             }
             form.append('type', '{{ $type }}');
@@ -453,6 +530,7 @@
                             confirmButtonText: 'Ok'
                         }).then((result) => {
                             if (result.isConfirmed) {
+                                PrintSlip();
                                 location.reload();
                             }
                         });

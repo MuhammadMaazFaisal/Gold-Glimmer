@@ -21,7 +21,7 @@ return new class extends Migration
             $table->float('weight');
             $table->float('price');
             $table->string('category');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->string('image');
             $table->integer('status')->default(1);
             $table->softDeletes();

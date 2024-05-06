@@ -13,7 +13,7 @@ class POSController extends Controller
     public function index()
     {
         $customers = Customer::all();
-        $products= FinishedProduct::with('product')->get();
+        $products= FinishedProduct::with('product','product.productType')->where('status', 1)->get();
         return view('admin.pos.index', compact('customers', 'products'));
     }
 
@@ -28,7 +28,6 @@ class POSController extends Controller
         $order = PosOrder::with('customer','items.product')->find($id);
         $customers = Customer::all();
         $products= FinishedProduct::with('product')->get();
-        // dd($order);
         return view('admin.pos.edit', compact('order', 'customers', 'products'));
     }
 
@@ -37,6 +36,8 @@ class POSController extends Controller
         $order = new PosOrder();
         $order->customer_id = $request->customer;
         $order->total = $request->total;
+        $order->advance = $request->advance ?? 0;
+        $order->balance = $request->total - ($request->advance?? 0);
         $order->save();
 
         for ($i = 0; $i < count($request->product); $i++) {
@@ -44,6 +45,10 @@ class POSController extends Controller
             $orderItem->pos_order_id = $order->id;
             $orderItem->finished_product_id = $request->product[$i];
             $orderItem->save();
+
+            $product = FinishedProduct::find($request->product[$i]);
+            $product->status = 0;
+            $product->save();
         }
 
         $notification = array(

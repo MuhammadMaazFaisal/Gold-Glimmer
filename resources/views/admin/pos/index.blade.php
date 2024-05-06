@@ -53,7 +53,9 @@
                                                                     <option value="">Select Product</option>
                                                                     @foreach ($products as $product)
                                                                         <option value="{{ $product->id }}">
-                                                                            {{ $product->barcode }}</option>
+                                                                            {{ $product->barcode }} |
+                                                                            {{ $product->product->productType->name }}
+                                                                        </option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
@@ -99,15 +101,22 @@
                                                 </div>
                                             </div>
                                             <div class="row mb-4 ">
-                                                <div class="col-8">
+                                                <div class="col-12 d-flex justify-content-between mb-3">
                                                     <div class="col-sm-3">
                                                         <input type="number" step="any" name="total" value=""
                                                             id="total" class="form-control" placeholder="Total"
                                                             required readonly>
                                                     </div>
+                                                    {{-- <div class="col-sm-3">
+                                                        <input type="number" step="any" name="advance" value=""
+                                                            id="advance" class="form-control" placeholder="Advance"
+                                                            required>
+                                                    </div> --}}
                                                 </div>
-                                                <button type="submit"
-                                                    class="btn btn-primary col-2">Save</button>
+                                                <div class="d-flex justify-content-end">
+                                                    <button type="submit" class="btn btn-primary col-2">Save</button>
+                                                </div>
+
                                             </div>
                                         </form>
                                     </div>
@@ -123,6 +132,111 @@
 @endsection
 @section('scripts')
     <script>
+        function PrintSlip(formData) {
+            let productRows = "";
+            var category = document.querySelectorAll('input[name="category[]"]');
+            var purity = document.querySelectorAll('input[name="purity_text[]"]');
+            var price = document.querySelectorAll('input[name="price[]"]');
+            var weight = document.querySelectorAll('input[name="weight[]"]');
+            var total = document.querySelector('input[name="total"]').value;
+            var customer = document.querySelector('select[name="customer"]').selectedOptions[0].text;
+            var date = document.querySelector('input[name="date"]').value;
+            console.log(category);
+            console.log(purity);
+            console.log(price);
+            console.log(weight);
+            for (let i = 0; i < price.length; i++) {
+                productRows += `
+            <tr>
+                <td>${category[i].value}</td>
+                <td>${weight[i].value}</td>
+                <td>${price[i].value}</td>
+            </tr>
+        `;
+            }
+
+            let printContents = `<!DOCTYPE html>
+                    <html>
+                    <head>
+                        <style>
+                            @media print {
+                                @page {
+                                    size: 80mm 200mm;
+                                    margin: 0;
+                                    margin-top: -20px;
+                                }
+                                body {
+                                    font-family: Arial, sans-serif;
+                                    font-size: 12px;
+                                    padding: 10px;
+                                }
+                                h1 {
+                                    font-size: 16px;
+                                    text-align: center;
+                                    margin: 10px 0;
+                                    color: #333;
+                                }
+                                p {
+                                    margin-bottom: 5px;
+                                }
+                                .label {
+                                    font-weight: bold;
+                                }
+                                table {
+                                    width: 100%;
+                                    border-collapse: collapse;
+                                }
+                                th {
+                                    background-color: #f2f2f2;
+                                    border: 1px solid #ddd;
+                                    padding: 8px;
+                                    text-align: left;
+                                }
+                                td {
+                                    border: 1px solid #ddd;
+                                    padding: 8px;
+                                }
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <h1>Point of Sale Slip</h1>
+                        <p class="label">Customer:</p>
+                        <p>${customer}</p>
+                        <p class="label">Date:</p>
+                        <p>${date}</p>
+                        <p class="label">Products:</p>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Weight</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${productRows}
+                            </tbody>
+                        </table>
+                        <p class="label">Total:</p>
+                        <p>${total}</p>
+                    </body>
+                    </html>
+                    <script>
+                        window.onload = function() {
+                            window.print();
+                        }
+                        <\/script>
+                    `;
+
+            let slipContent = printContents;
+            let printWindow = window.open("", "_blank");
+            printWindow.document.open();
+            printWindow.document.write(slipContent);
+            printWindow.document.close();
+
+        }
+
         function getProductDetails(id, element) {
             url = "{{ route('pos.product.details', ':id') }}";
             url = url.replace(':id', id);
@@ -186,6 +300,7 @@
                             title: 'Order Created Successfully',
                             showConfirmButton: true,
                         }).then((result) => {
+                            PrintSlip(formData); // Generate slip content
                             location.reload();
                         })
                     } else {

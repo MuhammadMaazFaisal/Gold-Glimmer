@@ -1304,7 +1304,7 @@
         var code = code.getValue();
         var selectElement = document.getElementById('select-manufacturer-purity');
         var selectedValues = selectElement.value;
-        var selectedOption = selectElement.selectedOptions[0]; // Assuming you're only selecting one option
+        var selectedOption = selectElement.selectedOptions[0]; 
         var selectedText = selectedOption.text;
         var unpolish_weight = document.getElementById('unpolish_weight').value;
         $.ajax({

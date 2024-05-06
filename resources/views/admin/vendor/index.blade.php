@@ -10,6 +10,14 @@
                             <option value="">Select a vendor...</option>
                         </select>
                     </div>
+                    <div id="balance-area" class=" d-none col-7 row">
+                        <label for="horizontal-firstname-input"
+                            class="col-sm-4 col-form-label text-end">Balance:</label>
+                        <div class="col-sm-6">
+                            <input type="text" name="balance" id="balance" value="" class="form-control"
+                                placeholder="Balance" readonly>
+                        </div>
+                    </div>
                 </div>
                 <div class="card ">
                     <div class="card-header card border border-danger">
@@ -103,14 +111,21 @@
                 url: url,
                 method: "GET",
                 success: function(response) {
+                    console.log("123",response);
                     delete1.classList.remove("disabled");
                     document.getElementById("id").value = response.vendor.id;
                     document.getElementById("name").value = response.vendor.name;
                     document.getElementById("phone").value = response.vendor.phone;
                     document.getElementById("address").value = response.vendor.address;
-                    document.getElementById("18k").value = response.vendor['18k'];
-                    document.getElementById("21k").value = response.vendor['21k'];
-                    document.getElementById("22k").value = response.vendor['22k'];
+                    if (document.getElementById("18k")) {
+                        document.getElementById("18k").value = response.vendor['18k'];
+                        document.getElementById("21k").value = response.vendor['21k'];
+                        document.getElementById("22k").value = response.vendor['22k'];
+                        document.getElementById("balance").value = response.balance.toFixed(3) + " g"
+                    }else{
+                        document.getElementById("balance").value = "Rs " + response.balance;
+                    }
+                    document.getElementById("balance-area").classList.remove("d-none");
                     document.getElementById("name").readOnly = true;
                 }
             });

@@ -158,7 +158,7 @@
 
                                                                 <input type="text" step="any" name="dimension[]"
                                                                     id="dimension[]" value="" class="form-control"
-                                                                    placeholder="Dimensions" required>
+                                                                    placeholder="Dimensions">
                                                             </div>
                                                             <label for="horizontal-firstname-input"
                                                                 class="col-sm-1 col-form-label d-flex justify-content-end">Image
@@ -354,7 +354,7 @@
             <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Dimensions:</label>
             <div class="col-sm-2">
 
-                <input type="text" step="any" name="dimension[]" id="dimension[]" value="" class="form-control" placeholder="Dimensions" required>
+                <input type="text" step="any" name="dimension[]" id="dimension[]" value="" class="form-control" placeholder="Dimensions">
             </div>
             <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Image
                 Upload:</label>

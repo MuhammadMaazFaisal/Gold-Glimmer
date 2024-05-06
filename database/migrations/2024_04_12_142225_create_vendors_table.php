@@ -22,6 +22,7 @@ return new class extends Migration
             $table->float('18k')->nullable();
             $table->float('21k')->nullable();
             $table->float('22k')->nullable();
+            $table->float('balance')->default(0);
             $table->string('status')->comment('0: Inactive, 1: Active');
             $table->softDeletes();
             $table->timestamps();

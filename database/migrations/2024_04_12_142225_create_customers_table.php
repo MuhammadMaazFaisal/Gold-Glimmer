@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('phone');
             $table->text('address');
+            $table->float('balance')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

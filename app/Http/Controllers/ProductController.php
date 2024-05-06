@@ -77,6 +77,8 @@ class ProductController extends Controller
             $product->save();
         }
 
+        Product::where('id', $request->m_product_id)->update(['status' => 1]);
+
         $notification = array(
             'message' => 'All products created successfully!',
             'alert-type' => 'success'
@@ -205,6 +207,20 @@ class ProductController extends Controller
             $item->quantity = $request->zircon_quantity[$i];
             $item->item_id = StockDetail::where('barcode', $request->zircon_code[$i])->first()->item_id;
             $item->save();
+
+            $stock = StockDetail::where('barcode', $request->zircon_code[$i])->first();
+            if ($stock->quantity < intval($request->zircon_quantity[$i])) {
+                $stock->quantity = 0;
+            }else {
+                $stock->quantity = $stock->quantity - intval($request->zircon_quantity[$i]);
+            }
+
+            if ($stock->weight < intval($request->zircon_weight[$i])) {
+                $stock->weight = 0;
+            }else {
+                $stock->weight = $stock->weight - intval($request->zircon_weight[$i]);
+            }
+            $stock->save();
         }
 
         for ($i = 0; $i < count($request->stone_code); $i++) {
@@ -214,6 +230,20 @@ class ProductController extends Controller
             $item->quantity = $request->stone_quantity[$i];
             $item->item_id = StockDetail::where('barcode', $request->stone_code[$i])->first()->item_id;
             $item->save();
+
+            $stock = StockDetail::where('barcode', $request->stone_code[$i])->first();
+            if ($stock->quantity < intval($request->stone_quantity[$i])) {
+                $stock->quantity = 0;
+            }else {
+                $stock->quantity = $stock->quantity - intval($request->stone_quantity[$i]);
+            }
+
+            if ($stock->weight < intval($request->stone_weight[$i])) {
+                $stock->weight = 0;
+            }else {
+                $stock->weight = $stock->weight - intval($request->stone_weight[$i]);
+            }
+            $stock->save();
         }
 
         $notification = array(
@@ -241,7 +271,8 @@ class ProductController extends Controller
         $stoneSetterStep->rate = $request->r_rate;
         $stoneSetterStep->shruded_quantity = $request->sh_qty;
         $stoneSetterStep->wastage = $request->r_wastage;
-        $stoneSetterStep->grand_weight = $request->r_grand_weight;
+        $stoneSetterStep->
+        grand_weight = $request->r_grand_weight;
         $stoneSetterStep->payable = $request->r_payable;
         $stoneSetterStep->save();
 

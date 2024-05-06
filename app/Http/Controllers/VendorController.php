@@ -2,6 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AdditionalStep;
+use App\Models\Cash;
+use App\Models\Metal;
+use App\Models\PolisherStep;
+use App\Models\Product;
+use App\Models\ReturnedStoneStep;
 use App\Models\Vendor;
 use App\Models\VendorType;
 use Illuminate\Http\Request;
@@ -63,7 +69,30 @@ class VendorController extends Controller
     public function edit($id)
     {
         $vendor = Vendor::find($id);
-        return response()->json(['vendor' => $vendor]);
+        // calcualte balance of vendor
+        if ($vendor->type == 1) {
+            $balance = Product::where('vendor_id', $id)->sum('total');
+            $given =Metal::where('vendor_id', $id)->where('type', 1)->sum('pure_weight');
+            $received =Metal::where('vendor_id', $id)->where('type', 2)->sum('pure_weight');
+            $amount= ($balance + $received) - $given;
+        } elseif ($vendor->type == 2) {
+            $balance = PolisherStep::where('vendor_id', $id)->sum('payable');
+            $given =Metal::where('vendor_id', $id)->where('type', 1)->sum('pure_weight');
+            $received =Metal::where('vendor_id', $id)->where('type', 2)->sum('pure_weight');
+            $amount= ($balance + $received) - $given;
+        } elseif ($vendor->type == 3) {
+            $balance = ReturnedStoneStep::where('vendor_id', $id)->sum('payable');
+            $given =Metal::where('vendor_id', $id)->where('type', 1)->sum('pure_weight');
+            $received =Metal::where('vendor_id', $id)->where('type', 2)->sum('pure_weight');
+            $amount= ($balance + $received) - $given;
+        } else {
+            $balance = AdditionalStep::where('vendor_id', $id)->sum('amount');
+            $given =Cash::where('vendor_id', $id)->where('type', 'Issue')->sum('amount');
+            $received =Cash::where('vendor_id', $id)->where('type', 'Receive')->sum('amount');
+            $amount= ($balance + $received) - $given;
+        }
+
+        return response()->json(['vendor' => $vendor, 'balance' => $amount]);
     }
 
     public function update(Request $request, $id)
