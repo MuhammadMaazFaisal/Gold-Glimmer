@@ -62,7 +62,7 @@ class PurchasingController extends Controller
         }
 
         $lastStock = Stock::latest()->first();
-        $nextStockNumber = $lastStock ? str_pad($lastStock->id + 1, 4, '0', STR_PAD_LEFT) : '0001';
+        $nextStockNumber = $lastStock ? str_pad(intval($lastStock->id) + 1, 4, '0', STR_PAD_LEFT) : '0001';
 
         $stock = new Stock();
         $stock->id = $nextStockNumber;
