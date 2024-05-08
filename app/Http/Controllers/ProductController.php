@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\AdditionalStep;
 use App\Models\FinishedProduct;
 use App\Models\InventoryItem;
+use App\Models\Order;
+use App\Models\OrderDetail;
 use App\Models\PolisherStep;
 use App\Models\PolishingType;
 use App\Models\Product;
@@ -28,14 +30,14 @@ class ProductController extends Controller
         $polishers= Vendor::where('type', VendorType::where('name', 'Polishing')->first()->id)->get();
         $stoneSetters = Vendor::where('type', VendorType::where('name', 'Stone Setting')->first()->id)->get();
         $vendors = Vendor::where('type', VendorType::where('name', 'Additional Vendor')->first()->id)->where('name', '!=', 'existing')->get();
-        
-        $products = Product::where('status', 0)->with('vendor')->get();
-        return view('admin.product.index', compact('manufacturers', 'polishers', 'stoneSetters', 'vendors', 'products'));
+        $orders= Order::with('vendor', 'customer')->get();
+        return view('admin.product.index', compact('manufacturers', 'polishers', 'stoneSetters', 'vendors', 'orders'));
     }
 
     public function completeProduct($id)
     {
-        $product = Product::where('id', $id)->with('vendor', 'productType')->first();
+        $product = Product::where('id', $id)->with('vendor', 'productType', 'polisherStep')->first();
+        // dd($product);
         return view('admin.product.complete', compact('product'));
     }
 
@@ -45,7 +47,9 @@ class ProductController extends Controller
         $polishers= Vendor::where('type', VendorType::where('name', 'Polishing')->first()->id)->get();
         $stoneSetters = Vendor::where('type', VendorType::where('name', 'Stone Setting')->first()->id)->get();
         $vendors = Vendor::where('type', VendorType::where('name', 'Additional Vendor')->first()->id)->where('name', '!=', 'existing')->get();
-        $products = Product::where('status', 0)->with('vendor')->get();
+        $order_id = OrderDetail::where('p_id', $id)->first()->o_id;
+        $product_ids= OrderDetail::where('o_id', $order_id)->pluck('p_id');
+        $products = Product::where('status', 0)->whereIn('id', $product_ids)->with('vendor', 'productType')->get();
         $product = Product::where('id', $id)->with('vendor', 'productType')->first();
         $polisherStep = PolisherStep::where('product_id', $id)->with( 'polishingType')->first();
         $stoneSetterSteps = StoneSetterStep::where('product_id', $id)->with('vendor', 'zircons', 'stones')->get();

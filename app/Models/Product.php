@@ -21,5 +21,10 @@ class Product extends Model
     {
         return $this->belongsTo(ProductType::class, 'product_type');
     }
+
+    public function polisherStep()
+    {
+        return $this->hasOne(PolisherStep::class, 'product_id', 'id');
+    }
     
 }

@@ -145,7 +145,7 @@
                                                         </div>
                                                         <div class="row mb-4">
                                                             <label for="horizontal-firstname-input"
-                                                                class="col-sm-1 col-form-label d-flex justify-content-end">Weight:</label>
+                                                                class="col-sm-1 col-form-label d-flex justify-content-end">Weight (g):</label>
                                                             <div class="col-sm-3">
 
                                                                 <input type="number" step="any" name="weight[]"
@@ -223,7 +223,7 @@
                 </div>
                 <div id="input-div" class="row d-none">
                     <div class="col-3">
-                        <label for="total_issued_weight" class="form-label">Total Pure Weight:</label>
+                        <label for="total_issued_weight" class="form-label">Total Pure Weight (g):</label>
                     </div>
                     <div class="col-3">
                         <input type="number" step="any" id="total_pure_weight" class="form-control"
@@ -346,7 +346,7 @@
             </div>
         </div>
         <div class="row mb-4">
-            <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Weight:</label>
+            <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Weight (g):</label>
             <div class="col-sm-3">
 
                 <input type="number" step="any" name="weight[]" value="" id="weight[]" class="form-control" placeholder="Weight" required>

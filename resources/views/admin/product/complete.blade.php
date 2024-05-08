@@ -56,6 +56,7 @@
                                                     <div class="form-group">
                                                         <label for="weight">Weight (g)</label>
                                                         <input type="number" step="any" class="form-control" id="weight[]" required
+                                                        value="@if( isset($product->polisherStep) && isset($product->polisherStep->polish_weight)){{ $product->polisherStep->polish_weight / $product->quantity }}@else{{ $product->unpolished_weight / $product->quantity }}@endif"
                                                             name="weight[]" placeholder="Enter weight in grams">
                                                     </div>
                                                 </div>

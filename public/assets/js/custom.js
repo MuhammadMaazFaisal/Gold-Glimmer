@@ -247,15 +247,15 @@ function AddStoneSetter() {
                                </div>
                            </div>
                            <div class="row mb-4">
-                               <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Total Weight:</label>
+                               <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Total Weight (g):</label>
                                <div class="col-sm-3">
                                    <input type="number" step="any" name="s_total_weight[]" id="s_total_weight[]" value="${lastRetainedWeightValue}" class="form-control" placeholder="Total Weight" readonly>
                                </div>
-                               <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">- Retained Weight:</label>
+                               <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">- Retained Weight (g):</label>
                                <div class="col-sm-3">
                                    <input type="number" step="any" name="retained_weight[]" id="retained_weight[]" class="form-control" placeholder="Retained Weight">
                                </div>
-                               <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">= Issued Weight:</label>
+                               <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">= Issued Weight (g):</label>
                                <div class="col-sm-3">
                                    <input type="number" step="any" name="Issued_weight[]" id="stepIssueweight[]" class="form-control" placeholder="Issued Weight" readonly>
                                </div>
@@ -271,7 +271,7 @@ function AddStoneSetter() {
                                                     <div class="col-sm-2 p-0">
                                                     <input type="text" name="zircon_detail[]" id="zircon_detail[]" value="" class="form-control" placeholder="Zircon Detail">
                                                     </div>
-                                   <label for="horizontal-firstname-input" class="col-sm-1 col-form-label  d-flex justify-content-end">Weight:</label>
+                                   <label for="horizontal-firstname-input" class="col-sm-1 col-form-label  d-flex justify-content-end">Weight (g):</label>
                                    <div class="col-sm-2">
                                        <input type="number" step="any" name="zircon_weight[]" id="zircon_weight[]" value="" class="form-control" placeholder="Zircon">
                                    </div>
@@ -286,7 +286,7 @@ function AddStoneSetter() {
                            <div id="area">
                            </div>
                            <div class="row mb-4">
-                               <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Total Weight:</label>
+                               <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Total Weight (g):</label>
                                <div class="col-sm-2">
                                    <input type="number" step="any" name="zircon_total_weight[]" value="" id="zircon_total_weight[]" class="form-control form-control card bg-dark border-dark text-light" placeholder="Total">
                                </div>
@@ -311,7 +311,7 @@ function AddStoneSetter() {
                                <div class="col-sm-2 p-0">
                                <input type="text" name="stone_detail[]" id="stone_detail[]" value="" class="form-control" placeholder="Stone Detail">
                                </div>
-                               <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Weight:</label>
+                               <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Weight (g):</label>
                                <div class="col-sm-2">
                                    <input type="number" step="any" name="stone_weight[]" id="stone_weight[]" value="" class="form-control" placeholder="Stone Weight">
                                </div>
@@ -326,7 +326,7 @@ function AddStoneSetter() {
                            <div id="area2">
                            </div>
                            <div class="row mb-4">
-                               <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Total Weight:</label>
+                               <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Total Weight (g):</label>
                                <div class="col-sm-2">
                                    <input type="number" step="any" name="stone_total_weight[]" value="" id="stone_total_weight[]" class="form-control form-control card bg-dark border-dark text-light" placeholder="Total">
                                </div>
@@ -341,7 +341,7 @@ function AddStoneSetter() {
                                </div>
                            </div>
                            <div class="row mb-4">
-                               <label for="horizontal-firstname-input" class="col-sm-1 col-form-label ">Grand Total Weight:</label>
+                               <label for="horizontal-firstname-input" class="col-sm-1 col-form-label ">Grand Total Weight (g):</label>
                                <div class="col-sm-3">
                                    <input type="number" step="any" name="grand_total_weight[]" value="" id="grand_total_weight[]" class=" form-control form-control card bg-dark border-dark text-light" placeholder="Total">
                                </div>
@@ -365,7 +365,7 @@ function AddStoneSetter() {
                        </form>
                        <form id="r_stepthree" method="POST" enctype="multipart/form-data">
                            <div class="row">
-                               <label for="received_weight">Recieved Weight:</label>
+                               <label for="received_weight">Recieved Weight (g):</label>
                                <div class="col-sm-4 mb-4">
                                    <input type="number" step="any" name="received_weight" value="" id="received_weight" class="form-control" placeholder="Received weight">
                                </div>
@@ -375,7 +375,7 @@ function AddStoneSetter() {
                                        <div class="col-sm-3">
                                            <input type="text" name="r_code[]" id="r_code[]" value="" class="form-control" placeholder="Detail">
                                        </div>
-                                       <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Weight:</label>
+                                       <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Weight (g):</label>
                                        <div class="col-sm-2">
                                            <input type="number" step="any" name="r_weight[]" id="r_weight[]" value="" class="form-control" placeholder="Weight">
                                        </div>
@@ -390,7 +390,7 @@ function AddStoneSetter() {
                                </div>
                            </div>
                            <div class="row">
-                               <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Stone Weight:</label>
+                               <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Stone Weight (g):</label>
                                <div class="col-sm-3">
                                    <input type="number" step="any" name="r_stone_weight" value="" id="r_stone_weight" class="form-control form-control card bg-dark border-dark text-light" placeholder="Total">
                                </div>
@@ -418,7 +418,7 @@ function AddStoneSetter() {
                                <div class="col-sm-3">
                                    <input type="number" step="any" value="" id="r_wastage" name="r_wastage" class="form-control" placeholder="Wastage" readonly>
                                </div>
-                               <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Grand Weight:</label>
+                               <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Grand Weight (g):</label>
                                <div class="col-sm-3">
                                    <input type="number" step="any" name="r_grand_weight" value="" id="r_grand_weight" class="form-control card bg-dark border-dark text-light" placeholder="Total">
                                </div>
@@ -491,7 +491,7 @@ function AddStone(element) {
                        <div class="col-sm-2 p-0">
                        <input type="text" name="stone_detail[]" id="stone_detail[]" value="" class="form-control" placeholder="Stone Detail">
                        </div>
-                       <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Weight:</label>
+                       <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Weight (g):</label>
                        <div class="col-sm-2">
                            <input type="text" name="stone_weight[]" id="stone_weight[]" value="" class="form-control" placeholder="Stone Weight">
                        </div>
@@ -540,7 +540,7 @@ function Add(element) {
    <div class="col-sm-2 p-0">
        <input type="text" name="zircon_detail[]" id="zircon_detail[]" value="" class="form-control" placeholder="Zircon Detail">
    </div>
-   <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Weight:</label>
+   <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Weight (g):</label>
    <div class="col-sm-2">
        <input type="text" name="zircon_weight[]" id="zircon_weight[]" value="" class="form-control" placeholder="Zircon" >
    </div>
@@ -629,7 +629,7 @@ function Add(element) {
    <div class="col-sm-2 p-0">
        <input type="text" name="zircon_detail[]" id="zircon_detail[]" value="" class="form-control" placeholder="Zircon Detail">
    </div>
-   <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Weight:</label>
+   <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Weight (g):</label>
    <div class="col-sm-2">
        <input type="text" name="zircon_weight[]" id="zircon_weight[]" value="" class="form-control" placeholder="Zircon" >
    </div>
@@ -670,7 +670,7 @@ function AddReturned(element) {
                        <div class="col-sm-3">
                            <input type="text" name="r_code[]" id="r_code[]" value="" class="form-control" placeholder="Detail">
                        </div>
-                       <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Weight:</label>
+                       <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Weight (g):</label>
                        <div class="col-sm-2">
                            <input type="number" step="any" name="r_weight[]" id="r_weight[]" value="" class="form-control" placeholder="Weight" required>
                        </div>

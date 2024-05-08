@@ -247,15 +247,15 @@
                                    </div>
                                </div>
                                <div class="row mb-4">
-                                   <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Total Weight:</label>
+                                   <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Total Weight (g):</label>
                                    <div class="col-sm-3">
                                        <input type="number" step="any" name="s_total_weight[]" id="s_total_weight[]" value="${lastRetainedWeightValue}" class="form-control" placeholder="Total Weight" readonly>
                                    </div>
-                                   <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">- Retained Weight:</label>
+                                   <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">- Retained Weight (g):</label>
                                    <div class="col-sm-3">
                                        <input type="number" step="any" name="retained_weight[]" id="retained_weight[]" class="form-control" placeholder="Retained Weight">
                                    </div>
-                                   <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">= Issued Weight:</label>
+                                   <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">= Issued Weight (g):</label>
                                    <div class="col-sm-3">
                                        <input type="number" step="any" name="Issued_weight[]" id="stepIssueweight[]" class="form-control" placeholder="Issued Weight" readonly>
                                    </div>
@@ -268,7 +268,7 @@
                                                                 <option value="">Select a zircon...</option>
                                                             </select>
                                                         </div>
-                                       <label for="horizontal-firstname-input" class="col-sm-1 col-form-label  d-flex justify-content-end">Weight:</label>
+                                       <label for="horizontal-firstname-input" class="col-sm-1 col-form-label  d-flex justify-content-end">Weight (g):</label>
                                        <div class="col-sm-2">
                                            <input type="number" step="any" name="zircon_weight[]" id="zircon_weight[]" value="" class="form-control" placeholder="Zircon">
                                        </div>
@@ -283,7 +283,7 @@
                                <div id="area">
                                </div>
                                <div class="row mb-4">
-                                   <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Total Weight:</label>
+                                   <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Total Weight (g):</label>
                                    <div class="col-sm-2">
                                        <input type="number" step="any" name="zircon_total_weight[]" value="" id="zircon_total_weight[]" class="form-control form-control card bg-dark border-dark text-light" placeholder="Total">
                                    </div>
@@ -305,7 +305,7 @@
                                            <option value="">Select a stone...</option>
                                        </select>
                                    </div>
-                                   <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Weight:</label>
+                                   <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Weight (g):</label>
                                    <div class="col-sm-2">
                                        <input type="number" step="any" name="stone_weight[]" id="stone_weight[]" value="" class="form-control" placeholder="Stone Weight">
                                    </div>
@@ -320,7 +320,7 @@
                                <div id="area2">
                                </div>
                                <div class="row mb-4">
-                                   <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Total Weight:</label>
+                                   <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Total Weight (g):</label>
                                    <div class="col-sm-2">
                                        <input type="number" step="any" name="stone_total_weight[]" value="" id="stone_total_weight[]" class="form-control form-control card bg-dark border-dark text-light" placeholder="Total">
                                    </div>
@@ -335,7 +335,7 @@
                                    </div>
                                </div>
                                <div class="row mb-4">
-                                   <label for="horizontal-firstname-input" class="col-sm-1 col-form-label ">Grand Total Weight:</label>
+                                   <label for="horizontal-firstname-input" class="col-sm-1 col-form-label ">Grand Total Weight (g):</label>
                                    <div class="col-sm-3">
                                        <input type="number" step="any" name="grand_total_weight[]" value="" id="grand_total_weight[]" class=" form-control form-control card bg-dark border-dark text-light" placeholder="Total">
                                    </div>
@@ -359,7 +359,7 @@
                            </form>
                            <form id="r_stepthree" method="POST" enctype="multipart/form-data">
                                <div class="row">
-                                   <label for="received_weight">Recieved Weight:</label>
+                                   <label for="received_weight">Recieved Weight (g):</label>
                                    <div class="col-sm-4 mb-4">
                                        <input type="number" step="any" name="received_weight" value="" id="received_weight" class="form-control" placeholder="Received weight">
                                    </div>
@@ -369,7 +369,7 @@
                                            <div class="col-sm-3">
                                                <input type="text" name="r_code[]" id="r_code[]" value="" class="form-control" placeholder="Detail">
                                            </div>
-                                           <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Weight:</label>
+                                           <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Weight (g):</label>
                                            <div class="col-sm-2">
                                                <input type="number" step="any" name="r_weight[]" id="r_weight[]" value="" class="form-control" placeholder="Weight">
                                            </div>
@@ -384,7 +384,7 @@
                                    </div>
                                </div>
                                <div class="row">
-                                   <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Stone Weight:</label>
+                                   <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Stone Weight (g):</label>
                                    <div class="col-sm-3">
                                        <input type="number" step="any" name="r_stone_weight" value="" id="r_stone_weight" class="form-control form-control card bg-dark border-dark text-light" placeholder="Total">
                                    </div>
@@ -412,7 +412,7 @@
                                    <div class="col-sm-3">
                                        <input type="number" step="any" value="" id="r_wastage" name="r_wastage" class="form-control" placeholder="Wastage" readonly>
                                    </div>
-                                   <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Grand Weight:</label>
+                                   <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Grand Weight (g):</label>
                                    <div class="col-sm-3">
                                        <input type="number" step="any" name="r_grand_weight" value="" id="r_grand_weight" class="form-control card bg-dark border-dark text-light" placeholder="Total">
                                    </div>
@@ -798,10 +798,10 @@
        <p><span class="label" style="margin-right:6px;">Date:</span><span>${data[0].date}</span></p>
        <p><span class="label" style="margin-right:6px;">Barcode:</span><span>${data[0].product_id}</span></p>
        <p><span class="label" style="margin-right:6px;">Name:</span><span>${data[0].vendor_id} | ${data[0].vendor_name}</span></p>
-       <p><span class="label" style="margin-right:6px;">Issued Weight:</span><span>${data[0].Issued_weight}</span></p>
-       <p><span class="label" style="margin-right:6px;">Zircon Weight:</span><span>${data[0].z_total_weight}</span></p>
-       <p><span class="label" style="margin-right:6px;">Stone Weight:</span><span>${data[0].s_total_weight}</span></p>
-       <p><span class="label" style="margin-right:6px;">grand Weight:</span><span>${data[0].grand_weight}</span></p>
+       <p><span class="label" style="margin-right:6px;">Issued Weight (g):</span><span>${data[0].Issued_weight}</span></p>
+       <p><span class="label" style="margin-right:6px;">Zircon Weight (g):</span><span>${data[0].z_total_weight}</span></p>
+       <p><span class="label" style="margin-right:6px;">Stone Weight (g):</span><span>${data[0].s_total_weight}</span></p>
+       <p><span class="label" style="margin-right:6px;">grand Weight (g):</span><span>${data[0].grand_weight}</span></p>
        <svg id="barcode"></svg>
        <script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.5/JsBarcode.all.js" integrity="sha512-wkHtSbhQMx77jh9oKL0AlLBd15fOMoJUowEpAzmSG5q5Pg9oF+XoMLCitFmi7AOhIVhR6T6BsaHJr6ChuXaM/Q==" crossorigin="anonymous" referrerpolicy="no-referrer"><\/script>
        <script>
@@ -888,8 +888,8 @@
        <p><span class="label"  style="margin-right:6px;">Date:</span><span>${data[0].date}</span></p>
        <p><span class="label"  style="margin-right:6px;">Barcode:</span><span>${data[0].product_id}</span></p>
        <p><span class="label"  style="margin-right:6px;">Name:</span><span>${data[0].vendor_id} | ${data[0].vendor_name}</span></p>
-       <p><span class="label"  style="margin-right:6px;">Received Weight:</span><span>${data[0].received_weight}</span></p>
-       <p><span class="label"  style="margin-right:6px;">Stone Weight:</span><span>${data[0].stone_weight}</span></p>
+       <p><span class="label"  style="margin-right:6px;">Received Weight (g):</span><span>${data[0].received_weight}</span></p>
+       <p><span class="label"  style="margin-right:6px;">Stone Weight (g):</span><span>${data[0].stone_weight}</span></p>
        <p><span class="label"  style="margin-right:6px;">S-Quantity:</span><span>${data[0].shruded_quantity}</span></p>
        <p><span class="label"  style="margin-right:6px;">Wastage:</span><span>${data[0].wastage}</span></p>
        <p><span class="label"  style="margin-right:6px;">Payable:</span><span>${data[0].payable}</span></p>
@@ -1090,7 +1090,7 @@
                                                                     <option value="">Select a stone...</option>
                                                                 </select>
                            </div>
-                           <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Weight:</label>
+                           <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Weight (g):</label>
                            <div class="col-sm-2">
                                <input type="text" name="stone_weight[]" id="stone_weight[]" value="" class="form-control" placeholder="Stone Weight">
                            </div>
@@ -1134,7 +1134,7 @@
                <option value="">Select a zircon...</option>
            </select>
        </div>
-       <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Weight:</label>
+       <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Weight (g):</label>
        <div class="col-sm-2">
            <input type="text" name="zircon_weight[]" id="zircon_weight[]" value="" class="form-control" placeholder="Zircon" >
        </div>
@@ -1212,7 +1212,7 @@
                            <div class="col-sm-3">
                                <input type="text" name="r_code[]" id="r_code[]" value="" class="form-control" placeholder="Detail">
                            </div>
-                           <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Weight:</label>
+                           <label for="horizontal-firstname-input" class="col-sm-1 col-form-label d-flex justify-content-end">Weight (g):</label>
                            <div class="col-sm-2">
                                <input type="number" step="any" name="r_weight[]" id="r_weight[]" value="" class="form-control" placeholder="Weight" required>
                            </div>

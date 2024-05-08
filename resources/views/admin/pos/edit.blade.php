@@ -65,7 +65,7 @@
                                                                     </select>
                                                                 </div>
                                                                 <label for="horizontal-firstname-input"
-                                                                    class="col-sm-1 col-form-label d-flex justify-content-end">Weight:</label>
+                                                                    class="col-sm-1 col-form-label d-flex justify-content-end">Weight (g):</label>
                                                                 <div class="col-sm-3">
                                                                     <input type="number" step="any" name="weight[]"
                                                                         value="{{ $item->product->weight }}" id="weight[]"
@@ -234,7 +234,7 @@
                                             </select>
                                         </div>
                                         <label for="horizontal-firstname-input"
-                                            class="col-sm-1 col-form-label d-flex justify-content-end">Weight:</label>
+                                            class="col-sm-1 col-form-label d-flex justify-content-end">Weight (g):</label>
                                         <div class="col-sm-3">
                                             <input type="number" step="any" name="weight[]"
                                                 value="" id="weight[]" class="form-control"

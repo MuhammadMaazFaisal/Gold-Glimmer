@@ -113,7 +113,7 @@
             </div>
             <div id="input-div" class="row d-none">
                 <div class="col-3">
-                    <label for="total_issued_weight" class="form-label">Total Pure Weight:</label>
+                    <label for="total_issued_weight" class="form-label">Total Pure Weight (g):</label>
                 </div>
                 <div class="col-3">
                     <input type="number" step="any" id="total_pure_weight" class="form-control" placeholder="Total Pure Weight">

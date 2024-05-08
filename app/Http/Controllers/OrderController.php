@@ -73,4 +73,11 @@ class OrderController extends Controller
 
         return response()->json($notification);
     }
+
+    public function edit($id)
+    {
+        $orders = Order::where('id', $id)->with('customer', 'vendor', 'orderDetails', 'orderDetails.product', 'orderDetails.product.productType')->first();
+        
+        return view('admin.order.edit', compact('orders'));
+    }
 }

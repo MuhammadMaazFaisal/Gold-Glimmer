@@ -44,7 +44,7 @@
                                             </div>
                                             <div class="row mb-5">
                                                 <label for="issued_weight" class="col-sm-1 col-form-label">Issued
-                                                    Weight:</label>
+                                                    Weight (g):</label>
                                                 <div class="col-sm-2">
                                                     <input type="number" step="any" name="issued_weight"
                                                         id="issued_weight" class="form-control"
@@ -114,7 +114,7 @@
                 </div>
                 <div id="input-div" class="row d-none">
                     <div class="col-3">
-                        <label for="total_issued_weight" class="form-label">Total Pure Weight:</label>
+                        <label for="total_issued_weight" class="form-label">Total Pure Weight (g):</label>
                     </div>
                     <div class="col-3">
                         <input type="number" step="any" id="total_pure_weight" class="form-control"
@@ -376,9 +376,9 @@
                 <p><span class="label" style="margin-right:6px";>Date:</span><span>${$('#date').val()}</span></p>
                 <p><span class="label" style="margin-right:6px";>Vendor:</span><span>${$("#vendor").selectize()[0].selectize.options[$("#vendor").selectize()[0].selectize.getValue()].text}</span></p>
                 <p><span class="label" style="margin-right:6px";>Detail:</span><span>${$('#detail').val()}</span></p>
-                <p><span class="label" style="margin-right:6px";>Issued Weight:</span><span>${$('#issued_weight').val()}</span></p>
+                <p><span class="label" style="margin-right:6px";>Issued Weight (g):</span><span>${$('#issued_weight').val()}</span></p>
                 <p><span class="label" style="margin-right:6px";>Purity:</span><span>${$('#purity').val()}</span></p>
-                <p><span class="label" style="margin-right:6px";>Pure Weight:</span><span>${$('#pure_weight').val()}</span></p>
+                <p><span class="label" style="margin-right:6px";>Pure Weight (g):</span><span>${$('#pure_weight').val()}</span></p>
                 </body>
                 </html>
             `;
