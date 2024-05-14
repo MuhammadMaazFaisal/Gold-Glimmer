@@ -52,10 +52,14 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('order.index') }}" class=" ">
+                    <a href="javascript: void(0);" class=" ">
                         <i data-feather="file-text"></i>
                         <span data-key="t-authentication">Order Management</span>
                     </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ route('order.index') }}" data-key="t-register">Create Order</a></li>
+                        <li><a href="{{ route('order.list') }}" data-key="t-register">Order List</a></li>
+                    </ul>
                 </li>
                 <li>
                     <a href="javascript: void(0);" class=" ">

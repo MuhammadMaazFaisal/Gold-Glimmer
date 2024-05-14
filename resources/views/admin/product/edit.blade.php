@@ -230,7 +230,7 @@
                                                     <div class="col-sm-9">
                                                         <div>
                                                             <button type="button"
-                                                                class="btn btn-success waves-effect waves-light  d-none"
+                                                                class="btn btn-success waves-effect waves-light"
                                                                 onclick="PrintManufacturer()">Print</button>
                                                             <button type="submit" class="btn btn-primary btn1"
                                                                 id="m_save" value="Save">Save</button>
@@ -396,7 +396,7 @@
                                                     <div class="col-sm-9">
                                                         <div>
                                                             <button type="button" id="polisher_print_btn"
-                                                                class="btn btn-success waves-effect waves-light  d-none"
+                                                                class="btn btn-success waves-effect waves-light"
                                                                 onclick="PrintPolisher()">Print</button>
                                                             <button type="submit" id="polisher_save_btn"
                                                                 class="btn btn-primary btn1" value="Save">Save</button>
@@ -715,7 +715,7 @@
                                                             <div class="col-sm-9">
                                                                 <div>
                                                                     <button type="button"
-                                                                        class="btn btn-success waves-effect waves-light  d-none"
+                                                                        class="btn btn-success waves-effect waves-light"
                                                                         onclick="PrintSetter(this)">Print</button>
                                                                     <button type="submit" class="btn btn-primary btn1"
                                                                         id="s_save">Save</button>
@@ -897,7 +897,7 @@
                                                             <div class="col-sm-9">
                                                                 <div>
                                                                     <button type="button"
-                                                                        class="btn btn-success waves-effect waves-light  d-none"
+                                                                        class="btn btn-success waves-effect waves-light"
                                                                         onclick="PrintReturned(this)">Print</button>
                                                                     <button type="submit" class="btn btn-primary btn1"
                                                                         id="r_save">Save</button>
@@ -1128,7 +1128,7 @@
                                                         <div class="col-sm-9">
                                                             <div>
                                                                 <button type="button"
-                                                                    class="btn btn-success waves-effect waves-light  d-none"
+                                                                    class="btn btn-success waves-effect waves-light"
                                                                     onclick="PrintSetter(this)">Print</button>
                                                                 <button type="submit" class="btn btn-primary btn1"
                                                                     id="s_save">Save</button>
@@ -1251,7 +1251,7 @@
                                                         <div class="col-sm-9">
                                                             <div>
                                                                 <button type="button"
-                                                                    class="btn btn-success waves-effect waves-light  d-none"
+                                                                    class="btn btn-success waves-effect waves-light"
                                                                     onclick="PrintReturned(this)">Print</button>
                                                                 <button type="submit" class="btn btn-primary btn1"
                                                                     id="r_save">Save</button>
@@ -1474,10 +1474,11 @@
                 </div>
                 <div class="modal-body">
                     <table id="product-table" class="table table-hover ">
-                        <thead>
+                        thead>
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Order ID</th>
+                                <th scope="col">Product ID</th>
                                 <th scope="col">Vendor Name</th>
                                 <th scope="col">Customer Name</th>
                                 <th scope="col">Date</th>
@@ -1486,17 +1487,16 @@
                         </thead>
                         <tbody id="product-table-body">
 
-                            @foreach ($orders as $order)
+                            @foreach ($orders->orderDetails as $order)
                                 <tr>
                                     <th scope="row">{{ $loop->iteration }}</th>
-                                    <td>O-{{ str_pad($order->id, 4, '0', STR_PAD_LEFT) }}</td>
-                                    <td>{{ $order->vendor->name }}</td>
-                                    <td>{{ $order->vendor->name }}</td> 
-                                    <td>{{ $order->customer->name }}</td>
-                                    <td>{{ $order->date }}</td>
+                                    <td>O-{{ str_pad($orders->id, 4, '0', STR_PAD_LEFT) }}</td>
+                                    <td>{{ str_pad($order->p_id, 4, '0', STR_PAD_LEFT) }}</td>
+                                    <td>{{ $orders->vendor->name }}</td>
+                                    <td>{{ $orders->customer->name }}</td>
+                                    <td>{{ $orders->date }}</td>
                                     <td>
-                                        <a href="{{ route('order.edit', $order->id) }}"
-                                            class="btn btn-primary">Select</a>
+                                        <a href="{{ route('product.edit', $order->p_id) }}" class="btn btn-primary">Select</a>
                                     </td>
                                 </tr>
                             @endforeach

@@ -92,6 +92,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('get-stock-items', [ProductController::class, 'getStockItems'])->name('product.stock.items');
     Route::post('get-stock-item-detail', [ProductController::class, 'getStockItemDetail'])->name('product.stock.item.detail');
 
+    // Get Print Data
+    // get Manufacturer Print Data
+    Route::get('get-manufacturer-print-data', [ProductController::class, 'getManufacturerPrint'])->name('get.manufacturer.print');
+    Route::get('get-polishing-print-data', [ProductController::class, 'getPolishingPrintData'])->name('get.polishing.print');
+    Route::get('get-stone-setting-print-data', [ProductController::class, 'getStoneSettingPrintData'])->name('get.stone.setting.print');
+    Route::get('get-return-print-data', [ProductController::class, 'getReturnPrintData'])->name('get.return.print');
+
     // Finished Product Management
     Route::get('finished-product', [ProductController::class, 'finishedProduct'])->name('finished.product');
 
@@ -103,6 +110,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('pos', [POSController::class, 'store'])->name('pos.store');
     // pos order list
     Route::get('pos-order-list', [POSController::class, 'posOrderList'])->name('pos.order.list');
+    Route::get('pos-order-details/{id}', [POSController::class, 'posOrderDetails'])->name('pos.order.details');
 
 
 
@@ -111,6 +119,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('create-order', [OrderController::class, 'create'])->name('order.create');
     Route::get('order/{id}', [OrderController::class, 'edit'])->name('order.edit');
     Route::post('order', [OrderController::class, 'store'])->name('order.store');
+    Route::get('orders', [OrderController::class, 'list'])->name('order.list');
+    Route::get('get-order-details/{id}', [OrderController::class, 'getOrderDetails'])->name('order.details');
 
     // Customer Management
     Route::post('customer-list', [CustomerController::class, 'index'])->name('customer.index');

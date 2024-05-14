@@ -48,8 +48,8 @@ class ProductController extends Controller
         $polishers= Vendor::where('type', VendorType::where('name', 'Polishing')->first()->id)->get();
         $stoneSetters = Vendor::where('type', VendorType::where('name', 'Stone Setting')->first()->id)->get();
         $vendors = Vendor::where('type', VendorType::where('name', 'Additional Vendor')->first()->id)->where('name', '!=', 'existing')->get();
-        $orders=Order::with('customer', 'vendor')->get();
         $order_id = OrderDetail::where('p_id', $id)->first()->o_id;
+        $orders = Order::where('id', $order_id)->with('customer', 'vendor', 'orderDetails', 'orderDetails.product', 'orderDetails.product.productType')->first();
         $product_ids= OrderDetail::where('o_id', $order_id)->pluck('p_id');
         $products = Product::where('status', 0)->whereIn('id', $product_ids)->with('vendor', 'productType')->get();
         $product = Product::where('id', $id)->with('vendor', 'productType')->first();
@@ -59,7 +59,7 @@ class ProductController extends Controller
         $additionalSteps = AdditionalStep::where('product_id', $id)->with('vendor')->get();
         $stockItems = StockDetail::all();
 
-        return view('admin.product.edit', compact('manufacturers', 'polishers', 'stoneSetters', 'vendors', 'orders', 'product', 'polisherStep', 'stoneSetterSteps', 'stockItems', 'returnedStoneSteps', 'additionalSteps'));
+        return view('admin.product.edit', compact('manufacturers', 'polishers', 'stoneSetters', 'vendors', 'products', 'product', 'polisherStep', 'stoneSetterSteps', 'stockItems', 'returnedStoneSteps', 'additionalSteps', 'orders'));
     }
 
     public function store(Request $request)
@@ -355,5 +355,29 @@ class ProductController extends Controller
     {
         $stockItem = StockDetail::where('barcode', $request->barcode)->first();
         return response()->json($stockItem);
+    }
+
+    public function getManufacturerPrint(Request $request)
+    {
+        $product = Product::where('id', $request->id)->with('vendor')->first();
+        return response()->json($product);
+    }
+
+    public function getPolishingPrintData(Request $request)
+    {
+        $product = Product::where('id', $request->id)->with('polisherStep')->first();
+        return response()->json($product);
+    }
+
+    public function getStoneSettingPrintData(Request $request)
+    {
+        $product = StoneSetterStep::where('product_id', $request->id)->where('vendor_id', $request->vendor_id)->with('vendor')->first();
+        return response()->json($product);
+    }
+
+    public function getReturnPrintData(Request $request)
+    {
+        $product = ReturnedStoneStep::where('product_id', $request->id)->where('vendor_id', $request->vendor_id)->with('vendor')->first();
+        return response()->json($product);
     }
 }

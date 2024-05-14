@@ -19,7 +19,6 @@
             <div class="col d-flex justify-content-end me-4">
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#product-modal">
                     Select Order
-                    Select Order
                 </button>
             </div>
         </div>
@@ -825,13 +824,12 @@
             </div> --}}
         </div>
     </div>
-    <div class="modal fade" id="product-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal fade" id="product-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+        data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-dialog-scrollable modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Select Order</h5>
-                    <h5 class="modal-title" id="exampleModalLabel">Select Order</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <table id="product-table" class="table table-hover ">
@@ -848,26 +846,20 @@
                         <tbody id="product-table-body">
 
                             @foreach ($orders as $order)
-                            @foreach ($orders as $order)
                                 <tr>
                                     <th scope="row">{{ $loop->iteration }}</th>
                                     <td>O-{{ str_pad($order->id, 4, '0', STR_PAD_LEFT) }}</td>
                                     <td>{{ $order->vendor->name }}</td>
-                                    <td>{{ $order->vendor->name }}</td> 
+                                    <td>{{ $order->vendor->name }}</td>
                                     <td>{{ $order->customer->name }}</td>
                                     <td>{{ $order->date }}</td>
                                     <td>
-                                        <a href="{{ route('order.edit', $order->id) }}"
-                                        <a href="{{ route('order.edit', $order->id) }}"
-                                            class="btn btn-primary">Select</a>
+                                        <a href="{{ route('order.edit', $order->id) }}" class="btn btn-primary">Select</a>
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>

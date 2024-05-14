@@ -13,9 +13,7 @@
                         <div class="card-body p-4 ">
                             <div class="row">
                                 <div class="col d-flex justify-content-end me-4">
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#product-modal">
-                                        Select Order
-                                    </button>
+                                   
                                 </div>
                                 <div class="col-lg-12 ms-lg-auto ">
                                     <div class="mt-4 mt-lg-0">
@@ -31,7 +29,8 @@
                                                         class="form-control form-select" required>
                                                         <option value="">Select Customer</option>
                                                         @foreach ($customers as $customer)
-                                                            <option value="{{ $customer->id }}">{{ $customer->id }}
+                                                            <option value="{{ $customer->id }}"
+                                                                @if ($order->customer_id == $customer->id) selected @endif>{{ $customer->id }}
                                                                 | {{ $customer->name }}</option>
                                                         @endforeach
                                                     </select>
@@ -45,9 +44,16 @@
                                                     Product Details
                                                 </h4>
                                                 <div class="product-container">
+                                                    @php 
+                                                    $total = 0;
+                                                    @endphp
+                                                    @foreach($orderProducts as $orderProduct)
+                                                    @php
+                                                        $total += $orderProduct->price;
+                                                    @endphp
                                                     <div class="product">
                                                         <h6>
-                                                            Product 1
+                                                            Product {{ $loop->iteration }}
                                                         </h6>
                                                         <div class="row mb-4">
                                                             <label for="horizontal-firstname-input"
@@ -57,7 +63,9 @@
                                                                     class="form-control form-select">
                                                                     <option value="">Select Product</option>
                                                                     @foreach ($products as $product)
-                                                                        <option value="{{ $product->id }}">
+                                                                        <option value="{{ $product->id }}"
+                                                                            @if ($product->id == $orderProduct->id) selected @endif
+                                                                            >
                                                                             {{ $product->barcode }} |
                                                                             {{ $product->product->productType->name }}
                                                                         </option>
@@ -69,22 +77,24 @@
                                                                 (g):</label>
                                                             <div class="col-sm-3">
                                                                 <input type="number" step="any" name="weight[]"
-                                                                    value="" id="weight[]" class="form-control"
+                                                                    value="{{ $orderProduct->weight }}"
+                                                                     id="weight[]" class="form-control"
                                                                     placeholder="Weight" required readonly>
                                                             </div>
                                                             <div class="col-sm-3 text-center">
-                                                                <a href="#" target="_blank">
-                                                                    <img src="" alt="" id="product-image"
+                                                                <a href="{{ asset('images/products') }}/{{ $orderProduct->product->image }}">
+                                                                    <img src="{{ asset('images/products') }}/{{ $orderProduct->product->image }}"
+                                                                     alt="" id="product-image"
                                                                         style="width: 60px; height: 60px;">
                                                                 </a>
                                                             </div>
                                                             <div class="col-sm-1">
-                                                                <i onclick="Add(this)" class="fa fa-plus-circle p-2"></i>
+                                                                {{-- <i onclick="Add(this)" class="fa fa-plus-circle p-2"></i> --}}
                                                             </div>
                                                             <label for="horizontal-firstname-input"
                                                                 class="col-sm-1 col-form-label d-flex justify-content-end">Purity:</label>
                                                             <div class="col-sm-2">
-                                                                <input type="text" name="purity_text[]" value=""
+                                                                <input type="text" name="purity_text[]" value="{{ $orderProduct->product->purity_text }}"   
                                                                     class="form-control" placeholder="Purity" required
                                                                     readonly>
                                                             </div>
@@ -92,32 +102,29 @@
                                                                 class="col-sm-1 col-form-label d-flex justify-content-end">Price:</label>
                                                             <div class="col-sm-2">
                                                                 <input type="number" step="any" name="price[]"
-                                                                    value="" id="price[]" class="form-control"
+                                                                    value="{{ $orderProduct->price }}"
+                                                                    id="price[]" class="form-control"
                                                                     placeholder="Price" required readonly>
                                                             </div>
                                                             <label for="horizontal-firstname-input"
                                                                 class="col-sm-1 col-form-label d-flex justify-content-end">Category:</label>
                                                             <div class="col-sm-2">
-                                                                <input type="text" name="category[]" value=""
+                                                                <input type="text" name="category[]" value="{{ $orderProduct->category }}"
                                                                     id="category[]" class="form-control"
                                                                     placeholder="Category" required readonly>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    @endforeach
                                                 </div>
                                             </div>
                                             <div class="row mb-4 ">
                                                 <div class="col-12 d-flex justify-content-between mb-3">
                                                     <div class="col-sm-3">
-                                                        <input type="number" step="any" name="total" value=""
+                                                        <input type="number" step="any" name="total" value="{{ $total }}"
                                                             id="total" class="form-control" placeholder="Total"
                                                             required readonly>
                                                     </div>
-                                                    {{-- <div class="col-sm-3">
-                                                        <input type="number" step="any" name="advance" value=""
-                                                            id="advance" class="form-control" placeholder="Advance"
-                                                            required>
-                                                    </div> --}}
                                                 </div>
                                                 <div class="d-flex justify-content-end">
                                                     <button type="submit" class="btn btn-primary col-2">Save</button>
@@ -136,45 +143,6 @@
         </div>
     </div>
 
-    <div class="modal fade" id="product-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
-        data-bs-backdrop="static" data-bs-keyboard="false">
-        <div class="modal-dialog modal-dialog-scrollable modal-xl">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Select Order</h5>
-                </div>
-                <div class="modal-body">
-                    <table id="product-table" class="table table-hover ">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Order ID</th>
-                                <th scope="col">Vendor Name</th>
-                                <th scope="col">Customer Name</th>
-                                <th scope="col">Date</th>
-                                <th scope="col">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody id="product-table-body">
-
-                            @foreach ($orders as $order)
-                                <tr>
-                                    <th scope="row">{{ $loop->iteration }}</th>
-                                    <td>O-{{ str_pad($order->id, 4, '0', STR_PAD_LEFT) }}</td>
-                                    <td>{{ $order->vendor->name }}</td>
-                                    <td>{{ $order->customer->name }}</td>
-                                    <td>{{ $order->date }}</td>
-                                    <td>
-                                        <a href="{{ route('pos.order.details', $order->id) }}" class="btn btn-primary">Select</a>
-                                    </td>
-                                </tr>
-                            @endforeach 
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
 @endsection
 @section('scripts')
     <script>
@@ -264,8 +232,8 @@
                                 ${productRows}
                             </tbody>
                         </table>
-                        <p class="label">Total:</p>
-                        <p>${total}</p>
+                        <p class="label">Total:
+                        <span>${total}</span></p>
                     </body>
                     </html>
                     <script>
@@ -343,7 +311,7 @@
                     if (response["alert-type"] == "success") {
                         Swal.fire({
                             icon: 'success',
-                            title: 'Order Created Successfully',
+                            title: 'Order Completed Successfully',
                             showConfirmButton: true,
                         }).then((result) => {
                             PrintSlip(formData); // Generate slip content

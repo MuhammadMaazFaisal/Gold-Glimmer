@@ -550,25 +550,17 @@
     function PrintManufacturer() {
         let id = document.getElementsByClassName("code")[0].value;
         $.ajax({
-            url: "functions.php",
-            type: "POST",
+            url: "{{ route('get.manufacturer.print') }}",
+            type: "Get",
             data: {
-                function: "PrintManufacturer",
                 id: id
             },
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function(data) {
-                data = JSON.parse(data);
+                console.log(data);
                 let printWindow = window.open("", "_blank");
-                if (data[0].purity == data[0]['18k']) {
-                    var purity = '18k';
-                } else if (data[0].purity == data[0]['21k']) {
-                    var purity = '21k';
-                } else if (data[0].purity == data[0]['22k']) {
-                    var purity = '22k';
-                }
                 // Generate slip content
                 let slipContent = `
                 <!DOCTYPE html>
@@ -602,17 +594,17 @@
                         </style>
                         </head>
                         <body>
-                        <p><span class="label" style="margin-right:6px;">Date:</span><span>${data[0].date}</span></p>
-                        <p><span class="label" style="margin-right:6px;">Barcode</span><span>:${data[0].product_id}</span></p>
-                        <p><span class="label" style="margin-right:6px;">Name:</span><span>${data[0].vendor_id} | ${data[0].vendor_name}</span></p>
-                        <p><span class="label" style="margin-right:6px;">Detail:</span><span>${data[0].details}</span></p>
-                        <p><span class="label" style="margin-right:6px;">Type:</span><span>${data[0].type}</span></p>
-                        <p><span class="label" style="margin-right:6px;">Quantity:</span><span>${data[0].quantity}</span></p>
-                        <p><span class="label" style="margin-right:6px;">Purity:</span><span>${purity}</span></p>
-                        <p><span class="label" style="margin-right:6px;">Unpolished:</span><span>${data[0].unpolish_weight}</span></p>
-                        <p><span class="label" style="margin-right:6px;">Polished:</span><span>${data[0].polish_weight}</span></p>
-                        <p><span class="label" style="margin-right:6px;">Wastage:</span><span>${data[0].wastage}</span></p>
-                        <p><span class="label" style="margin-right:6px;">Payable:</span><span>${data[0].tValues}</span></p>
+                        <p><span class="label" style="margin-right:6px;">Date:</span><span>${data.date}</span></p>
+                        <p><span class="label" style="margin-right:6px;">Barcode</span><span>:${data.id}</span></p>
+                        <p><span class="label" style="margin-right:6px;">Name:</span><span>${data.vendor_id} | ${data.vendor.name}</span></p>
+                        <p><span class="label" style="margin-right:6px;">Detail:</span><span>${data.details}</span></p>
+                        <p><span class="label" style="margin-right:6px;">Dimension:</span><span>${data.dimension}</span></p>
+                        <p><span class="label" style="margin-right:6px;">Quantity:</span><span>${data.quantity}</span></p>
+                        <p><span class="label" style="margin-right:6px;">Purity:</span><span>${data.purity_text}</span></p>
+                        <p><span class="label" style="margin-right:6px;">Unpolished:</span><span>${data.unpolished_weight}</span></p>
+                        ${data.wastage ?
+                        `<p><span class="label" style="margin-right:6px;">Wastage:</span><span>${data.wastage}</span></p>
+                        <p><span class="label" style="margin-right:6px;">Payable:</span><span>${data.total}</span></p>` : ''}
                         <svg id="barcode"></svg>
                         <script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.5/JsBarcode.all.js" integrity="sha512-wkHtSbhQMx77jh9oKL0AlLBd15fOMoJUowEpAzmSG5q5Pg9oF+XoMLCitFmi7AOhIVhR6T6BsaHJr6ChuXaM/Q==" crossorigin="anonymous" referrerpolicy="no-referrer"><\/script>
                         <script>
@@ -620,7 +612,7 @@
                     function renderBarcode() {
                         const barcodeElement = document.getElementById("barcode");
                         if (barcodeElement) {
-                            JsBarcode(barcodeElement, "${data[0].product_id}", {
+                            JsBarcode(barcodeElement, "${data.id}", {
                                 format: "CODE128",
                                 width: 2,
                                 height: 50,
@@ -649,25 +641,18 @@
     function PrintPolisher() {
         let id = document.getElementsByClassName("code")[0].value;
         $.ajax({
-            url: "functions.php",
-            type: "POST",
+            url: "{{ route('get.polishing.print') }}",
+            type: "get",
             data: {
-                function: "PrintPolisher",
                 id: id
             },
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function(data) {
-                data = JSON.parse(data);
+                console.log(data);
+                
                 let printWindow = window.open("", "_blank");
-                if (data[0].purity == data[0]['manufacturer_18k']) {
-                    var purity = '18k';
-                } else if (data[0].purity == data[0]['manufacturer_21k']) {
-                    var purity = '21k';
-                } else if (data[0].purity == data[0]['manufacturer_22k']) {
-                    var purity = '22k';
-                }
                 // Generate slip content
                 let slipContent = `
             <!DOCTYPE html>
@@ -700,17 +685,16 @@
        </style>
        </head>
        <body>
-       <p><span class="label" style="margin-right:6px;">Date:</span><span>${data[0].polisher_step_date}</span></p>
-       <p><span class="label" style="margin-right:6px;">Barcode</span><span>:${data[0].product_id}</span></p>
-       <p><span class="label" style="margin-right:6px;">Name:</span><span>${data[0].vendor_id} | ${data[0].polisher_name}</span></p>
-       <p><span class="label" style="margin-right:6px;">Type:</span><span>${data[0].type}</span></p>
-       <p><span class="label" style="margin-right:6px;">Quantity:</span><span>${data[0].quantity}</span></p>
-       <p><span class="label" style="margin-right:6px;">Purity:</span><span>${purity}</span></p>
-       <p><span class="label" style="margin-right:6px;">Unpolished:</span><span>${data[0].unpolish_weight}</span></p>
-       <p><span class="label" style="margin-right:6px;">Polished:</span><span>${data[0].polish_weight}</span></p>
-       <p><span class="label" style="margin-right:6px;">Rate:</span><span>${data[0].polisher_rate}</span></p>
-       <p><span class="label" style="margin-right:6px;">Wastage:</span><span>${data[0].polisher_wastage}</span></p>
-       <p><span class="label" style="margin-right:6px;">Payable:</span><span>${data[0].payable}</span></p>
+       <p><span class="label" style="margin-right:6px;">Date:</span><span>${data.polisher_step.date}</span></p>
+       <p><span class="label" style="margin-right:6px;">Barcode</span><span>:${data.id}</span></p>
+       <p><span class="label" style="margin-right:6px;">Name:</span><span>${data.vendor_id}</span></p>
+       <p><span class="label" style="margin-right:6px;">Quantity:</span><span>${data.quantity}</span></p>
+       <p><span class="label" style="margin-right:6px;">Purity:</span><span>${data.purity_text}</span></p>
+       <p><span class="label" style="margin-right:6px;">Unpolished:</span><span>${data.unpolished_weight}</span></p>
+       <p><span class="label" style="margin-right:6px;">Polished:</span><span>${data.polisher_step.polish_weight}</span></p>
+       <p><span class="label" style="margin-right:6px;">Rate:</span><span>${data.polisher_step.rate}</span></p>
+       <p><span class="label" style="margin-right:6px;">Wastage:</span><span>${data.polisher_step.wastage}</span></p>
+       <p><span class="label" style="margin-right:6px;">Payable:</span><span>${data.polisher_step.payable}</span></p>
        <svg id="barcode"></svg>
        <script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.5/JsBarcode.all.js" integrity="sha512-wkHtSbhQMx77jh9oKL0AlLBd15fOMoJUowEpAzmSG5q5Pg9oF+XoMLCitFmi7AOhIVhR6T6BsaHJr6ChuXaM/Q==" crossorigin="anonymous" referrerpolicy="no-referrer"><\/script>
        <script>
@@ -718,7 +702,7 @@
             function renderBarcode() {
                 const barcodeElement = document.getElementById("barcode");
                 if (barcodeElement) {
-                    JsBarcode(barcodeElement, "${data[0].product_id}", {
+                    JsBarcode(barcodeElement, "${data.id}", {
                         format: "CODE128",
                         width: 2,
                         height: 50,
@@ -750,10 +734,9 @@
         let vendor_id = area.querySelectorAll('select[id="select-stone_setter[]"]');
         vendor_id = vendor_id[0].value;
         $.ajax({
-            url: "functions.php",
-            type: "POST",
+            url: "{{ route('get.stone.setting.print') }}",
+            type: "get",
             data: {
-                function: "PrintSetter",
                 id: id,
                 vendor_id: vendor_id
             },
@@ -761,7 +744,6 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function(data) {
-                data = JSON.parse(data);
                 let printWindow = window.open("", "_blank");
                 // Generate slip content
                 let slipContent = `
@@ -795,13 +777,13 @@
        </style>
        </head>
        <body>
-       <p><span class="label" style="margin-right:6px;">Date:</span><span>${data[0].date}</span></p>
-       <p><span class="label" style="margin-right:6px;">Barcode:</span><span>${data[0].product_id}</span></p>
-       <p><span class="label" style="margin-right:6px;">Name:</span><span>${data[0].vendor_id} | ${data[0].vendor_name}</span></p>
-       <p><span class="label" style="margin-right:6px;">Issued Weight (g):</span><span>${data[0].Issued_weight}</span></p>
-       <p><span class="label" style="margin-right:6px;">Zircon Weight (g):</span><span>${data[0].z_total_weight}</span></p>
-       <p><span class="label" style="margin-right:6px;">Stone Weight (g):</span><span>${data[0].s_total_weight}</span></p>
-       <p><span class="label" style="margin-right:6px;">grand Weight (g):</span><span>${data[0].grand_weight}</span></p>
+       <p><span class="label" style="margin-right:6px;">Date:</span><span>${data.date}</span></p>
+       <p><span class="label" style="margin-right:6px;">Barcode:</span><span>${data.product_id}</span></p>
+       <p><span class="label" style="margin-right:6px;">Name:</span><span>${data.vendor_id}</span></p>
+       <p><span class="label" style="margin-right:6px;">Issued Weight (g):</span><span>${data.Issued_weight}</span></p>
+       <p><span class="label" style="margin-right:6px;">Zircon Weight (g):</span><span>${data.z_total_weight}</span></p>
+       <p><span class="label" style="margin-right:6px;">Stone Weight (g):</span><span>${data.s_total_weight}</span></p>
+       <p><span class="label" style="margin-right:6px;">Grand Weight (g):</span><span>${data.grand_weight}</span></p>
        <svg id="barcode"></svg>
        <script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.5/JsBarcode.all.js" integrity="sha512-wkHtSbhQMx77jh9oKL0AlLBd15fOMoJUowEpAzmSG5q5Pg9oF+XoMLCitFmi7AOhIVhR6T6BsaHJr6ChuXaM/Q==" crossorigin="anonymous" referrerpolicy="no-referrer"><\/script>
        <script>
@@ -809,7 +791,7 @@
                 function renderBarcode() {
                     const barcodeElement = document.getElementById("barcode");
                     if (barcodeElement) {
-                        JsBarcode(barcodeElement, "${data[0].product_id}", {
+                        JsBarcode(barcodeElement, "${data.product_id}", {
                             format: "CODE128",
                             width: 2,
                             height: 50,
@@ -841,10 +823,9 @@
         let vendor_id = area.querySelectorAll('select[id="select-stone_setter[]"]');
         vendor_id = vendor_id[0].value;
         $.ajax({
-            url: "functions.php",
-            type: "POST",
+            url: "{{ route('get.return.print') }}",
+            type: "get",
             data: {
-                function: "PrintReturned",
                 id: id,
                 vendor_id: vendor_id
             },
@@ -852,7 +833,6 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function(data) {
-                data = JSON.parse(data);
                 // Generate slip content
                 let slipContent = `
                     <!DOCTYPE html>
@@ -885,14 +865,14 @@
        </style>
        </head>
        <body>
-       <p><span class="label"  style="margin-right:6px;">Date:</span><span>${data[0].date}</span></p>
-       <p><span class="label"  style="margin-right:6px;">Barcode:</span><span>${data[0].product_id}</span></p>
-       <p><span class="label"  style="margin-right:6px;">Name:</span><span>${data[0].vendor_id} | ${data[0].vendor_name}</span></p>
-       <p><span class="label"  style="margin-right:6px;">Received Weight (g):</span><span>${data[0].received_weight}</span></p>
-       <p><span class="label"  style="margin-right:6px;">Stone Weight (g):</span><span>${data[0].stone_weight}</span></p>
-       <p><span class="label"  style="margin-right:6px;">S-Quantity:</span><span>${data[0].shruded_quantity}</span></p>
-       <p><span class="label"  style="margin-right:6px;">Wastage:</span><span>${data[0].wastage}</span></p>
-       <p><span class="label"  style="margin-right:6px;">Payable:</span><span>${data[0].payable}</span></p>
+       <p><span class="label"  style="margin-right:6px;">Date:</span><span>${data.created_at}</span></p>
+       <p><span class="label"  style="margin-right:6px;">Barcode:</span><span>${data.product_id}</span></p>
+       <p><span class="label"  style="margin-right:6px;">Name:</span><span>${data.vendor_id} </span></p>
+       <p><span class="label"  style="margin-right:6px;">Received Weight (g):</span><span>${data.received_weight}</span></p>
+       <p><span class="label"  style="margin-right:6px;">Stone Weight (g):</span><span>${data.stone_weight}</span></p>
+       <p><span class="label"  style="margin-right:6px;">S-Quantity:</span><span>${data.shruded_quantity}</span></p>
+       <p><span class="label"  style="margin-right:6px;">Wastage:</span><span>${data.wastage}</span></p>
+       <p><span class="label"  style="margin-right:6px;">Payable:</span><span>${data.payable}</span></p>
        <svg id="barcode"></svg>
        <script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.5/JsBarcode.all.js" integrity="sha512-wkHtSbhQMx77jh9oKL0AlLBd15fOMoJUowEpAzmSG5q5Pg9oF+XoMLCitFmi7AOhIVhR6T6BsaHJr6ChuXaM/Q==" crossorigin="anonymous" referrerpolicy="no-referrer"><\/script>
        <script>
@@ -900,7 +880,7 @@
             function renderBarcode() {
                 const barcodeElement = document.getElementById("barcode");
                 if (barcodeElement) {
-                    JsBarcode(barcodeElement, "${data[0].product_id}", {
+                    JsBarcode(barcodeElement, "${data.product_id}", {
                         format: "CODE128",
                         width: 2,
                         height: 50,

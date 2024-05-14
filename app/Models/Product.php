@@ -26,5 +26,10 @@ class Product extends Model
     {
         return $this->hasOne(PolisherStep::class, 'product_id', 'id');
     }
+
+    public function stoneSetterStep()
+    {
+        return $this->hasMany(StoneSetterStep::class, 'product_id', 'id');
+    }
     
 }

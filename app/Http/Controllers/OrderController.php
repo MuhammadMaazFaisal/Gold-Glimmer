@@ -76,15 +76,22 @@ class OrderController extends Controller
 
     public function edit($id)
     {
-        $order = Order::where('id', $id)->with('customer')->with('vendor')->first();
-        $orderDetails = OrderDetail::where('o_id', $id)->with('product')->get();
-        $manufacturers = Vendor::where('type',  VendorType::where('name', 'Manufacturing')->first()->id)->get();
-        $customers = Customer::all();
 
-        // dd($orderDetails);
-        return view('admin.order.edit', compact('order', 'orderDetails', 'manufacturers', 'customers'));
         $orders = Order::where('id', $id)->with('customer', 'vendor', 'orderDetails', 'orderDetails.product', 'orderDetails.product.productType')->first();
-        
         return view('admin.order.edit', compact('orders'));
+    }
+
+    public function list()
+    {
+        $orders = Order::with('customer', 'vendor')->get();
+        return view('admin.order.list', compact('orders'));
+    }
+
+    public function getOrderDetails($id) 
+    {
+        $order = Order::where('id', $id)->with('customer', 'vendor', 'orderDetails', 'orderDetails.product', 'orderDetails.product.productType')->first();
+        $customers = Customer::all();
+        // dd($order);
+        return view('admin.order.details', compact('order', 'customers'));
     }
 }
