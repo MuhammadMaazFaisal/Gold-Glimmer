@@ -19,6 +19,7 @@
             <div class="col d-flex justify-content-end me-4">
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#product-modal">
                     Select Order
+                    Select Order
                 </button>
             </div>
         </div>
@@ -146,7 +147,7 @@
                                                         </div>
                                                         <label for="horizontal-firstname-input"
                                                             class="col-sm-1 col-form-label d-flex justify-content-end">Unpolish
-                                                            Weight:</label>
+                                                            Weight (g):</label>
                                                         <div class="col-sm-3">
                                                             <input type="number" step="any" name="unpolish_weight"
                                                                 value="" id="unpolish_weight" class="form-control"
@@ -285,7 +286,7 @@
                                                     </div>
                                                     <label for="horizontal-firstname-input"
                                                         class="col-sm-1 col-form-label d-flex justify-content-end">Polish
-                                                        Weight:</label>
+                                                        Weight (g):</label>
                                                     <div class="col-sm-3">
                                                         <input type="number" step="any" name="polish_weight"
                                                             id="polish_weight" value="" class="form-control"
@@ -415,7 +416,7 @@
                                             <div class="row mb-4">
                                                 <label for="horizontal-firstname-input"
                                                     class="col-sm-1 col-form-label d-flex justify-content-end">Total
-                                                    Weight:</label>
+                                                    Weight (g):</label>
                                                 <div class="col-sm-3">
                                                     <input type="number" step="any" name="s_total_weight[]"
                                                         id="s_total_weight[]" class="form-control"
@@ -423,7 +424,7 @@
                                                 </div>
                                                 <label for="horizontal-firstname-input"
                                                     class="col-sm-1 col-form-label d-flex justify-content-end">-
-                                                    Retained Weight:</label>
+                                                    Retained Weight (g):</label>
                                                 <div class="col-sm-3">
                                                     <input type="number" step="any" name="retained_weight[]"
                                                         id="retained_weight[]" class="form-control"
@@ -431,7 +432,7 @@
                                                 </div>
                                                 <label for="horizontal-firstname-input"
                                                     class="col-sm-1 col-form-label d-flex justify-content-end">=
-                                                    Issued Weight:</label>
+                                                    Issued Weight (g):</label>
                                                 <div class="col-sm-3">
                                                     <input type="number" step="any" name="Issued_weight[]"
                                                         id="stepIssueweight[]" class="form-control"
@@ -454,7 +455,7 @@
                                                             placeholder="Zircon Detail">
                                                     </div>
                                                     <label for="horizontal-firstname-input"
-                                                        class="col-sm-1 col-form-label  d-flex justify-content-end">Weight:</label>
+                                                        class="col-sm-1 col-form-label  d-flex justify-content-end">Weight (g):</label>
                                                     <div class="col-sm-2">
                                                         <input type="number" step="any" name="zircon_weight[]"
                                                             id="zircon_weight[]" value="" class="form-control"
@@ -476,7 +477,7 @@
                                             <div class="row mb-4">
                                                 <label for="horizontal-firstname-input"
                                                     class="col-sm-1 col-form-label d-flex justify-content-end">Total
-                                                    Weight:</label>
+                                                    Weight (g):</label>
                                                 <div class="col-sm-2">
                                                     <input type="number" step="any" name="zircon_total_weight[]"
                                                         value="" id="zircon_total_weight[]"
@@ -518,7 +519,7 @@
                                                         value="" class="form-control" placeholder="Stone Detail">
                                                 </div>
                                                 <label for="horizontal-firstname-input"
-                                                    class="col-sm-1 col-form-label d-flex justify-content-end">Weight:</label>
+                                                    class="col-sm-1 col-form-label d-flex justify-content-end">Weight (g):</label>
                                                 <div class="col-sm-2">
                                                     <input type="number" step="any" name="stone_weight[]"
                                                         id="stone_weight[]" value="" class="form-control"
@@ -539,7 +540,7 @@
                                             <div class="row mb-4">
                                                 <label for="horizontal-firstname-input"
                                                     class="col-sm-1 col-form-label d-flex justify-content-end">Total
-                                                    Weight:</label>
+                                                    Weight (g):</label>
                                                 <div class="col-sm-2">
                                                     <input type="number" step="any" name="stone_total_weight[]"
                                                         value="" id="stone_total_weight[]"
@@ -569,7 +570,7 @@
                                             <div class="row mb-4">
                                                 <label for="horizontal-firstname-input"
                                                     class="col-sm-1 col-form-label ">Grand Total
-                                                    Weight:</label>
+                                                    Weight (g):</label>
                                                 <div class="col-sm-3">
                                                     <input type="number" step="any" name="grand_total_weight[]"
                                                         value="" id="grand_total_weight[]"
@@ -604,7 +605,7 @@
                                         </form>
                                         <form id="r_stepthree" method="POST" enctype="multipart/form-data">
                                             <div class="row">
-                                                <label for="received_weight">Recieved Weight:</label>
+                                                <label for="received_weight">Recieved Weight (g):</label>
                                                 <div class="col-sm-4 mb-4">
                                                     <input type="number" step="any" name="received_weight"
                                                         value="" id="received_weight" class="form-control"
@@ -619,7 +620,7 @@
                                                                 value="" class="form-control" placeholder="Detail">
                                                         </div>
                                                         <label for="horizontal-firstname-input"
-                                                            class="col-sm-1 col-form-label d-flex justify-content-end">Weight:</label>
+                                                            class="col-sm-1 col-form-label d-flex justify-content-end">Weight (g):</label>
                                                         <div class="col-sm-2">
                                                             <input type="number" step="any" name="r_weight[]"
                                                                 id="r_weight[]" value="" class="form-control"
@@ -642,7 +643,7 @@
                                             <div class="row">
                                                 <label for="horizontal-firstname-input"
                                                     class="col-sm-1 col-form-label d-flex justify-content-end">Stone
-                                                    Weight:</label>
+                                                    Weight (g):</label>
                                                 <div class="col-sm-3">
                                                     <input type="number" step="any" name="r_stone_weight"
                                                         value="" id="r_stone_weight"
@@ -692,7 +693,7 @@
                                                 </div>
                                                 <label for="horizontal-firstname-input"
                                                     class="col-sm-1 col-form-label d-flex justify-content-end">Grand
-                                                    Weight:</label>
+                                                    Weight (g):</label>
                                                 <div class="col-sm-3">
                                                     <input type="number" step="any" name="r_grand_weight"
                                                         value="" id="r_grand_weight"
@@ -824,10 +825,11 @@
             </div> --}}
         </div>
     </div>
-    <div class="modal fade" id="product-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="product-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-dialog-scrollable modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Select Order</h5>
                     <h5 class="modal-title" id="exampleModalLabel">Select Order</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -846,6 +848,7 @@
                         <tbody id="product-table-body">
 
                             @foreach ($orders as $order)
+                            @foreach ($orders as $order)
                                 <tr>
                                     <th scope="row">{{ $loop->iteration }}</th>
                                     <td>O-{{ str_pad($order->id, 4, '0', STR_PAD_LEFT) }}</td>
@@ -854,6 +857,7 @@
                                     <td>{{ $order->customer->name }}</td>
                                     <td>{{ $order->date }}</td>
                                     <td>
+                                        <a href="{{ route('order.edit', $order->id) }}"
                                         <a href="{{ route('order.edit', $order->id) }}"
                                             class="btn btn-primary">Select</a>
                                     </td>
@@ -871,4 +875,10 @@
 @endsection
 @section('scripts')
     @include('admin.product.scripts')
+    <script>
+        // open modal on page load
+        $(document).ready(function() {
+            $('#product-modal').modal('show');
+        });
+    </script>
 @endsection

@@ -83,5 +83,8 @@ class OrderController extends Controller
 
         // dd($orderDetails);
         return view('admin.order.edit', compact('order', 'orderDetails', 'manufacturers', 'customers'));
+        $orders = Order::where('id', $id)->with('customer', 'vendor', 'orderDetails', 'orderDetails.product', 'orderDetails.product.productType')->first();
+        
+        return view('admin.order.edit', compact('orders'));
     }
 }
