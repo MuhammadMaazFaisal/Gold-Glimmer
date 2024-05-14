@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AdditionalStep;
 use App\Models\FinishedProduct;
 use App\Models\InventoryItem;
+use App\Models\Order;
 use App\Models\PolisherStep;
 use App\Models\PolishingType;
 use App\Models\Product;
@@ -29,8 +30,8 @@ class ProductController extends Controller
         $stoneSetters = Vendor::where('type', VendorType::where('name', 'Stone Setting')->first()->id)->get();
         $vendors = Vendor::where('type', VendorType::where('name', 'Additional Vendor')->first()->id)->where('name', '!=', 'existing')->get();
         
-        $products = Product::where('status', 0)->with('vendor')->get();
-        return view('admin.product.index', compact('manufacturers', 'polishers', 'stoneSetters', 'vendors', 'products'));
+        $orders=Order::with('customer', 'vendor')->get();
+        return view('admin.product.index', compact('manufacturers', 'polishers', 'stoneSetters', 'vendors', 'orders'));
     }
 
     public function completeProduct($id)
@@ -45,7 +46,7 @@ class ProductController extends Controller
         $polishers= Vendor::where('type', VendorType::where('name', 'Polishing')->first()->id)->get();
         $stoneSetters = Vendor::where('type', VendorType::where('name', 'Stone Setting')->first()->id)->get();
         $vendors = Vendor::where('type', VendorType::where('name', 'Additional Vendor')->first()->id)->where('name', '!=', 'existing')->get();
-        $products = Product::where('status', 0)->with('vendor')->get();
+        $orders=Order::with('customer', 'vendor')->get();
         $product = Product::where('id', $id)->with('vendor', 'productType')->first();
         $polisherStep = PolisherStep::where('product_id', $id)->with( 'polishingType')->first();
         $stoneSetterSteps = StoneSetterStep::where('product_id', $id)->with('vendor', 'zircons', 'stones')->get();
@@ -53,7 +54,7 @@ class ProductController extends Controller
         $additionalSteps = AdditionalStep::where('product_id', $id)->with('vendor')->get();
         $stockItems = StockDetail::all();
 
-        return view('admin.product.edit', compact('manufacturers', 'polishers', 'stoneSetters', 'vendors', 'products', 'product', 'polisherStep', 'stoneSetterSteps', 'stockItems', 'returnedStoneSteps', 'additionalSteps'));
+        return view('admin.product.edit', compact('manufacturers', 'polishers', 'stoneSetters', 'vendors', 'orders', 'product', 'polisherStep', 'stoneSetterSteps', 'stockItems', 'returnedStoneSteps', 'additionalSteps'));
     }
 
     public function store(Request $request)

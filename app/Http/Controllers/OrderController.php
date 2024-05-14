@@ -73,4 +73,15 @@ class OrderController extends Controller
 
         return response()->json($notification);
     }
+
+    public function edit($id)
+    {
+        $order = Order::where('id', $id)->with('customer')->with('vendor')->first();
+        $orderDetails = OrderDetail::where('o_id', $id)->with('product')->get();
+        $manufacturers = Vendor::where('type',  VendorType::where('name', 'Manufacturing')->first()->id)->get();
+        $customers = Customer::all();
+
+        // dd($orderDetails);
+        return view('admin.order.edit', compact('order', 'orderDetails', 'manufacturers', 'customers'));
+    }
 }

@@ -18,7 +18,7 @@
             </div>
             <div class="col d-flex justify-content-end me-4">
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#product-modal">
-                    Select Product
+                    Select Order
                 </button>
             </div>
         </div>
@@ -828,7 +828,7 @@
         <div class="modal-dialog modal-dialog-scrollable modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Select Product</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Select Order</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -836,24 +836,25 @@
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Product ID</th>
-                                <th scope="col">Vendor ID</th>
+                                <th scope="col">Order ID</th>
                                 <th scope="col">Vendor Name</th>
+                                <th scope="col">Customer Name</th>
                                 <th scope="col">Date</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody id="product-table-body">
 
-                            @foreach ($products as $product)
+                            @foreach ($orders as $order)
                                 <tr>
                                     <th scope="row">{{ $loop->iteration }}</th>
-                                    <td>{{ $product->id }}</td>
-                                    <td>{{ $product->vendor_id }}</td>
-                                    <td>{{ $product->vendor->name }}</td>
-                                    <td>{{ $product->date }}</td>
+                                    <td>O-{{ str_pad($order->id, 4, '0', STR_PAD_LEFT) }}</td>
+                                    <td>{{ $order->vendor->name }}</td>
+                                    <td>{{ $order->vendor->name }}</td> 
+                                    <td>{{ $order->customer->name }}</td>
+                                    <td>{{ $order->date }}</td>
                                     <td>
-                                        <a href="{{ route('product.edit', $product->id) }}"
+                                        <a href="{{ route('order.edit', $order->id) }}"
                                             class="btn btn-primary">Select</a>
                                     </td>
                                 </tr>

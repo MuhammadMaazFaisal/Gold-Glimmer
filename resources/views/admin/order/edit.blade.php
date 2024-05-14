@@ -13,7 +13,7 @@
             <label for="horizontal-firstname-input"
                 class="col-sm-1 col-form-label d-flex justify-content-end">Product:</label>
             <div class="col-sm-2">
-                <input type="text" name="code" id="code" class="form-control code" value="{{ $product->id }}"
+                <input type="text" name="code" id="code" class="form-control code" value=""
                     placeholder="Product ID" readonly>
             </div>
             <div class="col d-flex justify-content-end me-4">
@@ -23,6 +23,11 @@
             </div>
         </div>
         <div class="row">
+            @foreach($orderDetails as $orderDetail)
+            @php
+                $product = $orderDetail->product;
+                
+                @endphp
             <div class="col-xl-12">
                 <div class="row">
                     <div class="col-lg-12">
@@ -248,6 +253,7 @@
                 <!-- End Form Layout -->
                 <!-- end card -->
             </div>
+            @endforeach
             <!-- end col -->
             <!--2 -->
             <div class="col-xl-12">
@@ -301,10 +307,10 @@
                                                     <div class="col-sm-11">
                                                         <textarea type="text" name="detail" id="p_details" class="form-control" style="height: 107px;"
                                                             placeholder="Details">
-@if (isset($polisherStep))
-{{ $polisherStep->details }}
-@endif
-</textarea>
+                                                            @if (isset($polisherStep))
+                                                            {{ $polisherStep->details }}
+                                                            @endif
+                                                            </textarea>
                                                     </div>
                                                 </div>
                                                 <div class="row mb-4">
