@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->string('date');
-            $table->string('vendor_id')->index('vendor_id');
             $table->string('customer_id')->index('customer_id');
             $table->softDeletes();
             $table->timestamps();

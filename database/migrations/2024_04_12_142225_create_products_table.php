@@ -15,17 +15,17 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->string('id')->primary();
-            $table->string('vendor_id')->index('vendor_id');
+            $table->string('vendor_id')->index('vendor_id')->nullable();
             $table->date('date');
             $table->string('image');
             $table->text('details')->nullable();
             $table->unsignedBigInteger('product_type')->index('product_type');
             $table->integer('quantity');
             $table->string('dimension')->nullable();
-            $table->float('purity');
-            $table->string('purity_text');
+            $table->float('purity')->nullable();
+            $table->string('purity_text')->nullable();
             $table->float('unpolished_weight');
-            $table->float('rate');
+            $table->float('rate')->nullable();
             $table->float('wastage')->nullable();
             $table->float('total')->nullable();
             $table->string('status')->comment('0: Inactive, 1: Active')->default(0);

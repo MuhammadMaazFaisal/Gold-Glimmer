@@ -18,13 +18,7 @@
                             </h4>
 
                         </div>
-                        <!-- <div class="col d-flex justify-content-end me-4">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" onclick="SelectMetal()" data-bs-target="#product-modal">
-                                    Show History
-                                </button>
-                            </div> -->
                         <div class="card-body p-4 ">
-
 
                             <div class="row">
 
@@ -37,20 +31,13 @@
                                             <div class="row mb-4">
                                                 <label for="date" class="col-sm-1 col-form-label">Date:</label>
                                                 <div class="col-sm-4">
-                                                    <input type="date" name="date" id="date" class="form-control"
+                                                    <input type="date" name="d-date" id="d-date" class="form-control"
                                                         placeholder="Date">
                                                 </div>
-                                                <label for="vendor"
-                                                    class="col-sm-2 col-form-label text-end">Manufacturer:</label>
-                                                <div class="col-sm-5">
-                                                    <select id="vendor" name="vendor" required
-                                                        class="form-control form-select">
-                                                        <option value="">Select Manufacturer</option>
-                                                        @foreach ($manufacturers as $manufacturer)
-                                                            <option value="{{ $manufacturer->id }}">{{ $manufacturer->id }}
-                                                                | {{ $manufacturer->name }}</option>
-                                                        @endforeach
-                                                    </select>
+                                                <label for="date" class="col-sm-2 col-form-label d-flex justify-content-end">Delivery Date:</label>
+                                                <div class="col-sm-4">
+                                                    <input type="date" name="date" id="date" class="form-control"
+                                                        placeholder="Date">
                                                 </div>
                                             </div>
                                             <h4 class="mb-4">

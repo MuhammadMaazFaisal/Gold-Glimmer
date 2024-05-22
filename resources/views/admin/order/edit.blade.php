@@ -252,7 +252,7 @@
                                     <th scope="row">{{ $loop->iteration }}</th>
                                     <td>O-{{ str_pad($orders->id, 4, '0', STR_PAD_LEFT) }}</td>
                                     <td>{{ str_pad($order->p_id, 4, '0', STR_PAD_LEFT) }}</td>
-                                    <td>{{ $orders->vendor->name }}</td>
+                                    <td>@if ($order->vendor) {{ $order->vendor->name }} @endif</td>
                                     <td>{{ $orders->customer->name }}</td>
                                     <td>{{ $orders->date }}</td>
                                     <td>

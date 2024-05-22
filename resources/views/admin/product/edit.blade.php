@@ -171,6 +171,7 @@
                                                                 required>
                                                                 <option value="">Please Select Purity
                                                                 </option>
+                                                                @if ($product->vendor)
                                                                 <option value="{{ $product->vendor->{'18k'} }}"
                                                                     {{ $product->purity_text == '18k' ? 'selected' : '' }}>
                                                                     18k</option>
@@ -180,6 +181,7 @@
                                                                 <option value="{{ $product->vendor->{'22k'} }}"
                                                                     {{ $product->purity_text == '22k' ? 'selected' : '' }}>
                                                                     22k</option>
+                                                                    @endif
                                                             </select>
                                                         </div>
                                                     </div>
@@ -1492,7 +1494,7 @@
                                     <th scope="row">{{ $loop->iteration }}</th>
                                     <td>O-{{ str_pad($orders->id, 4, '0', STR_PAD_LEFT) }}</td>
                                     <td>{{ str_pad($order->p_id, 4, '0', STR_PAD_LEFT) }}</td>
-                                    <td>{{ $orders->vendor->name }}</td>
+                                    <td>@if ($order->vendor) {{ $order->vendor->name }} @endif</td>
                                     <td>{{ $orders->customer->name }}</td>
                                     <td>{{ $orders->date }}</td>
                                     <td>

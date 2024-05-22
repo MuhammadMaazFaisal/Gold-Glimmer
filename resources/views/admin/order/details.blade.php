@@ -192,7 +192,7 @@
                         </style>
                     </head>
                     <body>
-                        <h1>Point of Sale Slip</h1>
+                        <h1>Order Slip</h1>
                         <p class="label">Customer: 
                         <span>${customer}</span></p>
                         <p class="label">Date:
