@@ -127,6 +127,9 @@ class ProductController extends Controller
         }
         $product->save();
 
+        $vendor->balance = $vendor->balance + $request->tValues;
+        $vendor->save();
+
         $notification = array(
             'message' => 'Record saved successfully!',
             'alert-type' => 'success'
@@ -167,6 +170,10 @@ class ProductController extends Controller
             $polisherStep->image = $imageName;
         }
         $polisherStep->save();
+
+        $vendor = Vendor::where('id', $request->vendor_id)->first();
+        $vendor->balance = $vendor->balance + $request->payable;
+        $vendor->save();
 
         $notification = array(
             'message' => 'Record saved successfully!',
@@ -277,10 +284,13 @@ class ProductController extends Controller
         $stoneSetterStep->rate = $request->r_rate;
         $stoneSetterStep->shruded_quantity = $request->sh_qty;
         $stoneSetterStep->wastage = $request->r_wastage;
-        $stoneSetterStep->
-        grand_weight = $request->r_grand_weight;
+        $stoneSetterStep->grand_weight = $request->r_grand_weight;
         $stoneSetterStep->payable = $request->r_payable;
         $stoneSetterStep->save();
+
+        $vendor = Vendor::where('id', $request->vendor_id)->first();
+        $vendor->balance = $vendor->balance + $request->r_payable;
+        $vendor->save();
 
         // delete all returned items
         ReturnedItem::where('returned_stone_step_id', $stoneSetterStep->id)->delete();
@@ -303,7 +313,6 @@ class ProductController extends Controller
 
     public function storeStepFour(Request $request)
     {
-        // dd($request->all());
         $product = Product::where('id', $request->product_id)->first();
         AdditionalStep::where('product_id', $product->id)->delete();
         for ($i = 0; $i < count($request->vendor_id); $i++) {
@@ -317,6 +326,10 @@ class ProductController extends Controller
             $additionalStep->amount = $request->amount[$i];
             $additionalStep->date = $request->date[$i];
             $additionalStep->save();
+
+            $vendor = Vendor::where('id', $request->vendor_id[$i])->first();
+            $vendor->balance = $vendor->balance + $request->amount[$i];
+            $vendor->save();
         }
 
         $notification = array(

@@ -19,7 +19,7 @@ class MetalController extends Controller
         } else {
             $metals = Metal::where('type', MetalType::where('name', $request->type)->first()->id)->with('vendor')->get();
         }
-        $total_weight = $metals->sum('pure_weight');
+        $total_weight = Vendor::where('id', $vendor_id)->first()->balance;
         return response()->json(['data' => $metals, 'total_weight' => $total_weight]);
     }
 
@@ -55,6 +55,13 @@ class MetalController extends Controller
         $metal->date = $request->date;
         $metal->save();
 
+        $vendor = Vendor::where('id', $request->vendor)->first();
+        if ($request->type == 'Issue') {
+            $vendor->balance = $vendor->balance + $request->pure_weight;
+        } else {
+            $vendor->balance = $vendor->balance - $request->pure_weight;
+        }
+        
         $notification = array(
             'message' => 'Metal Record created successfully!',
             'alert-type' => 'success'
