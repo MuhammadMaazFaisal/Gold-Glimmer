@@ -216,7 +216,7 @@
                                 <th scope="col">#</th>
                                 <th scope="col">Order ID</th>
                                 <th scope="col">Customer Name</th>
-                                <th scope="col">Date</th>
+                                <th scope="col">Delivery Date</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>

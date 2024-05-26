@@ -106,7 +106,6 @@ class OrderController extends Controller
 
     public function completeOrderStore(Request $request, $id)
     {
-        // dd($request->all());
 
        $products = $request->barcode;
        foreach ($products as $key => $value) {
