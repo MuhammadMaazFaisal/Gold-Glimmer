@@ -17,6 +17,9 @@ return new class extends Migration
             $table->id();
             $table->string('date');
             $table->string('customer_id')->index('customer_id');
+            $table->integer('advance')->default(0);
+            $table->integer('total')->nullable();
+            $table->string('status')->default('Pending');
             $table->softDeletes();
             $table->timestamps();
         });

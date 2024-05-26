@@ -121,6 +121,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('order', [OrderController::class, 'store'])->name('order.store');
     Route::get('orders', [OrderController::class, 'list'])->name('order.list');
     Route::get('get-order-details/{id}', [OrderController::class, 'getOrderDetails'])->name('order.details');
+    Route::get('complete-order/{id}', [OrderController::class, 'completeOrder'])->name('order.complete');
+    Route::post('complete-order/{id}', [OrderController::class, 'completeOrderStore'])->name('order.complete.store');
 
     // Customer Management
     Route::post('customer-list', [CustomerController::class, 'index'])->name('customer.index');

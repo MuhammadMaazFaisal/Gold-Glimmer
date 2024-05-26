@@ -31,6 +31,7 @@ class CustomerController extends Controller
         $customer->name = $request->name;
         $customer->phone = $request->phone;
         $customer->address = $request->address;
+        $customer->balance = $request->balance;
         $customer->save();
 
         $notification = array(

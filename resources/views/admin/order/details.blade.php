@@ -34,6 +34,9 @@
                                                     Product Details
                                                 </h4>
                                                 <div class="product-container">
+                                                    @php
+                                                        $flag = 0;
+                                                    @endphp
                                                     @foreach($order->orderDetails as $detail)
                                                     
                                                     <div class="product">
@@ -67,6 +70,9 @@
                                                                 @if ($detail->product->status == 1)
                                                                     <span class="badge badge-success bg-success">Completed</span>
                                                                 @else
+                                                                @php
+                                                                    $flag = 1;
+                                                                @endphp
                                                                     <span class="badge badge-warning bg-warning">Pending</span>
                                                                 @endif
                                                             </div>
@@ -107,6 +113,10 @@
                                                 </div>
                                                 <div class="d-flex justify-content-end">
                                                     <button type="submit" class="btn btn-primary col-2">Print</button>
+                                                    @if ($flag == 0 && $order->status !== 'completed')
+                                                        <a href="{{ route('order.complete', $order->id) }}"
+                                                            class="btn btn-success col-2 mx-2">Complete</a>
+                                                    @endif
                                                 </div>
 
                                             </div>

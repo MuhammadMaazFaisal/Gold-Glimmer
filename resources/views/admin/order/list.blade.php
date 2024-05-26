@@ -19,6 +19,7 @@
                                                 <th>Order ID</th>
                                                 <th>Customer ID</th>
                                                 <th>Date</th>
+                                                <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -28,6 +29,7 @@
                                                     <td>O-{{ str_pad($order->id, 5, '0', STR_PAD_LEFT) }}</td>
                                                     <td>{{ $order->customer_id }}</td>
                                                     <td>{{ $order->created_at }}</td>
+                                                    <td>{{ $order->status }}</td>
                                                     <td>
                                                         <a href="{{ route('order.details', $order->id) }}"
                                                             class="btn btn-primary">View</a>

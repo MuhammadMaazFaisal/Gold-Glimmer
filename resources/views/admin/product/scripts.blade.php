@@ -501,7 +501,7 @@
         }
         var selectElement = document.getElementById('select-manufacturer-purity');
         var selectedValues = selectElement.value;
-        var selectedOption = selectElement.selectedOptions[0]; 
+        var selectedOption = selectElement.selectedOptions[0];
         var selectedText = selectedOption.text;
         var unpolish_weight = document.getElementById('unpolish_weight').value;
         $.ajax({
@@ -651,7 +651,7 @@
             },
             success: function(data) {
                 console.log(data);
-                
+
                 let printWindow = window.open("", "_blank");
                 // Generate slip content
                 let slipContent = `
@@ -1244,7 +1244,7 @@
             }
             $(document).find('#difference').val(difference);
         }
-        
+
         CalculateNewPayable(document.getElementById('p_rate').value);
     }
 
@@ -1284,7 +1284,7 @@
         var code = code.getValue();
         var selectElement = document.getElementById('select-manufacturer-purity');
         var selectedValues = selectElement.value;
-        var selectedOption = selectElement.selectedOptions[0]; 
+        var selectedOption = selectElement.selectedOptions[0];
         var selectedText = selectedOption.text;
         var unpolish_weight = document.getElementById('unpolish_weight').value;
         $.ajax({
@@ -1666,7 +1666,7 @@
             },
             success: function(data) {
                 console.log(data);
-                if (data['alert-type']  == "success") {
+                if (data['alert-type'] == "success") {
                     Swal.fire({
                         title: 'Success!',
                         text: 'Manufacturer Record Saved Successfully',
@@ -1938,6 +1938,23 @@
                 newOption2.text = "22k";
                 // Append the new option to the select element
                 selectElement.appendChild(newOption2);
+                // get data-purity value from the select element
+                var selectedDataPurity = selectElement.getAttribute('data-purity');
+                console.log(selectedDataPurity);
+                if (selectedDataPurity == '18k') {
+                    //select option 1
+                    selectElement.options[1].selected = true;
+                } else if (selectedDataPurity == '21k') {
+                    //select option 2
+                    selectElement.options[2].selected = true;
+                } else if (selectedDataPurity == '22k') {
+                    //select option 3
+                    selectElement.options[3].selected = true;
+                }
+                // trigger change event
+                selectElement.dispatchEvent(new Event("change", {
+                    bubbles: true
+                }));
             }
         });
     });
@@ -1947,6 +1964,7 @@
     });
     $(document).on('change', '#select-manufacturer-purity', function(e) {
         e.preventDefault();
+        console.log("manufacturer purity changed");
         var manufacturer_rate = document.getElementById('manufacturer-rate');
         var selectElement = document.getElementById('select-manufacturer-purity');
         var selectedOptionValue = selectElement.value;

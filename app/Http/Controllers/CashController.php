@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cash;
+use App\Models\Customer;
 use App\Models\Vendor;
 use App\Models\VendorType;
 use Illuminate\Http\Request;
@@ -85,6 +86,9 @@ class CashController extends Controller
     public function getCashVendors(Request $request)
     {
         $vendors = Vendor::wherein('type', [VendorType::where('name', 'Additional Vendor')->first()->id])->where('name', '!=', 'existing')->get();
+        $customers =Customer::all();
+        //combine the two collections
+        $vendors = $vendors->merge($customers);
         return response()->json(['data' => $vendors]);
     }
 

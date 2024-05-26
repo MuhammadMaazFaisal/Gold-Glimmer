@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Models\Vendor;
 use App\Models\Product;
 use App\Models\Customer;
+use App\Models\FinishedProduct;
 use App\Models\VendorType;
 use App\Models\OrderDetail;
 use App\Models\ProductType;
@@ -82,8 +83,46 @@ class OrderController extends Controller
 
     public function getOrderDetails($id) 
     {
-        $order = Order::where('id', $id)->with('customer', 'vendor', 'orderDetails', 'orderDetails.product', 'orderDetails.product.productType')->first();
+        $order = Order::where('id', $id)->with('customer', 'orderDetails', 'orderDetails.product', 'orderDetails.product.productType')->first();
         $customers = Customer::all();
         return view('admin.order.details', compact('order', 'customers'));
+    }
+
+    public function completeOrder($id)
+    {
+        $order = Order::where('id', $id)->with('customer', 'orderDetails', 'orderDetails.product', 'orderDetails.product.productType')->first();
+        $product_ids=$order->orderDetails->pluck('p_id');
+        $products = FinishedProduct::whereIn('product_id', $product_ids)->get();
+        // dd($products);
+        $customers = Customer::all();
+
+        return view('admin.order.complete', compact('order', 'products', 'customers'));
+    }
+
+    public function completeOrderStore(Request $request, $id)
+    {
+        // dd($request->all());
+
+       $products = $request->barcode;
+       foreach ($products as $key => $value) {
+           $product = FinishedProduct::where('barcode', $value)->first();
+           $product->status = 0;
+           $product->save();
+         }
+        $order = Order::where('id', $id)->first();
+        $order->status = 'completed';
+        $order->total = $request->total;
+        $order->save();
+
+        $customer = Customer::where('id', $order->customer_id)->first();
+        $customer->balance = $customer->balance + $request->balance;
+        $customer->save();
+
+        $notification = array(
+            'message' => 'Order completed successfully.',
+            'success' => true
+        );
+
+        return response()->json($notification);
     }
 }

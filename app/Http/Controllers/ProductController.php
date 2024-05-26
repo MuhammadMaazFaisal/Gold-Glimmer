@@ -31,7 +31,8 @@ class ProductController extends Controller
         $stoneSetters = Vendor::where('type', VendorType::where('name', 'Stone Setting')->first()->id)->get();
         $vendors = Vendor::where('type', VendorType::where('name', 'Additional Vendor')->first()->id)->where('name', '!=', 'existing')->get();
 
-        $orders= Order::with('vendor', 'customer')->get();
+        $orders= Order::with('customer')->get();
+        // dd($orders);
         return view('admin.product.index', compact('manufacturers', 'polishers', 'stoneSetters', 'vendors', 'orders'));
     }
 

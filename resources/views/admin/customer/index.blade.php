@@ -10,14 +10,6 @@
                             <option value="">Select a customer...</option>
                         </select>
                     </div>
-                    {{-- <div id="balance-area" class=" d-none col-7 row">
-                        <label for="horizontal-firstname-input"
-                            class="col-sm-4 col-form-label text-end">Balance:</label>
-                        <div class="col-sm-6">
-                            <input type="text" name="balance" id="balance" value="" class="form-control"
-                                placeholder="Balance" readonly>
-                        </div>
-                    </div> --}}
                 </div>
                 <div class="card ">
                     <div class="card-header card border border-danger">
@@ -54,6 +46,13 @@
                                                     class="form-control" placeholder="Address" required>
                                             </div>
                                         </div>
+                                        <div class="row mb-4">
+                                            <label for="balance" class="ps-md-4 col-sm-1 col-form-label">Balance:</label>
+                                            <div class="col-sm-5">
+                                                <input type="number" step="any" name="balance" id="balance" value=""
+                                                    class="form-control" placeholder="Balance" required>
+                                            </div>
+                                        </div>
                                         <div class="row justify-content-end">
                                             <div class="col-sm-9 d-flex justify-content-end me-4">
                                                 <button type="button" id="delete"
@@ -87,8 +86,8 @@
                     document.getElementById("name").value = response.customer.name;
                     document.getElementById("phone").value = response.customer.phone;
                     document.getElementById("address").value = response.customer.address;
-                    // document.getElementById("balance").value = response.customer.balance;
-                    // document.getElementById("balance-area").classList.remove("d-none");
+                    document.getElementById("balance").value = response.customer.balance;
+                    document.getElementById("balance").readOnly = true;
                     document.getElementById("name").readOnly = true;
                 }
             });
