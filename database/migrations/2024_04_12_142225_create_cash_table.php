@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('cash', function (Blueprint $table) {
             $table->id();
             $table->string('date');
-            $table->string('vendor_id')->index('vendor_id');
+            $table->string('user_type');
+            $table->string('user_id');
             $table->string('type');
             $table->float('amount');
             $table->text('details')->nullable();

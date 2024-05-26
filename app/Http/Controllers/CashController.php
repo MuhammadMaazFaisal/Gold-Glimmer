@@ -12,7 +12,7 @@ class CashController extends Controller
 {
     public function index(Request $request)
     {
-        $vendor_id= $request->vendor_id;
+        $vendor_id = $request->vendor_id;
         if ($vendor_id) {
             $cashs = $cashs = Cash::where('type', $request->type)->where('vendor_id', $vendor_id)->with('vendor')->get();
         } else {
@@ -30,7 +30,8 @@ class CashController extends Controller
         } else {
             $type = 'Receive';
         }
-        return view('admin.cash.index', compact('type'));
+        $records = Cash::where('type', $type)->with('vendor')->get();
+        return view('admin.cash.index', compact('type', 'records'));
     }
 
     public function store(Request $request)
@@ -43,12 +44,28 @@ class CashController extends Controller
         ]);
 
         $cash = new Cash();
-        $cash->vendor_id = $request->vendor;
+        $customer = Customer::find($request->vendor);
+        if ($customer) {
+            $cash->user_type = 'customer';
+            $cash->user_id = $customer->id;
+        } else {
+            $cash->user_type = 'vendor';
+            $cash->user_id = $request->vendor;
+        }
         $cash->type = $request->type;
         $cash->details = $request->details;
         $cash->amount = $request->amount;
         $cash->date = $request->date;
         $cash->save();
+
+        if ($customer) {
+            if ($request->type == 'Issue') {
+                $customer->balance = $customer->balance + $request->amount;
+            } else {
+                $customer->balance = $customer->balance - $request->amount;
+            }
+            $customer->save();
+        }
 
         $notification = array(
             'message' => 'Cash Record created successfully!',
@@ -81,12 +98,12 @@ class CashController extends Controller
         );
 
         return response()->json(['data' => $notification]);
-    } 
-    
+    }
+
     public function getCashVendors(Request $request)
     {
         $vendors = Vendor::wherein('type', [VendorType::where('name', 'Additional Vendor')->first()->id])->where('name', '!=', 'existing')->get();
-        $customers =Customer::all();
+        $customers = Customer::all();
         //combine the two collections
         $vendors = $vendors->merge($customers);
         return response()->json(['data' => $vendors]);

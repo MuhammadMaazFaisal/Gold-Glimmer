@@ -38,7 +38,7 @@ class OrderController extends Controller
         $order->save();
 
         $customer = Customer::where('id', $request->customer)->first();
-        $customer->balance = $customer->balance + $request->advance;
+        $customer->balance = $customer->balance - $request->advance;
         $customer->save();
 
         for ($i = 0; $i < count($request->type); $i++) {
