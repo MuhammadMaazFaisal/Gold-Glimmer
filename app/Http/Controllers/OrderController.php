@@ -33,8 +33,13 @@ class OrderController extends Controller
 
         $order = new Order();
         $order->customer_id = $request->customer;
+        $order->advance = $request->advance;
         $order->date = $request->date;
         $order->save();
+
+        $customer = Customer::where('id', $request->customer)->first();
+        $customer->balance = $customer->balance + $request->advance;
+        $customer->save();
 
         for ($i = 0; $i < count($request->type); $i++) {
             $product = new Product();

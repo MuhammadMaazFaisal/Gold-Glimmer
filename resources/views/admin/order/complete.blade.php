@@ -245,6 +245,7 @@
             printWindow.document.open();
             printWindow.document.write(slipContent);
             printWindow.document.close();
+            window.location.href = "{{ route('order.list') }}";
 
         }
         $(document).ready(function() {

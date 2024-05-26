@@ -12,11 +12,11 @@
                         </div>
                         <div class="card-body p-4 ">
                             <div class="row">
-                                <div class="col d-flex justify-content-end me-4">
+                                {{-- <div class="col d-flex justify-content-end me-4">
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#product-modal">
                                         Select Order
                                     </button>
-                                </div>
+                                </div> --}}
                                 <div class="col-lg-12 ms-lg-auto ">
                                     <div class="mt-4 mt-lg-0">
                                         <form id="form" method="POST" enctype="multipart/form-data">
@@ -149,7 +149,6 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Order ID</th>
-                                <th scope="col">Vendor Name</th>
                                 <th scope="col">Customer Name</th>
                                 <th scope="col">Date</th>
                                 <th scope="col">Action</th>
@@ -161,7 +160,6 @@
                                 <tr>
                                     <th scope="row">{{ $loop->iteration }}</th>
                                     <td>O-{{ str_pad($order->id, 4, '0', STR_PAD_LEFT) }}</td>
-                                    <td>{{ $order->vendor->name }}</td>
                                     <td>{{ $order->customer->name }}</td>
                                     <td>{{ $order->date }}</td>
                                     <td>

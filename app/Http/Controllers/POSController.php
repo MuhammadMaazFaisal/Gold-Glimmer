@@ -59,6 +59,10 @@ class POSController extends Controller
             $product = FinishedProduct::find($request->product[$i]);
             $product->status = 0;
             $product->save();
+
+            $customer = Customer::where('id', $request->customer)->first();
+            $customer->balance = $customer->balance + $request->total;
+            $customer->save();
         }
 
         $notification = array(

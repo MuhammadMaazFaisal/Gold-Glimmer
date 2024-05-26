@@ -96,7 +96,7 @@ class ProductController extends Controller
 
     public function finishedProduct()
     {
-        $products = FinishedProduct::with('product', 'vendor')->get();
+        $products = FinishedProduct::with('product', 'vendor')->where('status', 1)->get();
         return view('admin.product.finished', compact('products'));
     }
 

@@ -160,7 +160,11 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="row mb-4 d-flex justify-content-end">
+                                            <div class="row mb-4 d-flex justify-content-between">
+                                                <div class="col-4">
+                                                <input type="number" step="any" id="advance" name="advance" class="form-control"
+                                                    placeholder="Advance">
+                                                </div>
                                                 <button type="submit" name="submit"
                                                     class="btn btn-primary col-2">Save</button>
                                             </div>

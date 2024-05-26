@@ -29,7 +29,13 @@
                                                     <td>O-{{ str_pad($order->id, 5, '0', STR_PAD_LEFT) }}</td>
                                                     <td>{{ $order->customer_id }}</td>
                                                     <td>{{ $order->created_at }}</td>
-                                                    <td>{{ $order->status }}</td>
+                                                    <td>
+                                                        @if ($order->status == 'completed')
+                                                            <span class="badge bg-success">Completed</span>
+                                                        @else
+                                                            <span class="badge bg-warning">Pending</span>
+                                                        @endif
+                                                    </td>
                                                     <td>
                                                         <a href="{{ route('order.details', $order->id) }}"
                                                             class="btn btn-primary">View</a>
