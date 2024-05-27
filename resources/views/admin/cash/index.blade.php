@@ -215,7 +215,7 @@
                         <p class="label">Vendor: <span>${vendor}</span></p>
                         <p class="label">Date: <span>${date}</span></p>
                         <p class="label">Type: <span>${type}</span></p>
-                        <p class="label">Amount: <span>${amount}</span></p>
+                        <p class="label">Amount: <span>Rs ${amount}</span></p>
                     </body>
                     </html>
                     <script>

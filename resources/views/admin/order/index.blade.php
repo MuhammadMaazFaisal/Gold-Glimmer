@@ -163,7 +163,7 @@
                                             <div class="row mb-4 d-flex justify-content-between">
                                                 <div class="col-4">
                                                 <input type="number" step="any" id="advance" name="advance" class="form-control"
-                                                    placeholder="Advance">
+                                                    placeholder="Advance" required>
                                                 </div>
                                                 <button type="submit" name="submit"
                                                     class="btn btn-primary col-2">Save</button>
