@@ -54,11 +54,25 @@
                                                 </div>
                                             </div>
                                             <div class="row mb-4">
-                                                <label for="amount" class="col-sm-1 col-form-label">Amount:</label>
-                                                <div class="col-sm-11">
+                                                <div class="col-sm-4">
+                                                    <label for="amount" class="form-label">Amount:</label>
                                                     <input type="number" step="any" name="amount" id="amount"
                                                         class="form-control" placeholder="Amount">
                                                 </div>
+                                                <div class="gold-area d-none col-sm-8 row">
+                                                    <div class="col-6">
+                                                        <label for="gold_rate" class="form-label">Gold Rate:</label>
+                                                        <input type="number" step="any" name="gold_rate" id="gold_rate"
+                                                            class="form-control" placeholder="Gold Rate">
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <label for="gold_weight" class="form-label">Gold Weight:</label>
+                                                        <input type="number" step="any" name="gold_weight"
+                                                            id="gold_weight" class="form-control" placeholder="Gold Weight"
+                                                            readonly>
+                                                    </div>
+                                                </div>
+
                                             </div>
                                             <div class="row mb-4">
                                                 <label for="detail" class="col-sm-1 col-form-label">Details:</label>
@@ -305,6 +319,7 @@
                 },
                 success: function(response) {
                     var data = response.data
+                    console.log(data);
                     var select = $('#vendor')[0].selectize;
                     for (var i = 0; i < data.length; i++) {
                         var newOption = {
@@ -312,7 +327,43 @@
                             text: data[i].id + " | " + data[i].name
                         };
                         select.addOption(newOption);
+
                     }
+                    // Add Event Listener to the select element
+                    select.on('change', function() {
+                        var selectedValue = select.getValue();
+                        // get record from variable data which has this value
+                        var record = data.find(x => x.id == selectedValue);
+                        const amountInput = document.getElementById('amount');
+                        const goldRateInput = document.getElementById('gold_rate');
+                        const goldWeightInput = document.getElementById('gold_weight');
+                        if (record && record.type && record.type != 4) {
+                            $('.gold-area').removeClass('d-none');
+                            goldRateInput.addEventListener('input', calculateGoldWeight);
+                            amountInput.addEventListener('input', calculateGoldWeight);
+                            goldRateInput.required = true;
+                            goldWeightInput.required = true;
+
+                            function calculateGoldWeight() {
+                                const amount = parseFloat(amountInput.value);
+                                const goldRate = parseFloat(goldRateInput.value);
+
+                                if (!isNaN(amount) && !isNaN(goldRate) && goldRate > 0) {
+                                    const goldWeight = amount / goldRate;
+                                    goldWeightInput.value = goldWeight.toFixed(
+                                        2); // Optionally, adjust the number of decimal places
+                                } else {
+                                    goldWeightInput.value = '';
+                                }
+                            }
+                        } else {
+                            $('.gold-area').addClass('d-none');
+                            goldRateInput.value = '';
+                            goldWeightInput.value = '';
+                            goldRateInput.required = false;
+                            goldWeightInput.required = false;
+                        }
+                    });
 
                 }
             });

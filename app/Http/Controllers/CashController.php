@@ -45,12 +45,20 @@ class CashController extends Controller
 
         $cash = new Cash();
         $customer = Customer::find($request->vendor);
+        $flag=0;
         if ($customer) {
             $cash->user_type = 'customer';
             $cash->user_id = $customer->id;
         } else {
             $cash->user_type = 'vendor';
             $cash->user_id = $request->vendor;
+            $vendor_type = Vendor::where('id', $request->vendor)->first()->type;
+            if ($vendor_type != 4) {
+                $vendor = Vendor::find($request->vendor);
+                $vendor->balance = $request->type == 'Issue' ? $vendor->balance + $request->gold_weight : $vendor->balance - $request->gold_weight;
+                $vendor->save();
+                $flag=1;
+            }
         }
         $cash->type = $request->type;
         $cash->details = $request->details;
@@ -58,7 +66,7 @@ class CashController extends Controller
         $cash->date = $request->date;
         $cash->save();
 
-        if ($customer) {
+        if ($customer && $flag==0) {
             if ($request->type == 'Issue') {
                 $customer->balance = $customer->balance + $request->amount;
             } else {
@@ -102,7 +110,7 @@ class CashController extends Controller
 
     public function getCashVendors(Request $request)
     {
-        $vendors = Vendor::wherein('type', [VendorType::where('name', 'Additional Vendor')->first()->id])->where('name', '!=', 'existing')->get();
+        $vendors = Vendor::where('name', '!=', 'existing')->get();
         $customers = Customer::all();
         //combine the two collections
         $vendors = $vendors->merge($customers);
