@@ -27,11 +27,11 @@ class ProductController extends Controller
     public function index()
     {
         $manufacturers = Vendor::where('type', VendorType::where('name', 'Manufacturing')->first()->id)->get();
-        $polishers= Vendor::where('type', VendorType::where('name', 'Polishing')->first()->id)->get();
+        $polishers = Vendor::where('type', VendorType::where('name', 'Polishing')->first()->id)->get();
         $stoneSetters = Vendor::where('type', VendorType::where('name', 'Stone Setting')->first()->id)->get();
         $vendors = Vendor::where('type', VendorType::where('name', 'Additional Vendor')->first()->id)->where('name', '!=', 'existing')->get();
 
-        $orders= Order::with('customer')->where('status', "Pending")->get();
+        $orders = Order::with('customer')->where('status', "Pending")->get();
         return view('admin.product.index', compact('manufacturers', 'polishers', 'stoneSetters', 'vendors', 'orders'));
     }
 
@@ -45,15 +45,15 @@ class ProductController extends Controller
     public function edit($id)
     {
         $manufacturers = Vendor::where('type', VendorType::where('name', 'Manufacturing')->first()->id)->get();
-        $polishers= Vendor::where('type', VendorType::where('name', 'Polishing')->first()->id)->get();
+        $polishers = Vendor::where('type', VendorType::where('name', 'Polishing')->first()->id)->get();
         $stoneSetters = Vendor::where('type', VendorType::where('name', 'Stone Setting')->first()->id)->get();
         $vendors = Vendor::where('type', VendorType::where('name', 'Additional Vendor')->first()->id)->where('name', '!=', 'existing')->get();
         $order_id = OrderDetail::where('p_id', $id)->first()->o_id;
         $orders = Order::where('id', $order_id)->with('customer', 'vendor', 'orderDetails', 'orderDetails.product', 'orderDetails.product.productType')->first();
-        $product_ids= OrderDetail::where('o_id', $order_id)->pluck('p_id');
+        $product_ids = OrderDetail::where('o_id', $order_id)->pluck('p_id');
         $products = Product::where('status', 0)->whereIn('id', $product_ids)->with('vendor', 'productType')->get();
         $product = Product::where('id', $id)->with('vendor', 'productType')->first();
-        $polisherStep = PolisherStep::where('product_id', $id)->with( 'polishingType')->first();
+        $polisherStep = PolisherStep::where('product_id', $id)->with('polishingType')->first();
         $stoneSetterSteps = StoneSetterStep::where('product_id', $id)->with('vendor', 'zircons', 'stones')->get();
         $returnedStoneSteps = ReturnedStoneStep::where('product_id', $id)->with('vendor', 'returnedItems')->get();
         $additionalSteps = AdditionalStep::where('product_id', $id)->with('vendor')->get();
@@ -65,7 +65,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         for ($i = 0; $i < count($request->barcode); $i++) {
-            $product= new FinishedProduct();
+            $product = new FinishedProduct();
             $product->vendor_id = $request->vendor_id;
             $product->product_id = $request->m_product_id;
             $product->barcode = $request->barcode[$i];
@@ -111,7 +111,7 @@ class ProductController extends Controller
         $product->details = $request->details;
         $product->product_type = ProductType::where('name', $request->type)->first()->id;
         $product->quantity = $request->quantity;
-        $vendor = Vendor::where('id', $request->vendor)->first();
+        $vendor = Vendor::where('id', $request->vendor_id)->first();
         $product->purity = $request->purity;
         $product->rate =  $request->rate;
         $product->purity_text = $request->purity_text;
@@ -213,50 +213,54 @@ class ProductController extends Controller
         // delete all zircons and stones
         Zircon::where('stone_setter_step_id', $stoneSetterStep->id)->delete();
         Stone::where('stone_setter_step_id', $stoneSetterStep->id)->delete();
-        for ($i = 0; $i < count($request->zircon_code); $i++) {
-            $item= new Zircon();
-            $item->stone_setter_step_id = $stoneSetterStep->id;
-            $item->weight = $request->zircon_weight[$i];
-            $item->quantity = $request->zircon_quantity[$i];
-            $item->item_id = StockDetail::where('barcode', $request->zircon_code[$i])->first()->item_id;
-            $item->save();
+        if ($request->zircon_code[0] != null) {
+            for ($i = 0; $i < count($request->zircon_code); $i++) {
+                $item = new Zircon();
+                $item->stone_setter_step_id = $stoneSetterStep->id;
+                $item->weight = $request->zircon_weight[$i];
+                $item->quantity = $request->zircon_quantity[$i];
+                $item->item_id = StockDetail::where('barcode', $request->zircon_code[$i])->first()->item_id;
+                $item->save();
 
-            $stock = StockDetail::where('barcode', $request->zircon_code[$i])->first();
-            if ($stock->quantity < intval($request->zircon_quantity[$i])) {
-                $stock->quantity = 0;
-            }else {
-                $stock->quantity = $stock->quantity - intval($request->zircon_quantity[$i]);
-            }
+                $stock = StockDetail::where('barcode', $request->zircon_code[$i])->first();
+                if ($stock->quantity < intval($request->zircon_quantity[$i])) {
+                    $stock->quantity = 0;
+                } else {
+                    $stock->quantity = $stock->quantity - intval($request->zircon_quantity[$i]);
+                }
 
-            if ($stock->weight < intval($request->zircon_weight[$i])) {
-                $stock->weight = 0;
-            }else {
-                $stock->weight = $stock->weight - intval($request->zircon_weight[$i]);
+                if ($stock->weight < intval($request->zircon_weight[$i])) {
+                    $stock->weight = 0;
+                } else {
+                    $stock->weight = $stock->weight - intval($request->zircon_weight[$i]);
+                }
+                $stock->save();
             }
-            $stock->save();
         }
 
-        for ($i = 0; $i < count($request->stone_code); $i++) {
-            $item= new Stone();
-            $item->stone_setter_step_id = $stoneSetterStep->id;
-            $item->weight = $request->stone_weight[$i];
-            $item->quantity = $request->stone_quantity[$i];
-            $item->item_id = StockDetail::where('barcode', $request->stone_code[$i])->first()->item_id;
-            $item->save();
+        if ($request->stone_code[0] != null) {
+            for ($i = 0; $i < count($request->stone_code); $i++) {
+                $item = new Stone();
+                $item->stone_setter_step_id = $stoneSetterStep->id;
+                $item->weight = $request->stone_weight[$i];
+                $item->quantity = $request->stone_quantity[$i];
+                $item->item_id = StockDetail::where('barcode', $request->stone_code[$i])->first()->item_id;
+                $item->save();
 
-            $stock = StockDetail::where('barcode', $request->stone_code[$i])->first();
-            if ($stock->quantity < intval($request->stone_quantity[$i])) {
-                $stock->quantity = 0;
-            }else {
-                $stock->quantity = $stock->quantity - intval($request->stone_quantity[$i]);
-            }
+                $stock = StockDetail::where('barcode', $request->stone_code[$i])->first();
+                if ($stock->quantity < intval($request->stone_quantity[$i])) {
+                    $stock->quantity = 0;
+                } else {
+                    $stock->quantity = $stock->quantity - intval($request->stone_quantity[$i]);
+                }
 
-            if ($stock->weight < intval($request->stone_weight[$i])) {
-                $stock->weight = 0;
-            }else {
-                $stock->weight = $stock->weight - intval($request->stone_weight[$i]);
+                if ($stock->weight < intval($request->stone_weight[$i])) {
+                    $stock->weight = 0;
+                } else {
+                    $stock->weight = $stock->weight - intval($request->stone_weight[$i]);
+                }
+                $stock->save();
             }
-            $stock->save();
         }
 
         $notification = array(
@@ -275,7 +279,7 @@ class ProductController extends Controller
             $stoneSetterStep = new ReturnedStoneStep();
             $stoneSetterStep->product_id = $product->id;
         }
-        
+
         $stoneSetterStep->vendor_id = $request->vendor_id;
         $stoneSetterStep->received_weight = $request->received_weight;
         $stoneSetterStep->stone_weight = $request->r_stone_weight;
@@ -295,7 +299,7 @@ class ProductController extends Controller
         // delete all returned items
         ReturnedItem::where('returned_stone_step_id', $stoneSetterStep->id)->delete();
         for ($i = 0; $i < count($request->r_code); $i++) {
-            $item= new ReturnedItem();
+            $item = new ReturnedItem();
             $item->code = $request->r_code[$i];
             $item->returned_stone_step_id = $stoneSetterStep->id;
             $item->weight = $request->r_weight[$i];
