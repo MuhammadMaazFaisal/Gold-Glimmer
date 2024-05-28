@@ -122,8 +122,10 @@
     function AddStock() {
         let area = document.getElementById('existing-tbody');
         let tr = document.createElement('tr');
+        let count = area.children.length + 1;
+        let barcode = Math.floor(new Date().getTime() + Math.random());
         tr.innerHTML = `<tr>
-                            <td scope="row">1</td>
+                            <td scope="row">${count}</td>
                             <td><textarea type="text" name="detail[]" id="detail[]" class="form-control" style="height: 20px;" placeholder="Details"></textarea></td>
                            <td colspan="2"><select class="form-control price_per" id="price_per[]" name="price_per[]" placeholder="Price per">
                                     <option value="">Select price per</option>
@@ -135,7 +137,8 @@
                             <td> <input type="number" step="any" placeholder="" id="weight[]" name="weight[]" class="form-control"></td>
                             <td><input type="number" step="any" value="" id="rate[]" name="rate[]" class="form-control"></td>
                             <td><input type="number" step="any" placeholder="" id="total[]" name="total[]" class="form-control"></td>
-                            <td><input id="barcode[]" name="barcode[]" value="" type="text" class="form-control" readonly></td>
+                            <td><input id="barcode[]" name="barcode[]" value="" type="text" class="form-control" readonly value="${barcode}"
+                                ></td>
                             <td><i onclick="DeleteStock(this)" class="fa fa-minus-circle fa-1x p-3"></i></td>
                             <td class="d-none"><input type="text" class="form-control" id="pd_id[]" name="pd_id[]" value="existing"></td>
                         </tr>`;

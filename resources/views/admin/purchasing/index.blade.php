@@ -9,14 +9,6 @@
                             PURCHASING
                         </h4>
                     </div>
-                    <div class="col d-flex justify-content-end me-4">
-                        <button type="button" onclick="DeletePurchasing()" class="btn btn-danger me-3" id="delete-product"
-                            disabled>Delete Invoice</button>
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#product-modal">
-                            Select Invoice
-                        </button>
-                    </div>
                     <div class="card-body px-4 ">
                         <div class="row">
                             <div class="col-lg-12 ms-lg-auto ">
@@ -47,7 +39,6 @@
                                                         <th scope="col">Rate</th>
                                                         <th scope="col">Total Amount</th>
                                                         <th scope="col">Barcode</th>
-                                                        <th scope="col">Add Stock</th>
                                                         <th scope="col"></th>
                                                     </tr>
                                                 </thead>
@@ -80,11 +71,11 @@
                                                                 placeholder="Total" onchange="GrandTotal()" required></td>
                                                         <td><input id="barcode[]" name="barcode[]" type="text"
                                                                 class="form-control" placeholder=""
-                                                                aria-label="Example text with button addon"
+                                                                aria-label="Example text with button addon" value="{{ round(microtime(true) * 1000) . mt_rand(100, 999) }}"
                                                                 aria-describedby="button-addon1" readonly></td>
-                                                        <td>
+                                                        <td class="d-none">
                                                             <div class="pt-2 form-check d-flex justify-content-center">
-                                                                <input class="form-check-input" type="checkbox"
+                                                                <input class="form-check-input" type="checkbox" checked
                                                                     name="checkbox[]" onclick="GenerateBarcode(this)"
                                                                     id="checkbox[]">
                                                             </div>
@@ -176,8 +167,10 @@
         function AddProduct() {
             let area = document.getElementById('tbody');
             let tr = document.createElement('tr');
+            let count = document.querySelectorAll('#tbody tr').length + 1;
+            let barcode = Math.floor(new Date().getTime() + Math.random());
             tr.innerHTML =
-                `<th scope="row">1</th>
+                `<th scope="row">${count}</th>
                               <td class="d-none"> <input type="text"  id="id[]" name="id[]" value="" placeholder="id" class="form-control d-none"></td>
                             <td><textarea type="text" name="detail[]" id="detail[]" class="form-control" style="height: 20px;" placeholder="Details"></textarea></td>
                             <td colspan="2"><select class="form-control price_per" id="price_per[]" name="price_per[]" placeholder="Price per">
@@ -189,10 +182,15 @@
                             <td> <input type="number" step="any" value="" id="weight[]" name="weight[]" class="form-control" placeholder="Weight" ></td>
                             <td><input type="number" step="any" value="" id="rate[]" name="rate[]" class="form-control" placeholder="Rate" required></td>
                             <td><input type="number" step="any" value="" id="total[]" name="total[]" class="form-control" placeholder="Total" required></td>
-                            <td><input id="barcode[]" name="barcode[]" type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" readonly></td>
-                            <td><div class="pt-2 form-check d-flex justify-content-center">
-                                    <input class="form-check-input" type="checkbox" name="checkbox[]" onclick="GenerateBarcode(this)" id="checkbox[]">
-                                </div></td>
+                            <td><input id="barcode[]" name="barcode[]" type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" value="${barcode}"
+                                 readonly></td>
+                            <td class="d-none">
+                                <div class="pt-2 form-check d-flex justify-content-center">
+                                    <input class="form-check-input" type="checkbox" checked
+                                        name="checkbox[]" onclick="GenerateBarcode(this)"
+                                        id="checkbox[]">
+                                </div>
+                            </td>
                         <td><i onclick="DeleteProduct(this)" class="fa fa-minus-circle fa-1x p-3"></i></td>
                                                                         <td><input type="hidden" step="any" value="" id="rate_s[]" name="rate_s[]" class="form-control" placeholder="Rate" required></td>`;
             area.appendChild(tr);
