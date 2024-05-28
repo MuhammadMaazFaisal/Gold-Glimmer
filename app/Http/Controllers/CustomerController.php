@@ -86,7 +86,7 @@ class CustomerController extends Controller
     public function getNextCustomerNumber()
     {
         $customer = Customer::latest()->first();
-        $number = $customer ? $customer->id + 1 : 1;
+        $number = $customer ? intval($customer->id) + 1 : 1;
         return response()->json(['customerNumber' => $number]);
     }
 
